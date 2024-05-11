@@ -1,7 +1,7 @@
 <x-app-layout>
 @extends('layout')
 <div class="card" style="margin:20px;">
-  <div class="card-header">Sujets externe</div>
+  <div class="card-header bg-primary">Sujets externe</div>
   <div class="card-body">
         <div class="card-body">
         <h5 class="card-title">Titre de sujet: {{ $sujets -> titre }}</h5>

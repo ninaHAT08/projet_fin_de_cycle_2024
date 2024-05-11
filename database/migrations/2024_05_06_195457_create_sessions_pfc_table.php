@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-       
-        Schema::create('fiches', function (Blueprint $table) {
-      
-            $table->bigIncrements('idfiche');
+        Schema::create('sessions_pfc', function (Blueprint $table) {
+            $table->id();
+            $table->string('intitulé_session');
+            $table->date('date_debut');
+            $table->date('date_fin');
+            $table->integer('nbr_session');
             $table->foreignId('iduser')->constrained('users');
-            $table->foreignId('idSujets')->constrained('sujets');
-            
             $table->timestamps();
         });
-    
-      
     }
 
     /**
@@ -29,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-     
-        Schema::dropIfExists('fiches');
+        Schema::dropIfExists('sessions_pfc');
+
     }
 };

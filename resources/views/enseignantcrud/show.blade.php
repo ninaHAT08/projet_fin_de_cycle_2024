@@ -2,7 +2,7 @@
 @section('content')
   <div >
 <div class="card" style="margin:90px ;" >
-  <div class="card-header" >Profil</div>
+  <div class="card-header  bg-primary" >Profil</div>
   <div class="card-body">
         <div class="card-body">
         <h5 class="card-title">Nom: {{ $enseignant->nom }}</h5>
@@ -14,7 +14,7 @@
 
   </div>
     </hr>
-    <a href="{{url('enseignantt')}}" class="nav-link btn-retour"><button type="button" class="btn btn-dark">Retour</button></a>  
+    <a href="{{url('enseignantt')}}" class="nav-link btn-retour"><button type="button" class="btn btn-primary">retour</button></a>  
   </div>
 </div>
 </div>

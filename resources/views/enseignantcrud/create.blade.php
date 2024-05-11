@@ -2,7 +2,7 @@
 @section('content')
   
 <div class="card" style="margin:20px;">
-  <div class="card-header">Ajouter un enseignant</div>
+  <div class="card-header  bg-primary">Ajouter un enseignant</div>
   <div class="card-body">
        
       <form action="{{ url('enseignantuser') }}" method="post">
@@ -22,7 +22,8 @@
 <x-text-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" />
 <x-input-error :messages="$errors->get('password')" class="mt-2" /></br>
 <div style="text-align: center;">
-        <input type="submit" value="Enregistre" class="btn btn-success"></br>
+    <button type="submit" class="btn btn-primary">ajouter</button>
+        <a href="{{url('enseignantt')}}" class="nav-link btn-retour"><button type="button" class="btn btn-primary">retour</button></a>
         </div>
         </div>
 

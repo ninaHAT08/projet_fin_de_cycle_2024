@@ -34,7 +34,7 @@
     <!-- header section strats -->
     <header class="header_section">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-2">
           <a class="navbar-brand" href="index.html">
       
             <img src="images/logo20.png" alt=""  style="width: 180px;height: 50px;">
@@ -44,7 +44,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
          
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
@@ -64,9 +64,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('register') }}">Inscription</a>
                 </li>-->
-                <li class="nav-item">
-                  <a class="nav-link" href="#connexion">Connexion</a>
-                </li>
+               
               </ul>
              
             </div>
@@ -78,53 +76,9 @@
    
    
     <!-- end slider section -->
-    <section class="image-section">
-    <img src="images/78.jpg" alt="Image description" style="height: 42%;">
-
-  <div class="bg" style="margin-top: 70px;">
-
-    <!-- about section
-    <section class="about_section layout_padding" > -->
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-5 offset-md-2">
-            <div class="about_detail-box" id="aboute">
-              <h3 class="custom_heading ">
-                A propos
-              </h3>
-              <p class="">
-              C'est une solution web dédiée à l'Université Abderrahmane Mira de Bejaia, 
-              spécifiquement élaborée pour répondre aux besoins de la Faculté des Sciences Exactes.
-              Cette plateforme informatique offre un environnement centralisé pour la gestion exhaustive de la scolarité
-              des étudiants. En permettant la gestion des Points de Fréquentation et de Conduite (PFC), des conseils disciplinaires et d'autres activités administratives clés, 
-              elle assure une coordination efficace des processus internes de l'administration du département
-              </p>
-              <div>
-                <a href="">
-                En savoir plus
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="about_img-box">
-              <img src="images/4.webp" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-
-
-  <!-- contact section -->
-
-
-
-  <section class="contact_section layout_padding" id="connexion"  >
-    <h2 class="custom_heading text-center">
-            Connexion
+    <section class="contact_section layout_padding" id="connexion"  >
+    <h2   class="custom_heading text-center ">
+            Se connecter
     </h2>
     <div class="container mt-5 pt-5">
 
@@ -166,7 +120,7 @@
     <!-- Login Button -->
     <div class="text-center">
         <x-primary-button style="width:20em">
-            {{ __('Connexion') }}
+            {{ __('connexion') }}
         </x-primary-button>
     </div>
 </form>
@@ -175,10 +129,51 @@
   </section>
 
   <!-- end contact section -->
+  <div class="bg" style="margin-top: 70px;">
+
+    <!-- about section
+    <section class="about_section layout_padding" > -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-5 offset-md-2">
+            <div class="about_detail-box" id="aboute">
+              <h3 class="custom_heading ">
+                A propos
+              </h3>
+              <p class="">
+              C'est une solution web dédiée à l'Université Abderrahmane Mira de Bejaia, 
+              spécifiquement élaborée pour répondre aux besoins de la Faculté des Sciences Exactes.
+              Cette plateforme informatique offre un environnement centralisé pour la gestion exhaustive de la scolarité
+              des étudiants. En permettant la gestion des Points de Fréquentation et de Conduite (PFC), des conseils disciplinaires et d'autres activités administratives clés, 
+              elle assure une coordination efficace des processus internes de l'administration du département
+              </p>
+              <div>
+                <a href="">
+                En savoir plus
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="about_img-box">
+              <img src="images/4.webp" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+<!-- end     section  -->
+
+
+ 
+
+
 
   <!-- info section -->
-  <section class="info_section layout_padding " id="contact">
-    <div class="container">
+  <section class="info_section  " id="contact">
+    <div class="container w-60 h-10">
       <div class="info_items">
         <a href="">
           <div class="item ">

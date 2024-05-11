@@ -2,7 +2,7 @@
 @extends('layout')
 <!-- Afficher les messages de succès ou d'erreur -->
 @if (session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success bg-red-300">
         {{ session('success') }}
     </div>
 @endif
@@ -14,20 +14,30 @@
 @endif
 
 <!-- Afficher la liste des sujets ajoutés à la liste de l'utilisateur -->
-<div class="card">
-<div class="card-body" style="background-color:   lightblue; margin:20px;">
-<div style="display: inline-block;" class="info-item">
-    <p style="font-size: 20px; color: black; font-weight: bold;">Nom: {{ Auth::user()->nom }}</p>
-    <p style="font-size: 20px; color: black; font-weight: bold;">Prénom: {{ Auth::user()->prenom }}</p>
-</div>
-<div style="display: inline-block;" class="info-item">
-    <p style="font-size: 20px; color: black; font-weight: bold;">Spécialité: {{ Auth::user()->specialite }}</p>
-    <p style="font-size: 20px; color: black; font-weight: bold;">Email: {{ Auth::user()->email }}</p>
-</div>
-</div>
-</div>
-<div class="row" style="margin:20px;">
-<a href="{{url('etudiantsujet')}}" ><button type="button" class="btn btn-dark">Retour</button></a> 
+<table class="table table-success table-striped">
+<thead>
+                                 <tr>
+                                        <th>nom</th>
+                                        <th>prenom</th>
+                                         <th>spécialité</th>
+                                         <th>email</th>
+                                        
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                  
+                                      <tr>
+                                         
+                                          <td> {{ Auth::user()->nom }}</td>
+                                          <td>  {{ Auth::user()->prenom }} </td>
+                                          <td>  {{ Auth::user()->specialite }}</td>
+                                          <td> {{ Auth::user()->email }}</td>
+                                                     
+                                     
+                                </tbody>
+</table>
+<div class="row" style="margin-top:20px;">
+ 
     <div class="col-12">
   <h2 style="font-size: 50px; color: black; text-align: center;font-weight: bold;">  Fiche de veoux</h2> 
             <div class="table-responsive">
@@ -67,8 +77,10 @@
                             </table>
                         </div>
                         <div style="text-align: center;">
+                        <a href="{{url('etudiantsujet')}}" ><button type="button" class="btn btn-dark bg-primary">retour</button></a>
                         <button type="submit" class="btn btn-info" style="margin-right: 10px;">Envoyer</button>
                         <button id="generatePDF" class="btn btn-primary">Télécharger en PDF</button>
+                        
                             </div>
 
                     </div>
@@ -123,3 +135,5 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 </x-app-layout>
+
+

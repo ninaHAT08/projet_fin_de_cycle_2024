@@ -1,7 +1,7 @@
 <x-app-layout>
 @extends('layout')
 <div class="card" style="margin:20px;">
-  <div class="card-header">Proposer un Sujet</div>
+  <div class="card-header bg-primary">Proposer un Sujet</div>
   <div class="card-body">   
       <form action="{{ url('sujetss') }}" method="post">
         {!! csrf_field() !!}
@@ -17,7 +17,8 @@
         <input type="text" name="nom_entreprise" id="nom_entreprise" class="form-control @error('nom_entreprise') is-invalid @enderror"></br>
         
         <div style="text-align: center;">
-        <input type="submit" value="Enregistre" class="btn btn-success"></br>
+        <button type="submit" class="btn btn-primary">enregistré</button>
+        <a href="{{url('dashboard')}}" class="nav-link btn-retour"><button type="button" class="btn btn-primary">retour</button></a>
         </div>
     </form>
     

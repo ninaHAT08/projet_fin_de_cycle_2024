@@ -1,58 +1,146 @@
-<x-app-layout>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Tables - SUJETS</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
+            <!-- Navbar Brand-->
+            <img src="images/logo20.png" alt=""  style="width: 180px;height: 50px;">
+            <!-- Sidebar Toggle-->
+           
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li> <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profil') }}
+                        </x-dropdown-link></li>
+                        <li><form method="POST" action="{{ route('logout') }}">
+                            @csrf
 
-@extends('layout')
- <div class="row" style="margin:20px;">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>La liste des Sujets</h2>
-                    </div>
-                                
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Deconnexion') }}
+                            </x-dropdown-link>
+                        </form>
+                        </li>
                       
-                      <div style="margin-left: 1050px;">
-     @include('partials.search')
-     </div>
-                      <div class="table-responsive">
-                            <table class="table">
-                                <thead>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+        
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4"> consulter la liste des sujets proposé par les enseignants </h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="{{url('admin')}}"><h5>retour</h5></a></li>
+                            <li class="breadcrumb-item active"></li>
+                        </ol>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                               
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header bg-primary">
+                                <i class="fas fa-table me-1"></i>
+                               <h4>liste des sujets</h4>
+                            </div>
+                
+
+
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                      
                                     <tr>
                                     
-                                        <th>Titre</th>   
+                                       <th>Titre</th>   
+                                        <th>Description</th>
+                                        <th>Mot_clé</th>
+                                        <th>Specialité</th>
+                                        <th>L'encadrant</th>
+                                        <th>Actions</th>
+
+                              
+                                </tr>
+                                       
+                                    </thead>
+                                    <tfoot>
+                                     <tr>
+                                       
+                                    
+                                     <th>Titre</th>   
                                         <th>Description</th>
                                         <th>Mot_clé</th>
                                         <th>Specialite concerne</th>
                                         <th>L'encadrant</th>
-
-                                  
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach( $sujets as $sujet)
+                                        <th>Actions</th>
+                              
+                               
+                                     </tr>
+                                    </tfoot>
+                                   
+                                        <tbody>
+                                        @foreach( $sujets as $sujet)
         
-                                <td><a href="{{ route ('gestionadmin.show',$sujet)}}">{{ $sujet -> titre}}</a></td>
-                                        <td>{{ $sujet -> description}}</td>  
-                                           <td>{{ $sujet -> mot_clé}}</td>
-                                           <td>{{ $sujet -> specialite}}</td>
-                                        <td>{{ $sujet->user->nom }} {{ $sujet->user->prenom }}</td>
+                <td>{{ $sujet -> titre}}</td>
+                <td>{{ $sujet -> description}}</td>  
+                   <td>{{ $sujet -> mot_clé}}</td>
+                   <td>{{ $sujet -> specialite}}</td>
+                <td>{{ $sujet->user->nom }} {{ $sujet->user->prenom }}</td>
+             
+
                                      
-                                      
-            
-                                    </tr>
-
-                                    
+                                      <td> <a href="{{ route ('gestionadmin.show',$sujet)}}" title="View Student"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button></a></td>
+                               
+                                  </tr> 
                                 @endforeach 
-                                </tbody>
-                            </table>
+                                        </tbody>
+                                
+                                </table>
+                            </div>
                         </div>
-
-{{ $sujets-> links()}}
-
- </div>
-
                     </div>
-                </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted"><p>
+      © 2024 All Rights Reserved By  <strong>GndznHtm</strong>
+     
+    </p>
+   </div>
+                           
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
-  
-        </div>
-</x-app-layout>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+    </body>
+</html>

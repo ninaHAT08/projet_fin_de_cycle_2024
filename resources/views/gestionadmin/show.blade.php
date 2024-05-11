@@ -1,7 +1,7 @@
 <x-app-layout>
 @extends('layout')
 <div class="card" style="margin:20px;">
-  <div class="card-header">Sujet</div>
+  <div class="card-header  bg-primary">Sujet</div>
   <div class="card-body">
         <div class="card-body">
   
