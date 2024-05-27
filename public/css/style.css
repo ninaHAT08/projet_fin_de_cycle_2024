@@ -537,17 +537,17 @@ a:focus {
   margin-bottom: auto;
   background-repeat: no-repeat;
 }
-h2{
+h5{
   margin-top: 5%;
 }
 
 .contact_section input {
-  width: 100%;
+  width: 30%;
   border: 0;
   border-bottom: 1px solid #ffffff;
-  height: 40px;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  height: 35px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background-color: transparent;
   outline: none;
   color: #fff;
@@ -574,13 +574,12 @@ h2{
 }
 
 .contact_section button {
+  padding-left: 20px;
   
-  padding: 12px 55px;
   background-color: #179dfb;
   border: 1px solid #252525;
   color: #ffffff;
-  outline: none;
-  border: none;
+ 
  
 
 }

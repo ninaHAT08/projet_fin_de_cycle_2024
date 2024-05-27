@@ -106,8 +106,10 @@
                                                 <th>#</th>
                                                 <th>Nom</th>   
                                                 <th>Prenom</th>
-                                                <th>specialite</th>
-                                                <th>Email</th>
+                                                <th>Date Naissance</th>
+                                                  <th>specialite</th>         
+                                                   <th>matricule</th>
+                                                  <th>Email</th>
                                                 <th>Actions</th>
                                             </tr>
                                        
@@ -117,8 +119,10 @@
                                             <th>#</th>
                                             <th>Nom</th>   
                                             <th>Prenom</th>
-                                            <th>specialité</th>
-                                            <th>Email</th>
+                                            <th>Date Naissance</th>
+                                           <th>specialite</th>         
+                                           <th>matricule</th>
+                                             <th>Email</th>
                                             <th>Actions</th>
                                         </tr>
                                     </tfoot>
@@ -129,16 +133,22 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $item->nom }}</td>
                                                     <td>{{ $item->prenom }}</td>
-                                                    <td>{{ $item->specialite}}</td>
+                                                    <td>{{ $item->date_naiss }}</td>
+                                                  <td>{{ $item->specialite}}</td>
+                                                    <td>{{ $item->matricule}}</td>
                                                    <td>{{ $item->email }}</td>
               
-                                                    <td>
+                                                    <td> 
+                                                    <div class="d-flex gap-2">
+
                                                     <a href="{{ url('/etudiant/' . $item->id) }}" title="View Student"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button></a>
-                                                     <form method="POST" action="{{ url('/etudiantt/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                                     <form method="POST" action="{{ url('/etudiantt/' . $item->id) }}" accept-charset="UTF-8" style="display:inline"  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce user ?');">
                                                        @method('DELETE') 
                                                        @csrf
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                      <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</button> </form>
+                                                    <button type="submit" class="btn btn-danger btn-sm "  >
+                                                      <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</button> 
+                                                    </form>
+                                                     </div>
                                                     </td>
                                                 </tr>
                                              @endforeach

@@ -68,9 +68,9 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{url('etudiantsujet')}}">consulter liste sujet </a>
-                                    <a class="nav-link" href="{{route('fiche.ajouter')}}"> ma fiche de voeux</a>
-                                   
+                                    <a class="nav-link" href="{{ url('espaceetudiant') }}">consulter liste sujet </a>
+                                    <a class="nav-link" href="{{route('choix.ajouter')}}"> ma fiche de voeux</a>
+                                    <!-- <a href="{{route('choix.ajouter')}}" class="nav-link"><button type="button" class="btn btn-secondary">Consulter ma fiche de veoux</button></a> -->
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -86,7 +86,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="{{route('sujetss.create')}}">proposer un sujet</a> 
+                                        <a class="nav-link" href="{{route('sujetss.create')}}">proposer un sujet</a>
+                                         
                                             <a class="nav-link" href="{{url('sujetss')}}">voir la liste des sujets externes</a>
                                         </nav>
                                     </div>

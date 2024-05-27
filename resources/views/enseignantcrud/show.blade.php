@@ -8,13 +8,17 @@
         <h5 class="card-title">Nom: {{ $enseignant->nom }}</h5>
         <p class="card-text">Prenom : {{ $enseignant->prenom }}</p>
         <p class="card-text">Type d'utilisateur : {{ $enseignant->usertype }}</p>
-        <p class="card-text">Domaine d'expertise: {{ $enseignant->specialite }}</p>
+        <p class="card-text">Domaine d'expertise: {{ $enseignant->domaine_exp }}</p>
+        <p class="card-text">Grade: {{ $enseignant->grade }}</p>
+        <p class="card-text">Grade: {{ $enseignant->diplome }}</p>
+        <p class="card-text">Grade: {{ $enseignant->annee_rec }}</p>
+        <p class="card-text">Grade: {{ $enseignant->domaine_exp }}</p>
         <p class="card-text">Email : {{ $enseignant->email }}</p>
         <p class="card-text">Mot de passe : {{ $enseignant->password }}</p>
 
   </div>
     </hr>
-    <a href="{{url('enseignantt')}}" class="nav-link btn-retour"><button type="button" class="btn btn-primary">retour</button></a>  
+    <a href="{{url('admin')}}" class="nav-link btn-retour"><button type="button" class="btn btn-primary">retour</button></a>  
   </div>
 </div>
 </div>

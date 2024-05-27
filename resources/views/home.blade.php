@@ -75,10 +75,13 @@
     <!-- end header section -->
    
    
-    <!-- end slider section -->
-    <section class="contact_section layout_padding" id="connexion"  >
-    <h2   class="custom_heading text-center ">
-            Se connecter
+     <!-- contact section -->
+
+
+
+  <section class="contact_section layout_padding" id="connexion"  >
+    <h2 class="custom_heading text-center">
+            Connexion
     </h2>
     <div class="container mt-5 pt-5">
 
@@ -120,7 +123,7 @@
     <!-- Login Button -->
     <div class="text-center">
         <x-primary-button style="width:20em">
-            {{ __('connexion') }}
+            {{ __('Connexion') }}
         </x-primary-button>
     </div>
 </form>
@@ -129,6 +132,12 @@
   </section>
 
   <!-- end contact section -->
+
+ 
+
+
+
+
   <div class="bg" style="margin-top: 70px;">
 
     <!-- about section

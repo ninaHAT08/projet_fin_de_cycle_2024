@@ -57,16 +57,7 @@
                             <li class="breadcrumb-item"><a href="{{url('dashboard')}}"><h5>retour</h5></a></li>
                             <li class="breadcrumb-item active"></li>
                         </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                               
-                            </div>
                         </div>
-                        <div class="card mb-4">
-                            <div class="card-header bg-primary">
-                                <i class="fas fa-table me-1"></i>
-                               <h4>liste des sujets</h4>
-                            </div>
                   @if (session('success'))
                     <div class="alert alert-success">
                        {{ session('success') }}
@@ -79,6 +70,16 @@
                       </div>
                   @endif
 
+                        <div class="card mb-4">
+                            <div class="card-body">
+                               
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header bg-primary">
+                                <i class="fas fa-table me-1"></i>
+                               <h4>liste des sujets</h4>
+                 
 
                             <div class="card-body">
                                 <table id="datatablesSimple">

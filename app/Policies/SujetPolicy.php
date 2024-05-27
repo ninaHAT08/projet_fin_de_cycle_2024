@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\sujets;
+use App\Models\Sujet; // Utilisation du modèle Sujet
 use Illuminate\Auth\Access\Response;
 
 class SujetPolicy
@@ -19,7 +19,7 @@ class SujetPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, sujets $sujets): bool
+    public function view(User $user, Sujet $sujet): bool // Utilisation du modèle Sujet
     {
         return true;
     }
@@ -35,7 +35,7 @@ class SujetPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, sujets $sujets): bool
+    public function update(User $user, Sujet $sujet): bool // Utilisation du modèle Sujet
     {
         return true;
     }
@@ -43,18 +43,15 @@ class SujetPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, sujets $sujets): bool
+    public function delete(User $user, Sujet $sujet): bool
     {
-    
-      
-            return $user->id === $sujets->iduser;
-       
+        return $user->id === $sujet->iduser1;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, sujets $sujets): bool
+    public function restore(User $user, Sujet $sujet): bool // Utilisation du modèle Sujet
     {
         return true;
     }
@@ -62,7 +59,7 @@ class SujetPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, sujets $sujets): bool
+    public function forceDelete(User $user, Sujet $sujet): bool // Utilisation du modèle Sujet
     {
         return true;
     }

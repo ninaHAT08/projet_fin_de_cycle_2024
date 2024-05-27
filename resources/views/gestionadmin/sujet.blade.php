@@ -52,17 +52,29 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4"> consulter la liste des sujets proposé par les enseignants </h1>
+                        <h1 class="mt-4">  la liste des sujets proposé par les enseignants </h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="{{url('admin')}}"><h5>retour</h5></a></li>
                             <li class="breadcrumb-item active"></li>
                         </ol>
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                         <div class="card mb-4">
                             <div class="card-body">
                                
                             </div>
                         </div>
                         <div class="card mb-4">
+                      
                             <div class="card-header bg-primary">
                                 <i class="fas fa-table me-1"></i>
                                <h4>liste des sujets</h4>
@@ -76,11 +88,14 @@
                                       
                                     <tr>
                                     
-                                       <th>Titre</th>   
-                                        <th>Description</th>
-                                        <th>Mot_clé</th>
-                                        <th>Specialité</th>
-                                        <th>L'encadrant</th>
+                                    <th>Titre</th>
+                                      <th>Description</th>
+                                      <th>Spécialité</th>
+                                      <th>Mot clé</th>
+                                      <th>Année universitaire</th>
+                                      <th>Type de sujet</th>
+                                      <th>Enseignant</th>
+                                      <th>Co-encadrant</th>
                                         <th>Actions</th>
 
                               
@@ -91,11 +106,14 @@
                                      <tr>
                                        
                                     
-                                     <th>Titre</th>   
-                                        <th>Description</th>
-                                        <th>Mot_clé</th>
-                                        <th>Specialite concerne</th>
-                                        <th>L'encadrant</th>
+                                     <th>Titre</th>
+                                      <th>Description</th>
+                                      <th>Spécialité</th>
+                                      <th>Mot clé</th>
+                                      <th>Année universitaire</th>
+                                      <th>Type de sujet</th>
+                                      <th>Enseignant</th>
+                                      <th>Co-encadrant</th>
                                         <th>Actions</th>
                               
                                
@@ -105,15 +123,26 @@
                                         <tbody>
                                         @foreach( $sujets as $sujet)
         
-                <td>{{ $sujet -> titre}}</td>
-                <td>{{ $sujet -> description}}</td>  
-                   <td>{{ $sujet -> mot_clé}}</td>
-                   <td>{{ $sujet -> specialite}}</td>
-                <td>{{ $sujet->user->nom }} {{ $sujet->user->prenom }}</td>
-             
+                                          <td>{{ $sujet->titre }}</td>
+                                          <td>{{ $sujet->description }}</td>
+                                          <td>{{ $sujet->specialite }}</td>
+                                           <td>{{ $sujet->mot_cle }}</td>
+                                             <td>{{ $sujet->anneeUniv }}</td>
+                                             <td>{{ $sujet->typeSujet }}</td>
+                                  <td>{{ $sujet->user1->nom }} {{ $sujet->user1->prenom }}</td>
+                    <td>{{ $sujet->user2->nom ?? 'Aucun' }} {{ $sujet->user2->prenom ?? 'co-encadrant' }}</td>
+                 
 
                                      
-                                      <td> <a href="{{ route ('gestionadmin.show',$sujet)}}" title="View Student"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button></a></td>
+                                  <td>
+                                                <div class="d-flex gap-2">
+                                                    <!-- <a href="{{ route('sujets.show', $sujet) }}" title="Voir le sujet"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button></a> -->
+                                                    <form action="{{ route('sujets.valider', $sujet->idSujet) }}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i> valider</button>
+                                                    </form>
+                                                </div>
+                                            </td>
                                
                                   </tr> 
                                 @endforeach 

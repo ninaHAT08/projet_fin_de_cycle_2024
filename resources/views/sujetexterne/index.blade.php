@@ -52,10 +52,11 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4"> consulter la liste des sujets externes</h1>
+                        <h1 class="mt-4">  la liste des sujets proposé par les etudiants </h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="{{url('dashboard')}}"><h5>retour</h5></a></li>
-                            <li class="breadcrumb-item active"></li>
+                        <li class="breadcrumb-item"><a href="{{url('dashboard')}}"><h5>retour</h5></a>
+                          <a href="{{route('mmaliste')}}"><h5>mon sujet</h5></a>
+                          </li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
@@ -65,7 +66,7 @@
                         <div class="card mb-4">
                             <div class="card-header bg-primary">
                                 <i class="fas fa-table me-1"></i>
-                               <h4>liste des sujets</h4>
+                               <h4>liste des sujets externes</h4>
                             </div>
                 
 
@@ -76,12 +77,15 @@
                                       
                                     <tr>
                                     
-                                       <th>Titre</th>   
-                                        <th>Description</th>
-                                        <th>Mot_clé</th>
-                                        <th>Specialite </th>
-                                        <th>Entreprise </th>
-                                        <th>L'etudiant</th>
+                                    <th>Titre</th>
+                                      <th>Description</th>
+                                      <th>Spécialité</th>
+                                      <th>Mot clé</th>
+                                      <th>Année universitaire</th>
+                                      <th>Type de sujet</th>
+                                      <th>etudiant</th>
+                                      <th>Nom de l'entreprise</th>
+                                      <th>maitre du stage</th>
                                         <th>Actions</th>
 
                               
@@ -92,12 +96,15 @@
                                      <tr>
                                        
                                     
-                                     <th>Titre</th>   
-                                        <th>Description</th>
-                                        <th>Mot_clé</th>
-                                        <th>Specialite </th>
-                                        <th>Entreprise </th>
-                                        <th>L'etudiant</th>
+                                     <th>Titre</th>
+                                      <th>Description</th>
+                                      <th>Spécialité</th>
+                                      <th>Mot clé</th>
+                                      <th>Année universitaire</th>
+                                      <th>Type de sujet</th>
+                                      <th>etudiant</th>
+                                      <th>Nom de l'entreprise</th>
+                                      <th>maitre du stage</th>
                                         <th>Actions</th>
                               
                                
@@ -105,16 +112,22 @@
                                     </tfoot>
                                    
                                         <tbody>
-                                        @foreach( $sujets as $sujet)
-        
-                                        <td>{{ $sujet -> titre}}</td>
-                                        <td>{{ $sujet -> description}}</td>  
-                                           <td>{{ $sujet -> mot_clé}}</td>
-                                           <td>{{ $sujet -> specialite}}</td>
-                                           <td>{{ $sujet -> nom_entreprise}}</td>
-                                        <td>{{ $sujet->user->nom }} {{ $sujet->user->prenom }}</td>
+                                        @foreach ($sujets as $sujet)
+        <tr>
+            <td>{{ $sujet->titre }}</td>
+            <td>{{ $sujet->description }}</td>
+            <td>{{ $sujet->specialite }}</td>
+            <td>{{ $sujet->mot_cle }}</td>
+            <td>{{ $sujet->anneeUniv }}</td>
+            <td>{{ $sujet->typeSujet }}</td>
+            <td>{{ $sujet->user1->nom }} {{ $sujet->user1->prenom }}</td>
+            <td>{{ $sujet->nomEntreprise }}</td>
+            <td>{{ $sujet->maitre_du_stage }}</td>
+
+                 
+
                                      
-                                      <td> <a href="{{ route ('sujetss.show',$sujet)}}" title="View Student"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button></a></td>
+            <td><a href="{{ route ('sujetss.show',$sujet) }}" title="View Student"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> voir</button></a></td> 
                                
                                   </tr> 
                                 @endforeach 

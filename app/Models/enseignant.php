@@ -10,5 +10,5 @@ class enseignant extends Model
     use HasFactory;
     protected $table= 'enseignant';
     protected $primaryKey = 'id';
-    protected $fillable = ['nom', 'prenom' ,'email', 'specialite'];
+    protected $fillable = ['nom', 'prenom' ,'date_naiss','domaine_exp','email',  'diplome','année_rec', 'grade'];
 }

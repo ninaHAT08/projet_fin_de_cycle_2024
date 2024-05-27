@@ -21,6 +21,17 @@ class User extends Authenticatable
         'prenom',
         'usertype',
        'specialite',
+       'matricule',
+       'date_naiss',
+       'etat',
+       'type_these',
+      'annee_ins',
+      'grade',
+        'diplome',
+        'annee_rec',
+        'idSujet',
+        'poste',
+        'domaine_exp',
         'email',
         'password',
     ];
@@ -55,5 +66,10 @@ class User extends Authenticatable
     
 
     }
+     // Relation with Choix (les choix faits par l'étudiant)
+     public function choix()
+     {
+         return $this->hasMany(Choix::class, 'idUser3');
+     }
  
 }

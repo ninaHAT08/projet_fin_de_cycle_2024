@@ -10,9 +10,9 @@ use App\Policies\SujetPolicy;
 use App\Policies\SujetexternePolicy;
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
+    protected $policies = [
+        Sujet::class => SujetPolicy::class,
+    ];
     public function register(): void
     {
         //
@@ -25,7 +25,7 @@ public function boot(): void
     {
         
           
-            
+       
         Gate::policy(sujets::class, SujetPolicy::class);
         Gate::policy(sujetexterne::class, SujetexternePolicy::class);
        

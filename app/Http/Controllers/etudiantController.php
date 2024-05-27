@@ -65,7 +65,7 @@ class etudiantController extends Controller
      */
     public function destroy(string $id)
     {
-        etudiant::destroy($id);
+        users::destroy($id);
         return redirect('etudiant')->with('flash_message', 'Student deleted!');  
     }
   
@@ -81,7 +81,9 @@ class etudiantController extends Controller
         // Ajouter les conditions de recherche par nom, prénom et spécialité
         $query->where(function ($query) use ($q) {
             $query->where('nom', 'like', '%' . $q . '%')
-                  ->orWhere('specialite', 'like', '%' . $q . '%')
+                  ->orWhere('specialite', 'like', '%' . $q . '%') 
+             
+                  ->orWhere('matricule', 'like', '%' . $q . '%')
                   ->orWhere('email', 'like', '%' . $q . '%')
                   ->orWhere('prenom', 'like', '%' . $q . '%');
         });

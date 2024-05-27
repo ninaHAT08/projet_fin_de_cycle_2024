@@ -34,7 +34,12 @@ class usersenseignantController extends Controller
        $validatedData = $request->validate([
         'nom' => 'required|string|max:255',
         'prenom' => 'required|string|max:255',
-        'specialite' => 'required|string|max:255',
+        'date_naiss' => 'required|date',
+        'grade' => 'required|string|max:255',
+        'diplome' => 'required|string|max:255',
+        'annee_rec' => 'required|integer',
+      
+        'domaine_exp' => 'required|string|max:255',
         'usertype' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:8',
@@ -47,7 +52,11 @@ class usersenseignantController extends Controller
     $enseignant = new Users([
         'nom' => $request->input('nom'),
         'prenom' => $request->input('prenom'),
-        'specialite' => $request->input('specialite'),
+        'date_naiss' => $request->input('date_naiss'),
+        'grade' => $request->input('grade'),
+        'diplome' => $request->input('diplome'),
+        'annee_rec' => $request->input('annee_rec'),
+        'domaine_exp' => $request->input('domaine_exp'),
         'email' => $request->input('email'),
         'password' => $hashedPassword,
         'usertype' => 'enseignant', // Assurez-vous d'ajouter le type d'utilisateur

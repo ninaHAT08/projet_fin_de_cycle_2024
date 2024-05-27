@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\etudiant;
-use App\Models\fiches;
+use App\Models\Choix;
 use Illuminate\Support\Facades\Hash;
 use App\Models\users;
 use Illuminate\Http\Request;
@@ -34,8 +34,10 @@ class usersController extends Controller
         $validatedData = $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
+            'date_naiss' => 'required|date',
             'specialite' => 'required|string|max:255',
-            'usertype' => 'required|string|max:255',
+            'matricule' => 'required|string|max:12',
+            'usertype' => 'required|string|max:255',    
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             // Ajoutez d'autres règles de validation au besoin
@@ -48,7 +50,9 @@ class usersController extends Controller
         Users::create([
             'nom' => $request->input('nom'),
             'prenom' => $request->input('prenom'),
+            'date_naiss' => $request->input('date_naiss'),
             'specialite' => $request->input('specialite'),
+            'matricule' => $request->input('matricule'),
             'email' => $request->input('email'),
             'password' => $hashedPassword,
             'usertype' => 'etudiant', 

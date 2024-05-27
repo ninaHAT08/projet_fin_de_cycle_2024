@@ -103,44 +103,58 @@
                                     <thead>
                                       
                                             <tr>
-                                                <th>#</th>
-                                                <th>Nom</th>   
-                                                <th>Prenom</th>
-                                                <th>Domaine d'expertise</th>
-                                                <th>Email</th>
-                                                <th>Actions</th>
+                                            <th>#</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Date Naissance</th>
+                                        <th>Grade</th>
+                                        <th>Diplome</th>
+                                        <th>Date de Recrutement</th>
+                                        <th>Domaine d'expertise</th>                                    
+                                        <th>Email</th>
+                                        <th>Actions</th>
                                             </tr>
                                        
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Nom</th>   
-                                            <th>Prenom</th>
-                                            <th>Domaine d'expertise</th>
-                                            <th>Email</th>
-                                            <th>Actions</th>
+                                        <th>#</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Date Naissance</th>
+                                        <th>Grade</th>
+                                        <th>Diplome</th>
+                                        <th>Date de Recrutement</th>
+                                        <th>Domaine d'expertise</th>                                    
+                                        <th>Email</th>
+                                        <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                    
                                         <tbody>
                                         @foreach($enseignant  as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nom }}</td>
                                         <td>{{ $item->prenom }}</td>
-                                        <td>{{ $item->specialite}}</td>
+                                        <td>{{ $item->date_naiss }}</td>
+                                        <td>{{ $item->grade }}</td>
+                                        <td>{{ $item->diplome }}</td>
+                                        <td>{{ $item->annee_rec }}</td>
+                                        <td>{{ $item->domaine_exp}}</td>
                                         <td>{{ $item->email }}</td>
   
                                         <td>
-                                        <a href="{{ url('/enseignantt/' . $item->id) }}" title="View Student"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button></a>
+                                        <div class="d-flex gap-2">
+                                        <a href="{{ url('/enseignantt/' . $item->id) }}" title="View Student"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> voir</button></a>
             
   
-                                            <form method="POST" action="{{ url('/enseignantuser' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                            <form method="POST" action="{{ url('/enseignantuser' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce enseignant?');">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Student" onclick="return confirm('Confirmation de la suppression?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprime</button>
                                             </form>
+                                          </div>
                                         </td>
                                     </tr>
                                 @endforeach

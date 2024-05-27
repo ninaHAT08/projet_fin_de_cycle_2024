@@ -68,9 +68,9 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{route('sujets.create')}}">proposé un sujet </a>
-                                    <a class="nav-link" href="#"> voir la liste des sujets</a>
-                                   
+                                    <a class="nav-link" href="{{route('sujets.create')}}">proposer un sujet </a>
+                                    <a class="nav-link" href="{{route('maliste')}}"> voir ma liste des sujets</a>
+                                    <a class="nav-link" href="{{ route('affectation') }}">Voir la liste des choix</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -86,8 +86,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="{{route('sujetss.create')}}"></a> 
-                                            <a class="nav-link" href="{{url('sujetss')}}">voir la liste des sujets externes</a>
+                                        <a class="nav-link" href="#"></a> 
+                                            <a class="nav-link" href="{{url('enseaignantsujetexterne')}}">voir la liste des sujets externes</a>
                                         </nav>
                                     </div>
                                    

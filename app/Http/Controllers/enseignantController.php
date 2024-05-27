@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Sujet;
 use App\Models\users;
 use App\Models\enseignant;
 class enseignantController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
    // $etudiant = etudiant::all();
@@ -52,10 +50,21 @@ class enseignantController extends Controller
     {
         //
     }
+ // Récupérer les choix envoyés pour les sujets appartenant à l'enseignant connecté
+    // public function showStudentChoices()
+    // {
+    //     $enseignantId = Auth::id();
 
-    /**
-     * Update the specified resource in storage.
-     */
+    //     // Récupérer les choix envoyés pour les sujets appartenant à l'enseignant connecté
+    //     $choix = Choix::whereHas('Sujet', function ($query) use ($enseignantId) {
+    //         $query->where('iduser1', $enseignantId);
+    //     })->where('envoyer', true)->get();
+
+    //     return view('enseignantcrud.choix', compact('choix'));
+    // }
+
+
+
     public function update(Request $request, string $id)
     {
         //
@@ -79,8 +88,12 @@ class enseignantController extends Controller
         // Ajouter les conditions de recherche par nom, prénom et spécialité
         $query->where(function ($query) use ($q) {
             $query->where('nom', 'like', '%' . $q . '%')
-                  ->orWhere('specialite', 'like', '%' . $q . '%')
+                  ->orWhere('domaine_exp', 'like', '%' . $q . '%')
                   ->orWhere('prenom', 'like', '%' . $q . '%')
+                 
+                  ->orWhere('grade', 'like', '%' . $q . '%')
+                  ->orWhere('diplome', 'like', '%' . $q . '%')
+                  ->orWhere('annee_rec', 'like', '%' . $q . '%')
                   ->orWhere('email', 'like', '%' . $q . '%');
         });
     

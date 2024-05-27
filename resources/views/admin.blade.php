@@ -48,14 +48,21 @@
                     </ul>
                 </li>
             </ul>
-        </nav>
+</nav>
+
+
+
+
+
+
+
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark  bg-secondary"  id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link"   href="index.html">
+                            <a class="nav-link"   href="{{url('admin')}}">
                                 <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
                                 Dashboard
                             </a>
@@ -69,8 +76,11 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ route('etudiant.index') }}">Gestion Etudiant</a>
                                     <a class="nav-link" href="{{ route('enseignantt.index') }}">Gestion Enseignant</a>
-                                    <a class="nav-link" href="{{ url('adminsujet') }}">Gestion des sujets </a>
+                                    <a class="nav-link" href=" {{ url('doctorant') }}">Gestion doctorant</a>
+                                    <a class="nav-link" href="{{ url('adminsujet') }}">Gestion des sujets  </a>
                                     <a class="nav-link" href="{{ url('adminsujetexterne') }}">gestion des sujets externe</a>
+                                    <a class="nav-link" href="{{ route('sessions.index') }}">Gestion des sessions </a>
+
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -82,7 +92,8 @@
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
+                                    </div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
