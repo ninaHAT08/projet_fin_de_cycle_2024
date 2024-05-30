@@ -574,8 +574,8 @@ h5{
 }
 
 .contact_section button {
-  padding-left: 20px;
-  
+  padding: 10px;
+  margin-left: 20%;
   background-color: #179dfb;
   border: 1px solid #252525;
   color: #ffffff;
@@ -587,6 +587,7 @@ h5{
 .contact_section button:hover {
   color: #179dfb;
   background-color: transparent;
+
 }
 
 .info_section {

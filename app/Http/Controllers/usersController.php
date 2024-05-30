@@ -6,8 +6,9 @@ use App\Models\etudiant;
 use App\Models\Choix;
 use Illuminate\Support\Facades\Hash;
 use App\Models\users;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule; 
 class usersController extends Controller
 {
     /**
@@ -31,17 +32,37 @@ class usersController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'date_naiss' => 'required|date',
-            'specialite' => 'required|string|max:255',
-            'matricule' => 'required|string|max:12',
-            'usertype' => 'required|string|max:255',    
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            // Ajoutez d'autres règles de validation au besoin
-        ]);
+       // Règles de validation de base
+       $rules = [
+        'nom' => 'required|string|max:255',
+        'prenom' => 'required|string|max:255',
+        'date_naiss' => 'required|date',
+        'specialite' => 'required|string|max:255',
+        'usertype' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8',
+    ];
+
+    // Ajouter une règle conditionnelle pour 'matricule' si 'usertype' est 'etudiant'
+    if ($request->input('usertype') === 'etudiant') {
+        $rules['matricule'] = [
+            'required',
+            'string',
+            'min:12',
+            Rule::unique('users')->where(function ($query) {
+                return $query->where('usertype', 'etudiant');
+            }),
+        ];
+    } else {
+        $rules['matricule'] = [
+            'nullable',
+            'string',
+            'min:12',
+        ];
+    }
+
+    $validatedData = $request->validate($rules);
+
     
         // Hash du mot de passe
         $hashedPassword = Hash::make($request->input('password'));

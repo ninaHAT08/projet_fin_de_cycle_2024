@@ -39,18 +39,33 @@ class SujetexterneController extends Controller
 
    public function create()
    {
-       if (Auth::check()) {
-           // Vérifie si l'utilisateur est un étudiant
-           if (Auth::user()->usertype != 'etudiant') {
-               // Redirige ou retourne un message d'erreur
-               return redirect()->route('dashboard')->with('error', 'Vous n\'êtes pas autorisé à créer un sujet.');
-           }
-       $etudiants = User::where('usertype', 'etudiant')->get();
-   
-           return view('sujetexterne.create', compact('etudiants'));
-       } else {
-           return redirect()->route('login')->with('error', 'Veuillez vous connecter.');
-       }
+    //    
+    if (Auth::check()) {
+        // Vérifie si l'utilisateur est un étudiant
+        if (Auth::user()->usertype != 'etudiant') {
+            // Redirige ou retourne un message d'erreur
+            return redirect()->route('dashboard')->with('error', 'Vous n\'êtes pas autorisé à créer un sujet.');
+        }
+
+        // Vérifie si l'étudiant a déjà proposé un sujet
+        $existingSujet = Sujet::where('iduser1', Auth::id())->first();
+
+        // Si un sujet existe déjà pour cet utilisateur, afficher une erreur
+        if ($existingSujet) {
+            // Si l'étudiant a déjà proposé un sujet, redirige vers le tableau de bord avec un message d'erreur
+            return redirect()->route('dashboard')->with('error', 'Vous avez déjà proposé un sujet.');
+        }
+        // Si l'étudiant n'a pas encore proposé de sujet, affiche le formulaire de création de sujet externe
+        $etudiants = User::where('usertype', 'etudiant')->get();
+        return view('sujetexterne.create', compact('etudiants'));
+
+        // Récupère la liste des étudiants (pour les cas où vous pourriez en avoir besoin)
+        $etudiants = User::where('usertype', 'etudiant')->get();
+
+        return view('sujetexterne.create', compact('etudiants'));
+    } else {
+        return redirect()->route('login')->with('error', 'Veuillez vous connecter.');
+    }
    }
 
    public function store(Request $request)

@@ -69,26 +69,41 @@
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Uilisateur && Sujets
+                               Users
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('etudiant.index') }}">Gestion Etudiant</a>
-                                    <a class="nav-link" href="{{ route('enseignantt.index') }}">Gestion Enseignant</a>
-                                    <a class="nav-link" href=" {{ url('doctorant') }}">Gestion doctorant</a>
-                                    <a class="nav-link" href="{{ url('adminsujet') }}">Gestion des sujets  </a>
-                                    <a class="nav-link" href="{{ url('adminsujetexterne') }}">gestion des sujets externe</a>
-                                    <a class="nav-link" href="{{ route('sessions.index') }}">Gestion des sessions </a>
+                                    <a class="nav-link" href="{{ route('etudiant.index') }}">Gestion Etudiants</a>
+                                    <a class="nav-link" href="{{ route('enseignantt.index') }}">Gestion Enseignants</a>
+                                    <a class="nav-link" href=" {{ url('doctorant') }}">Gestion Doctorants</a>
 
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
+                               Autres
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                       Sujets PFC
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
+                                    </div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{ url('adminsujet') }}">Gestion des sujets interne </a>
+                                    <a class="nav-link" href="{{ url('adminsujetexterne') }}">gestion des sujets externe</a>
+                                    <a class="nav-link" href="{{ route('sessions.index') }}">Gestion des sessions </a>
+                                        </nav>
+                                    </div>
+                                   
+                                </nav>
+
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Authentication
@@ -97,9 +112,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">Login</a>
                                             <a class="nav-link" href="#">Register</a>
-                                            <a class="nav-link" href="#">Forgot Password</a>
+                                          
                                         </nav>
                                     </div>
                                    

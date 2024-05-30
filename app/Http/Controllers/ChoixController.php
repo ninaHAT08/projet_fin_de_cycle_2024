@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sujet;
 use App\Models\Choix;
 use App\Models\users;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -176,13 +177,7 @@ public function envoyer(Request $request)
         return redirect()->back()->with('error', 'Vous avez déjà envoyé vos choix et ne pouvez plus effectuer de modifications.');
     }
 
-    // Vérifiez que chaque choix a un ordre défini
-    foreach ($choixs as $choix) {
-        if (is_null($choix->ordre)) {
-            return redirect()->back()->with('error', 'Vous devez définir un ordre pour chaque choix avant de les envoyer.');
-        }
-    }
-
+    
     // Mettre à jour les choix pour marquer comme envoyés
     foreach ($choixs as $choix) {
         $choix->update(['envoyer' => true]);
@@ -209,41 +204,51 @@ public function affectation()
 
     return view('sujets.affectation', compact('choixs'));
 }
-
-public function updateOrdre(Request $request)
-{
-    $idUtilisateur = Auth::id();
-    $ordreData = $request->input('ordre');
-
-    // Valider les données pour éviter les doublons
-    $counts = array_count_values($ordreData);
-    foreach ($counts as $ordre => $count) {
-        if ($count > 1) {
-            return redirect()->route('choix.ajouter')->with('error', 'Chaque ordre doit être unique pour chaque utilisateur.');
+public function affecter(Request $request, $choixId)
+    {
+        // Récupérer le choix spécifique
+        $choix = Choix::findOrFail($choixId);
+    
+        // Vérifier si le sujet associé à ce choix existe
+        $sujet = Sujet::findOrFail($choix->idSujet1);
+    
+        // Vérifier si le sujet est déjà affecté
+        if ($sujet->Sujet_affecter) {
+            return redirect()->back()->with('error', 'Le sujet est déjà affecté.');
         }
-    }
-
-    // Vérifier s'il existe déjà un choix avec les mêmes ordres pour le même utilisateur
-    $existingChoices = Choix::where('idUser3', $idUtilisateur)
-                             ->whereIn('ordre', $ordreData)
-                             ->count();
-    if ($existingChoices > 0) {
-        return redirect()->route('choix.ajouter')->with('error', 'Vous avez déjà choisi un sujet avec le même ordre.');
-    }
-
-    // Mettre à jour les ordres s'ils sont valides
-    foreach ($ordreData as $choixId => $ordre) {
-        $choix = Choix::where('id', $choixId)
-                      ->where('idUser3', $idUtilisateur)
-                      ->where('envoyer', false) // Assurez-vous que le choix n'a pas encore été envoyé
-                      ->first();
-        if ($choix) {
-            $choix->update(['ordre' => $ordre]);
+     // Vérifier si l'étudiant 1 est déjà affecté à un sujet
+     $etudiant1 = User::findOrFail($choix->idUser3);
+     if ($etudiant1->etat) {
+         return redirect()->back()->with('error', 'L\'étudiant '.$etudiant1->nom.' '.$etudiant1->prenom.' est déjà affecté à un sujet.');
+     }
+ 
+     // Vérifier si le binôme de l'étudiant 1 est déjà affecté à un sujet
+     if ($choix->binome) {
+         $binome = User::findOrFail($choix->binome);
+         if ($binome->etat) {
+             return redirect()->back()->with('error', 'Le binôme de l\'étudiant '.$etudiant1->nom.' '.$etudiant1->prenom.' est déjà affecté à un sujet.');
+         }
+     }
+        // Mettre à jour la colonne Sujet_affecter dans la table sujets
+        $sujet->Sujet_affecter = true;
+        $sujet->save();
+    
+        // Mettre à jour la colonne etat et idSujet dans la table users pour idUser3
+        $etudiant1 = users::findOrFail($choix->idUser3);
+        $etudiant1->etat = true;
+       $etudiant1->idSujet = $sujet->idSujet =  $choix->idSujet1; 
+        $etudiant1->save();
+    
+        // Mettre à jour la colonne etat et idSujet dans la table users pour le binôme
+        if ($choix->binome) {
+            $etudiant2 = users::findOrFail($choix->binome);
+            $etudiant2->etat = true;
+            $etudiant2->idSujet =$sujet->idSujet; 
+            $etudiant2->save();
         }
+    
+        return redirect()->back()->with('success', 'Le sujet a été affecté avec succès.');
     }
-
-    return redirect()->route('choix.ajouter')->with('success', 'Les ordres ont été mis à jour avec succès.');
-}
-
+    
 
 }

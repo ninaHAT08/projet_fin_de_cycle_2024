@@ -1,22 +1,51 @@
 @extends('enseignantcrud.layout')
 @section('content')
-  
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="card" style="margin:20px;">
-  <div class="card-header bg-primary">ajouter un doctorant</div>
+  <div class="card-header bg-primary"><strong>ajouter un doctorant</strong></div>
   <div class="card-body">
        
       <form action="{{ url('doctorant') }}" method="post">
         {!! csrf_field() !!}
+        @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         <label>Nom</label></br>
-        <input type="text" name="nom" id="nom" class="form-control"></br>
+        <input type="text" name="nom" id="nom" class="form-control" required></br>
         <label>Prenom</label></br>
-        <input type="text" name="prenom" id="prenom" class="form-control"></br>
+        <input type="text" name="prenom" id="prenom" class="form-control" required></br>
         <label>Date Naissance</label></br>
         <input type="date" name="date_naiss" id="date_naiss" class="form-control"></br>
         <label>type these</label></br>
-        <input type="text" name="type_these" id="type_these" class="form-control"></br>
+        <input type="text" name="type_these" id="type_these" class="form-control" required></br>
         <label>annee inscription</label></br>
-        <input type="text" name="annee_ins" id="annee_ins" class="form-control"></br>
+        <input type="text" name="annee_ins" id="annee_ins" class="form-control" required></br>
         <!-- <label>Type d'utilisateur</label></br>
         <input type="text" name="usertype" id="usertype" class="form-control"></br>-->
         <label for="usertype">Type d'utilisateur</label><br>
@@ -25,7 +54,7 @@
     <!-- Ajoutez autant d'options que nécessaire -->
 </select><br>
         <label>Email</label></br>
-        <input type="text" name="email" id="email" class="form-control"></br>
+        <input type="text" name="email" id="email" class="form-control" required></br>
         <label>Mot de passe</label></br>
        
 <x-text-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" />

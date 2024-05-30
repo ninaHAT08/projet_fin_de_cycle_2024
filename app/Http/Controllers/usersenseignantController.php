@@ -27,50 +27,55 @@ class usersenseignantController extends Controller
      */
     public function store(Request $request)
     {
-       // $input = $request->all();
-       // users::create($input);
-       // return redirect('enseignantt')->with('flash_message', 'Student Addedd!');  
+        $validatedData = $request->validate([
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'date_naiss' => 'required|date',
+            'grade' => 'required|string|max:255',
+            'diplome' => 'required|string|max:255',
+            'annee_rec' => 'required|integer',
+            'domaine_exp' => 'required|array',// de type tableau 
+            'usertype' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+// Récupération des domaines d'expertise sélectionnés depuis la requête
+$selectedDomains = $request->input('domaine_exp');
 
-       $validatedData = $request->validate([
-        'nom' => 'required|string|max:255',
-        'prenom' => 'required|string|max:255',
-        'date_naiss' => 'required|date',
-        'grade' => 'required|string|max:255',
-        'diplome' => 'required|string|max:255',
-        'annee_rec' => 'required|integer',
-      
-        'domaine_exp' => 'required|string|max:255',
-        'usertype' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8',
-    ]);
+// Conversion du tableau en chaîne de caractères séparée par une virgule et un espace
+$selectedDomainsString = implode(", ", $selectedDomains);
+        // Hash du mot de passe
+        $hashedPassword = Hash::make($request->input('password'));
 
-    // Hash du mot de passe
-    $hashedPassword = Hash::make($request->input('password'));
+        try {
+            // Conversion du tableau de domaines d'expertise en JSON
+            $domaines = json_encode($request->input('domaine_exp'));
 
-    // Création de l'enseignant avec mot de passe hashé
-    $enseignant = new Users([
-        'nom' => $request->input('nom'),
-        'prenom' => $request->input('prenom'),
-        'date_naiss' => $request->input('date_naiss'),
-        'grade' => $request->input('grade'),
-        'diplome' => $request->input('diplome'),
-        'annee_rec' => $request->input('annee_rec'),
-        'domaine_exp' => $request->input('domaine_exp'),
-        'email' => $request->input('email'),
-        'password' => $hashedPassword,
-        'usertype' => 'enseignant', // Assurez-vous d'ajouter le type d'utilisateur
-        // Ajoutez d'autres champs du formulaire au besoin
-    ]);
+            // Création de l'enseignant avec mot de passe hashé
+            $enseignant = new Users([
+                'nom' => $request->input('nom'),
+                'prenom' => $request->input('prenom'),
+                'date_naiss' => $request->input('date_naiss'),
+                'grade' => $request->input('grade'),
+                'diplome' => $request->input('diplome'),
+                'annee_rec' => $request->input('annee_rec'),
+                'domaine_exp' => $domaines,
+                'email' => $request->input('email'),
+                'password' => $hashedPassword,
+                'usertype' => 'enseignant',
+            ]);
 
-    // Enregistrement de l'enseignant dans la base de données
-    $enseignant->save();
+         // Enregistrement de l'enseignant dans la base de données
+        $enseignant->save();
 
-    // Redirection avec un message de réussite
-    return redirect('enseignantt')->with('flash_message', 'Enseignant ajouté avec succès!');
-}
+        // Redirection avec un message de réussite
+        return redirect('enseignantt')->with('success', 'Enseignant ajouté avec succès!');
+    } catch (\Exception $e) {
+        // Redirection avec un message d'erreur en cas d'échec
+        return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'ajout de l\'enseignant.');
+    }
+    }
 
-    
 
     /**
      * Display the specified resource.

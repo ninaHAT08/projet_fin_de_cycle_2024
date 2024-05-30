@@ -44,6 +44,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'etat' => 'boolean',
     ];
 
     /**
@@ -59,12 +60,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function sujets(){
-       return $this ->hasMany('App\Models\sujets');
-      // return $this->hasMany(sujets::class);
-
-    
-
+    public function sujet()
+    {
+        return $this->belongsTo(Sujet::class, 'idSujet');
     }
      // Relation with Choix (les choix faits par l'étudiant)
      public function choix()

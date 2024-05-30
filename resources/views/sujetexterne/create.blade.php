@@ -18,6 +18,15 @@
         <div class="card-body">
             <form action="{{ route('sujetss.store') }}" method="POST">
                 @csrf
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <div class="row mb-3">
                     <div class="col-sm-4">
                         <input type="text" name="titre" id="titre" class="form-control @error('titre') is-invalid @enderror" placeholder="Titre" value="{{ old('titre') }}" required>

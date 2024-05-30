@@ -10,7 +10,7 @@ class Choix extends Model
     use HasFactory;
     protected $table= 'choix';
     protected $primaryKey = 'id';
-    protected $fillable = ['binome', 'date', 'idSujet1', 'idUser3','envoyer','ordre'];
+    protected $fillable = ['binome', 'date', 'idSujet1', 'idUser3','envoyer'];
 
     public function binomeUser()
     {

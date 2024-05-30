@@ -1,17 +1,7 @@
 @extends('layout')
 
 @section('content')
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
 
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
 <div class="container" style="margin-top: 20px;">
     <div class="card">
         <div class="card-header bg-primary text-white">ajouter un nouveau sujet</div>

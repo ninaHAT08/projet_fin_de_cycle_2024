@@ -161,25 +161,66 @@ return view ('sujets.search')-> with('sujets', $sujets);
 
 public function valider($idSujet)
 {
+    $sujet = Sujet::findOrFail($idSujet);
 
-     $sujets = Sujet::findOrFail($idSujet);
-     
-    $sujets->publier = true;
-    $sujets->save();
+    if ($sujet->publier) {
+        // Si le sujet est déjà publié
+        return redirect()->route('adminsujet')->with('error', 'Ce sujet est déjà validé et publié.');
+    }
+
+    // Sinon, valider et publier le sujet
+    $sujet->publier = true;
+    $sujet->save();
   
-   return redirect()->route('adminsujet')->with('flash_message', 'Sujet publié avec succès dans l\'espace étudiant.');
-   //return view('gestionadmin.sujet', compact('sujets'));
+    return redirect()->route('adminsujet')->with('success', 'Sujet validé et publié avec succès dans l\'espace utilisateurs.');
 }
 
-
-
 /////afectation de sujet par lenseignant
-public function affecterSujet(Request $request, $id)
-{
-    $sujet = Sujet::findOrFail($id);
-    $sujet->sujet_affecter = $request->has('sujet_affecter') ? 1 : 0;
-    $sujet->save();
 
-    return redirect()->back()->with('success', 'Sujet ' . ($sujet->sujet_affecter ? 'affecté' : 'désaffecté') . ' avec succès.');
+
+    public function affecterSujet(Request $request, $id)
+{
+    // Vérifie si l'utilisateur est authentifié
+    if (!Auth::check()) {
+        return response()->json(['success' => false, 'message' => 'Utilisateur non authentifié.']);
+    }
+
+    // Vérifie si le sujet existe
+    $sujet = Sujet::findOrFail($id);
+
+    // Vérifie si le sujet est déjà affecté
+    if ($sujet->sujet_affecter === 1) {
+        return response()->json(['success' => false, 'message' => 'Le sujet est déjà affecté à un étudiant.']);
+    }
+
+    // Vérifie si l'utilisateur a déjà une affectation
+    $user = Auth::user();
+    if ($user->etat === true) {
+        return response()->json(['success' => false, 'message' => 'L\'étudiant a déjà une affectation de sujet.']);
+    }
+
+    // Procède à l'affectation du sujet
+    try {
+        // Début de la transaction
+        DB::beginTransaction();
+
+        // Met à jour le sujet pour le marquer comme affecté
+        $sujet->update(['sujet_affecter' => 1]);
+
+        // Met à jour l'utilisateur pour marquer l'état comme affecté et associer le sujet
+        $user->update(['etat' => true, 'idSujet' => $id]);
+
+        // Fin de la transaction
+        DB::commit();
+
+        // Retourne une réponse JSON avec un message de succès
+        return response()->json(['success' => true, 'message' => 'Sujet affecté avec succès.']);
+    } catch (\Exception $e) {
+        // En cas d'erreur, annule la transaction
+        DB::rollBack();
+
+        // Retourne une réponse JSON avec un message d'erreur
+        return response()->json(['success' => false, 'message' => 'Une erreur s\'est produite lors de l\'affectation du sujet.']);
+    }
 }
 }

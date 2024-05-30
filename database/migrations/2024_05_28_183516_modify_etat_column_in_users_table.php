@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('Choix', function (Blueprint $table) {
-            $table->integer('ordre')->default(null);
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('etat')->default(false)->nullable()->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('Choix', function (Blueprint $table) {
-            $table->dropColumn('ordre');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('etat')->nullable()->change();
         });
     }
 };

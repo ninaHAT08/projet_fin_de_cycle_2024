@@ -18,5 +18,9 @@ class HomeController extends Controller
     {
         return view('etudiant.index');
     }
+    public function indexdoct()
+    {
+        return view('doctorant');
+    }
     
 }

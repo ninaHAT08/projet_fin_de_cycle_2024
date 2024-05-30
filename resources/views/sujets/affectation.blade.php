@@ -1,124 +1,177 @@
-<x-app-layout>
-@extends('layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Tables - SUJETS</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-switch-button@2.1.0/dist/bootstrap-switch-button.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-switch-button@2.1.0/dist/bootstrap-switch-button.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
+            <!-- Navbar Brand-->
+            <img src="images/logo20.png" alt=""  style="width: 180px;height: 50px;">
+            <!-- Sidebar Toggle-->
+           
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li> <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profil') }}
+                        </x-dropdown-link></li>
+                        <li><form method="POST" action="{{ route('logout') }}">
+                            @csrf
 
-<div class="row" style="margin:20px;">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header bg-primary">
-                <h2>Affectation des sujets</h2>
-            </div>
-            <div class="card">
-                <div class="card-body" style="margin:20px;">
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Deconnexion') }}
+                            </x-dropdown-link>
+                        </form>
+                        </li>
+                      
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4 ">
                     <div style="display: inline-block;" class="info-item">
                         <p style="font-size: 20px; color: black;"><strong>Nom:</strong> {{ Auth::user()->nom }}</p>
                         <p style="font-size: 20px; color: black;"><strong>Prénom:</strong> {{ Auth::user()->prenom }}</p>
+                  
                     </div>
-                    <div style="display: inline-block;" class="info-item">
-                        <p style="font-size: 20px; color: black;"><strong>Email:</strong> {{ Auth::user()->email }}</p>
-                    </div>
-                    <div class="card-body">
+             
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="{{ url('enseignant') }}"><h5>retour</h5></a></li>
+                    </ol>
+                    <div class="card mb-4">
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
                             </div>
                         @endif
-
                         @if (session('error'))
                             <div class="alert alert-danger">
                                 {{ session('error') }}
                             </div>
                         @endif
-
-                        @if($choixs->isEmpty())
-                            <p>Aucun sujet n'a été envoyé pour le moment.</p>
-                        @else
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Titre</th>
-                                        <th>Étudiant 1</th>
-                                        <th>Spécialité Étudiant 1</th>
-                                        <th>Binôme</th>
-                                        <th>Spécialité Binôme</th>
-                                        <th>Priorité</th>
-                                        <th>Sujet Affecté</th>
-                                        <th>Date de la Sélection</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($choixs as $choix)
+                        <div class="card-header bg-primary">
+                            <i class="fas fa-table me-1"></i>
+                            <h4>Liste sujet choisis</h4>
+                        </div>
+                        <div class="card-body">
+                            @if($choixs->isEmpty())
+                                <p>Aucun sujet n'a été envoyé pour le moment.</p>
+                            @else
+                                <table id="datatablesSimple">
+                                    <thead>
                                         <tr>
-                                            <td>{{ \App\Models\Sujet::find($choix->idSujet1)->titre }}</td>
-                                            <td>{{ \App\Models\users::find($choix->idUser3)->nom }} {{ \App\Models\users::find($choix->idUser3)->prenom }}</td>
-                                            <td>{{ \App\Models\users::find($choix->idUser3)->specialite }}</td>
-                                            <td>
-                                                @if ($choix->binome)
-                                                    {{ \App\Models\users::find($choix->binome)->nom }} {{ \App\Models\users::find($choix->binome)->prenom }}
-                                                @else
-                                                    Aucun binôme
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($choix->binome)
-                                                    {{ \App\Models\users::find($choix->binome)->specialite }}
-                                                @else
-                                                    Aucun binôme
-                                                @endif
-                                            </td>
-                                            <td>{{ $choix->ordre }}</td>
-                                            <td>
-                                                <form action="{{ route('sujets.affecter', \App\Models\Sujet::find($choix->idSujet1)->idSujet) }}" method="POST">
-                                                    @csrf
-                                                    <div class="form-check form-switch">
-                                                        <input type="checkbox" class="form-check-input" id="sujetAffecter{{ $choix->id }}" name="sujet_affecter" {{ \App\Models\Sujet::find($choix->idSujet1)->sujet_affecter ? 'checked' : '' }} >
-                                                        <label class="form-check-label" for="sujetAffecter{{ $choix->id }}">{{ \App\Models\Sujet::find($choix->idSujet1)->sujet_affecter ? 'Affecté' : 'Non Affecté' }}</label>
-                                                    </div>
-                                                </form>
-                                            </td>
-                                            <td>{{ $choix->date }}</td>
+                                            <th>Titre</th>
+                                            <th>Étudiant </th>
+                                            <th>Spécialité Étudiant </th>
+                                            <th>Binôme</th>
+                                            <th>Spécialité Binôme</th>
+                                            <th>Sujet Affecté</th>
+                                            <th>Date de la Sélection</th>
+                                            <th>Action</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        @endif
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Titre</th>
+                                            <th>Étudiant 1</th>
+                                            <th>Spécialité Étudiant 1</th>
+                                            <th>Binôme</th>
+                                            <th>Spécialité Binôme</th>
+                                         
+                                            <th>Sujet Affecté</th>
+                                            <th>Date de la Sélection</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        @foreach ($choixs as $choix)
+                                            <tr>
+                                                <td>{{ \App\Models\Sujet::find($choix->idSujet1)->titre }}</td>
+                                                <td>{{ \App\Models\users::find($choix->idUser3)->nom }} {{ \App\Models\users::find($choix->idUser3)->prenom }}</td>
+                                                <td>{{ \App\Models\users::find($choix->idUser3)->specialite }}</td>
+                                                <td>
+                                                    @if ($choix->binome)
+                                                        {{ \App\Models\users::find($choix->binome)->nom }} {{ \App\Models\users::find($choix->binome)->prenom }}
+                                                    @else
+                                                        Aucun binôme
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($choix->binome)
+                                                        {{ \App\Models\users::find($choix->binome)->specialite }}
+                                                    @else
+                                                        Aucun binôme
+                                                    @endif
+                                                </td>
+                                              
+                                                <td>
+                                                <form action="{{ route('sujets.affecter', $choix->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary">
+                   affecte
+                </button>
+            </form>
+</td>
+                                            </td>
+
+                                                <td>{{ $choix->date }}</td>
+                                                <td>
+                                                    <!-- <a href="#" title="View Student"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Modifier</button></a> -->
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">
+                            <p>© 2024 All Rights Reserved By <strong>GndznHtm</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const switches = document.querySelectorAll('.form-check-input');
+   
+  
 
-        switches.forEach(switchElement => {
-            switchElement.addEventListener('change', function() {
-                const form = this.closest('form');
-                const formData = new FormData(form);
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
 
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Mettre à jour l'étiquette du switch si nécessaire
-                    const switchLabel = form.querySelector('.form-check-label');
-                    switchLabel.textContent = data.sujet_affecter ? 'Affecté' : 'Non Affecté';
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-            });
-        });
-    });
-</script>
-</x-app-layout>
+   
+</body>
+</html>

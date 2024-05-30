@@ -70,6 +70,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ url('espaceetudiant') }}">consulter liste sujet </a>
                                     <a class="nav-link" href="{{route('choix.ajouter')}}"> ma fiche de voeux</a>
+                                    <a class="nav-link" href="{{route('affichage.affectation')}}"> mes affectations </a>
                                     <!-- <a href="{{route('choix.ajouter')}}" class="nav-link"><button type="button" class="btn btn-secondary">Consulter ma fiche de veoux</button></a> -->
                                 </nav>
                             </div>

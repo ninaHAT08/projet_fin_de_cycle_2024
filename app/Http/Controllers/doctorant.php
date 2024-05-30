@@ -62,7 +62,7 @@ class doctorant extends Controller
         $doctorants->save();
     
         // Redirection avec un message de réussite
-        return redirect('doctorant')->with('flash_message', 'Enseignant ajouté avec succès!');
+        return redirect('doctorant')->with('flash_message', 'doctorant ajouté avec succès!');
     }
 
     /**

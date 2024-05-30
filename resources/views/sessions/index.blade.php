@@ -122,11 +122,11 @@
                             <td>{{ $session->annee_univ }}</td>
                             <td>
                                 <a href="{{ route('sessions.edit', $session->id) }}" class="btn btn-sm btn-warning">modifier</a>
-                                <form action="{{ route('sessions.destroy', $session->id) }}" method="POST" style="display:inline;">
+                                <!-- <form action="{{ route('sessions.destroy', $session->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette session?')">supprimer</button>
-                                </form>
+                                </form> -->
                             </td>
                         </tr>
                     @endforeach

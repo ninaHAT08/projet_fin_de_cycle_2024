@@ -12,6 +12,7 @@ use App\Http\Controllers\GestionAdminController;
 use App\Http\Controllers\SujetexterneController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ChoixController;
+use App\Http\Controllers\AffichageController;
 Route::get('/', function () {
     return view('home');
 });
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth' , 'admin'])->group(function () {
 Route::get('/admin', [HomeController::class, 'index'])->middleware(['auth' , 'admin']);
 Route::get('/enseignant', [HomeController::class, 'indexens'])->middleware(['auth','enseignant']);
+Route::get('/doctorant', [HomeController::class, 'indexdoct'])->middleware(['auth','doctorant']);
+
 /// la route pour la gestion des etudiant
 Route::resource('/etudiant', 'App\Http\Controllers\etudiantController');
 Route::resource('/etudiantt', 'App\Http\Controllers\usersController');
@@ -75,13 +78,12 @@ Route::put('/sujets/{id}', [App\Http\Controllers\SujetController::class, 'update
 Route::delete('/sujets/{idSujet}', [App\Http\Controllers\SujetController::class, 'destroy'])->name('sujets.destroy');
 Route::get('/sujets/{id}/show', [App\Http\Controllers\SujetController::class, 'show'])->name('sujets.show');
 //afecter sujet 
-Route::post('/sujets/{id}/affecter', [SujetController::class, 'affecterSujet'])->name('sujets.affecter');  
-
+Route::post('/sujets/affecter/{id}', [ChoixController::class, 'affecter'])->name('sujets.affecter');
 //liste choix des etudiant
    Route::get('/affectation', [App\Http\Controllers\ChoixController::class, 'affectation'])->name('affectation');
 });
-
-   
+//afficher laffectation dans etudiant
+Route::middleware('auth')->get('/affichage-affectation', [AffichageController::class, 'showAffectationNotification'])->name('affichage.affectation');  
 
 require __DIR__.'/auth.php';
 // pour la gestion des etudiant enseignant par l'admin ca rentre dans l'authentification
@@ -116,7 +118,7 @@ Route::post('/choix/updateBinome', [App\Http\Controllers\ChoixController::class,
 //la route d'envoie la fiche et l'affectation
 Route::post('/choix/envoyer', [App\Http\Controllers\ChoixController::class, 'envoyer'] )->name('choix.envoyer');
 Route::get('/affectation', [App\Http\Controllers\ChoixController::class, 'affectation'])->name('affectation');
-Route::post('/choix/updateOrdre', [App\Http\Controllers\ChoixController::class, 'updateOrdre'])->name('choix.updateOrdre');
+
 //les routes pour les actions CRUD (Create, Read, Update, Delete) pour session crer par moi
 Route::resource('sessions', SessionController::class);
 Route::get('sessions', [SessionController::class, 'index'])->name('sessions.index');

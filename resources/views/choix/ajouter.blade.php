@@ -15,7 +15,7 @@
 
 <!-- Afficher la liste des sujets ajoutés à la liste de l'utilisateur -->
 <div class="card">
-<div class="card-body" style="background-color:   lightblue; margin:20px;">
+<div class="card-body border border-primary" style=" margin:20px;">
 <div style="display: inline-block;" class="info-item">
 <p style="font-size: 20px; color: black; "><strong>Nom:</strong> {{ Auth::user()->nom }}</p>
     <p style="font-size: 20px; color: black; "><strong>Spécialité:</strong> {{ Auth::user()->specialite }}</p>
@@ -47,11 +47,14 @@
 </div>
 </div>
 </div>
-<div class="row" style="margin:20px;">
-<a href="{{ url('dashboard') }}" ><button type="button" class="btn btn-primry">retour</button></a> 
+<div class="container-fluid px-4">
+<ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="{{ url('admin') }}"><h5>Retour</h5></a></li>
+                        <li class="breadcrumb-item active"></li>
+                    </ol>
     <div class="col-12">
-  <h2 style="font-size: 50px; color: black; text-align: center;font-weight: bold;">  Fiche de veoux</h2> 
-            <div class="table-responsive">
+  <h2 style="font-size: 30px; color: black; text-align: center;">  <strong> Fiche de veoux  </strong> </h2> 
+            <div class="table-responsive  mt-4">
                             <table  id="fichesTable" class="table" style=" background-color: pink-100;">
                                  <thead>
                                  <tr>
@@ -64,7 +67,7 @@
                 <th>Co-encadrant</th>
                 <th>Date</th>
                 <th>Binôme</th>
-                <th>Ordre</th>
+              
                 <th>Action</th>
 
                                  </tr>
@@ -80,27 +83,21 @@
                 <td>{{ \App\Models\Sujet::find($choix->idSujet1)->anneeUniv }}</td> 
                 <td>{{ \App\Models\Sujet::find($choix->idSujet1)->user1->nom }} {{ \App\Models\Sujet::find($choix->idSujet1)->user1->prenom }}</td> 
                 <td>{{ \App\Models\Sujet::find($choix->idSujet1)->user2->nom ?? 'Aucun ' }} {{ \App\Models\Sujet::find($choix->idSujet1)->user2->prenom ?? 'co-encadrant' }}</td> 
-                <td>{{ $choix->date }}</td>
+                
+                <td>{{ $choix->date }} </td>
+                
                 <td>{{ $choix->binome ? \App\Models\users::find($choix->binome)->nom . ' ' . \App\Models\users::find($choix->binome)->prenom : 'Aucun binôme' }}</td>
-         <td>
-                <form action="{{ route('choix.updateOrdre') }}" method="POST" >
-        @csrf
-        <input type="number" name="ordre[{{ $choix->id }}]" value="{{ $choix->ordre }}" min="1" max="4" required class="form-control form-control-sm" style="width: 60px; margin-right: 10px;">
-        <div class="form-check form-check-inline ">
-            
-            <button type="submit" class="btn btn-primary btn-sm mt-1">Ajouter</button>
-        </div>
-       
-    </form>
-</td>
+        
+
 
          <td>
-                <form method="POST" action="{{ route('choix.destroy', $choix->id) }}" accept-charset="UTF-8" style="display:inline"  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce choix ?');">
-                                                       @method('DELETE') 
-                                                       @csrf
-                                                    <button type="submit" class="btn btn-danger btn-sm "  >
-                                                      <i class="fa fa-trash-o" aria-hidden="true"></i> supprimer</button> 
-                                                    </form>
+         <div class="d-flex gap-2">
+                                        <form method="POST" action="{{ route('choix.destroy', $choix->id) }}" accept-charset="UTF-8" style="display:inline"  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce choix ?');>
+                                                {{ method_field('DELETE') }}
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Student" onclick="return confirm('Confirmation de la suppression?')"><i class="fa fa-trash-o" aria-hidden="true"></i> supprimer</button>
+                                            </form>
+                                          </div>
                 </td>
        
 
@@ -113,7 +110,7 @@
                             </table>
                        
                         </div>
-                        <div class="d-flex gap-2">
+                        <div class="d-flex gap-2 mt-1">
                         <form action="{{ route('choix.envoyer') }}" method="POST">
     @csrf
  

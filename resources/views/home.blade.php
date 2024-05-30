@@ -79,11 +79,11 @@
 
 
 
-  <section class="contact_section layout_padding" id="connexion"  >
-    <h2 class="custom_heading text-center">
+  <section class="contact_section layout_padding  " id="connexion"  >
+    <!-- <h2 class="custom_heading text-center">
             Connexion
-    </h2>
-    <div class="container mt-5 pt-5">
+    </h2> -->
+    <div class="container mt-5 pt-5 ">
 
     
     <form method="POST" action="{{ route('login') }}" class="mt-4">
@@ -91,15 +91,15 @@
 
     <!-- Email Address -->
     <div class="mb-2">
-        <x-input-label for="email" :value="__('Email')" />
-        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+        
+        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="exp@gmail.com"/>
         <x-input-error :messages="$errors->get('email')" class="mt-1" />
     </div>
 
     <!-- Password -->
     <div class="mb-2">
-        <x-input-label for="password" :value="__('Mot de passe')" />
-        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+        <x-input-label for="password" :value="__('')" />
+        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="password" />
         <x-input-error :messages="$errors->get('password')" class="mt-1" />
     </div>
 
@@ -121,8 +121,8 @@
     </div>
 
     <!-- Login Button -->
-    <div class="text-center">
-        <x-primary-button style="width:20em">
+    <div class=" ml-10 ">
+        <x-primary-button style="width:15em">
             {{ __('Connexion') }}
         </x-primary-button>
     </div>
@@ -134,6 +134,19 @@
   <!-- end contact section -->
 
  
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 

@@ -145,7 +145,7 @@
                              
                                 <td>
                                     <div class="d-flex gap-2">
-                                    <form method="POST" action="{{ route('sujetss.destroy', $sujet->idSujet) }}" accept-charset="UTF-8" style="display:inline">
+                                    <form method="POST" action="{{ route('sujetss.destroy', $sujet->idSujet) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sujet ?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">
