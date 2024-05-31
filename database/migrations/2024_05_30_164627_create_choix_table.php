@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('choix', function (Blueprint $table) {
             $table->id();
+         
             $table->unsignedBigInteger('binome')->nullable()->default(null);
             $table->date('date');
             $table->unsignedBigInteger('idSujet1');
             $table->unsignedBigInteger('idUser3');
-           
+            $table->boolean('envoyer')->default(false);
 
             // Définition des clés étrangères
             $table->foreign('binome')->references('id')->on('users');
             $table->foreign('idSujet1')->references('idSujet')->on('sujet')->onDelete('cascade');
             $table->foreign('idUser3')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+          
         });
     }
 

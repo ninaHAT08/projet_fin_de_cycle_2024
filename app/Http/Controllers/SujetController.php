@@ -19,13 +19,23 @@ class SujetController extends Controller
     }
     public function index()
     {
-        $sujets = Sujet::whereHas('user1', function ($query) {
-         $query->where('usertype', 'enseignant');
-            })
-            ->where('typeSujet', 'interne') 
-            ->get();
+        // $sujets = Sujet::whereHas('user1', function ($query) {
+        //  $query->where('usertype', 'enseignant');
+        //     })
+        //     ->where('typeSujet', 'interne') 
+        //     ->get();
       //  return view('sujets.index', compact('sujets'));
-       return view('enseignant', compact('sujets'));
+      // return view('enseignant', compact('sujets'));
+      $userId = Auth::id(); 
+       $sujets = Sujet::where('iduser1', $userId)
+       ->whereHas('user1', function ($query) {
+           $query->where('usertype', 'enseignant');
+       })
+       ->where('typeSujet', 'interne')
+       ->get();
+       $nombreDeSujets = $sujets->count();
+       // Retourner la vue avec les sujets et le nombre de sujets
+       return view('enseignant', compact('sujets', 'nombreDeSujets'));
     }
 
     public function create()
@@ -127,8 +137,10 @@ public function maListe()
     // Récupérer les sujets publiés par cet enseignant
     $sujets = Sujet::where('iduser1', $userId)->get();
         // Retourner la vue avec les sujets
-   // return view('sujets.maliste', compact('sujets'));
-    return view ('sujets.maliste')-> with('sujets', $sujets);
+  
+  // $nombreDeSujets = $sujets->count();
+  // return view('sujets.maliste', compact('sujets', 'nombreDeSujets'));
+   return view ('sujets.maliste')-> with('sujets', $sujets);
 }
 
 public function destroy($idSujet)

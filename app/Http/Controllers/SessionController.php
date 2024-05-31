@@ -8,76 +8,166 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth; 
 class SessionController extends Controller
 {
-      // Afficher la liste des sessions
-      public function index()
-      {
-          $sessions = Session::all();
-          return view('sessions.index', compact('sessions'));
-      }
-  
-      // Afficher le formulaire de création d'une nouvelle session
-      public function create()
-      {
-          // Vérifier s'il y a déjà 5 sessions
-          if (Session::count() >= 5) {
-              return redirect()->route('sessions.index')->with('error', 'Vous ne pouvez pas créer plus de 5 sessions.');
-          }
-  
-          return view('sessions.create');
-      }
-  
-      // Enregistrer une nouvelle session
-      public function store(Request $request)
-      {
-          // Validation des données du formulaire
-          $request->validate([
-            'intitule_session' => 'required|string|max:255',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date|after:date_debut',
-            'annee_univ' => 'required|string|max:255'
-        ]);
+    public function index()
+    {
+        $sessions = Session::all();
+        return view('sessions.index', compact('sessions'));
+    }
 
-      
-
-        try {
-            // Vérifier s'il y a déjà 5 sessions
-            if (Session::count() >= 5) {
-                return redirect()->route('sessions.index')->with('error', 'Vous ne pouvez pas créer plus de 5 sessions.');
-            }
-
-            $user = Auth::user(); // Récupère l'utilisateur actuellement authentifié
-
-            // Vérifiez si l'utilisateur est authentifié
-            if (!$user) {
-                return redirect()->route('sessions.create')->with('error', 'Vous devez être authentifié pour créer une session.');
-            }
-
-            // Créer la nouvelle session avec les données du formulaire et l'utilisateur authentifié
-            Session::create([
-                'intitule_session' => $request->intitule_session,
-                'date_debut' => $request->date_debut,
-                'date_fin' => $request->date_fin,
-                'annee_univ' => $request->annee_univ,
-                'iduser' => $user->id // Associe l'utilisateur authentifié
-            ]);
-
-            return redirect()->route('sessions.index')->with('success', 'Session créée avec succès.');
-        } catch (QueryException $e) {
-            return redirect()->route('sessions.create')->with('error', 'Erreur de base de données : ' . $e->getMessage());
-        } catch (\Exception $e) {
-            return redirect()->route('sessions.create')->with('error', 'Une erreur est survenue : ' . $e->getMessage());
+    public function create()
+    {
+        if (Session::count() >= 5) {
+            return redirect()->route('sessions.index')->with('error', 'Vous ne pouvez pas créer plus de 5 sessions.');
         }
+
+        return view('sessions.create');
+    }
+
+   // public function store(Request $request)
+   // {$request->validate([
+         //   'intitule_session' => 'required|string|max:255',
+         //   'date_debut' => 'required|date',
+         //   'date_fin' => 'required|date',
+         //   'annee_univ' => 'required|integer',
+         //   'iduser' => 'required|exists:users,id'
+        //]);
+
+        //sessionpfc::create($request->all());
+        //return redirect()->route('sessions.index')->with('success', 'Session créée avec succès.');
+   // }
+  // public function store(Request $request)
+   // {
+        // Valider les données du formulaire
+       // $request->validate([
+       //     'intitule_session' => 'required|string|max:255',
+        //    'date_debut' => 'required|date',
+         //   'date_fin' => 'required|date|after_or_equal:date_debut',
+          //  'annee_univ' => 'required|integer',
+       // ]);
+
+        // Créer une nouvelle session avec les données validées et l'ID de l'utilisateur connecté
+       // $session = new SessionPfc([
+         //   'intitule_session' => $request->input('intitule_session'),
+         //   'date_debut' => $request->input('date_debut'),
+         //   'date_fin' => $request->input('date_fin'),
+          //  'annee_univ' => $request->input('annee_univ'),
+           // 'iduser' => Auth::user()->id,
+       //  ]);
+
+       //  $session->save();
+
+        // Rediriger avec un message de succès
+       // return redirect()->route('sessions.index')->with('success', 'Session ajoutée avec succès.');
+   // }
+
+   // public function destroy(sessionpfc $session)
+   // {
+      //  $session->delete();
+      //  return redirect()->route('sessions.index')->with('success', 'Session supprimée avec succès.');
+    //}
+    public function destroy($id)
+    {
+        $session = Session::findOrFail($id);
+        $session->delete();
+
+        return redirect()->route('sessions.index')->with('success', 'Session supprimée avec succès.');
+    }
+  
+    public function getEvents(Request $request)
+    {
+        if ($request->ajax()) {
+            $events = Session::select(['id', 'intitule_session as title', 'date_debut as start', 'date_fin as end'])->get();
+            return response()->json($events);
+        }
+        return view('sessions.index');
     }
 
 
-    
+
+
+    public function store(Request $request)
+    {
+        // Valider les données du formulaire
+        $request->validate([
+            'intitule_session' => 'required|string|max:255',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+            'annee_univ' => 'required|integer',
+        ]);
+
+        // Vérifier le chevauchement des dates
+        $existingSession = Session::where(function($query) use ($request) {
+            $query->whereBetween('date_debut', [$request->date_debut, $request->date_fin])
+                  ->orWhereBetween('date_fin', [$request->date_debut, $request->date_fin])
+                  ->orWhere(function($query) use ($request) {
+                      $query->where('date_debut', '<=', $request->date_debut)
+                            ->where('date_fin', '>=', $request->date_fin);
+                  });
+        })->exists();
+
+        if ($existingSession) {
+            return redirect()->back()->withErrors(['error' => 'Les dates de la session chevauchent une session existante.']);
+        }
+
+        // Créer une nouvelle session avec les données validées et l'ID de l'utilisateur connecté
+        $session = new Session([
+            'intitule_session' => $request->input('intitule_session'),
+            'date_debut' => $request->input('date_debut'),
+            'date_fin' => $request->input('date_fin'),
+            'annee_univ' => $request->input('annee_univ'),
+            'iduser' => Auth::user()->id,
+        ]);
+
+        $session->save();
+
+        // Rediriger avec un message de succès
+        return redirect()->route('sessions.index')->with('success', 'Session ajoutée avec succès.');
+    }
+
+    // Méthode update avec la même logique de validation
+    public function update(Request $request, $id)
+    {
+        // Valider les données du formulaire
+        $request->validate([
+            'intitule_session' => 'required|string|max:255',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+            'annee_univ' => 'required|integer',
+        ]);
+
+        // Vérifier le chevauchement des dates
+        $existingSession = Session::where('id', '!=', $id)
+            ->where(function($query) use ($request) {
+                $query->whereBetween('date_debut', [$request->date_debut, $request->date_fin])
+                      ->orWhereBetween('date_fin', [$request->date_debut, $request->date_fin])
+                      ->orWhere(function($query) use ($request) {
+                          $query->where('date_debut', '<=', $request->date_debut)
+                                ->where('date_fin', '>=', $request->date_fin);
+                      });
+            })->exists();
+
+        if ($existingSession) {
+            return redirect()->back()->withErrors(['error' => 'Les dates de la session chevauchent une session existante.']);
+        }
+
+        // Trouver et mettre à jour la session existante
+        $session = Session::findOrFail($id);
+        $session->intitule_session = $request->input('intitule_session');
+        $session->date_debut = $request->input('date_debut');
+        $session->date_fin = $request->input('date_fin');
+        $session->annee_univ = $request->input('annee_univ');
+        $session->save();
+
+        // Rediriger avec un message de succès
+        return redirect()->route('sessions.index')->with('success', 'Session mise à jour avec succès.');
+    }
     public function edit($id)
     {
         $session = Session::findOrFail($id);
         return view('sessions.edit', compact('session'));
     }
 
-    public function update(Request $request, $id)
+    public function updatte(Request $request, $id)
     {
         $request->validate([
             'intitule_session' => 'required',
@@ -92,31 +182,5 @@ class SessionController extends Controller
         return redirect()->route('sessions.index')->with('success', 'Session mise à jour avec succès.');
     }
 
-    public function destroy($id)
-    {
-        $session = Session::findOrFail($id);
-        $session->delete();
-
-        return redirect()->route('sessions.index')->with('success', 'Session supprimée avec succès.');
-    }
-   
-    public function getSessionsForCalendar()
-    {
-      try{
-        $sessions = Session::all(['intitule_session', 'date_debut', 'date_fin']);
-        \Log::info('Sessions retrieved: ', $sessions->toArray()); // Ajoutez ceci pour voir les données récupérées
-        $events = $sessions->map(function ($session) {
-            return [
-                'title' => $session->intitule_session,
-                'start' => $session->date_debut,
-                'end' => $session->date_fin,
-            ];
-        });
-
-        return response()->json($events);
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'Erreur lors de la récupération des événements.'], 500);
-    }
-    }
 
 }

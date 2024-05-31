@@ -8,3 +8,4 @@
 @section('scripts')
 @vite(['resources/js/app.js', 'resources/js/calendar.js'])
 @endsection
+

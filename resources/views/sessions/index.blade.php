@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,10 +13,15 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="fonts/icomoon/style.css">
   
-    <link href='fullcalendar/packages/core/main.css' rel='stylesheet' />
+    <!-- <link href='fullcalendar/packages/core/main.css' rel='stylesheet' /> -->
     <link href='fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
     
-    
+   
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css1/bootstrap.min.css">
     
@@ -27,8 +34,7 @@
         <img src="images/logo20.png" alt="" style="width: 180px;height: 50px;">
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
             </div>
         </form>
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -54,8 +60,7 @@
     </nav>
     <div id="layoutSidenav">
         <div class="container">
-            <h1>Liste des Sessions</h1>
-
+           
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -66,41 +71,49 @@
                 <div class="alert alert-danger">
                     {{ session('error') }}
                 </div>
-            @endif
-
-            <a href="{{ route('sessions.create') }}" class="btn btn-primary mb-3 mt-5">Créer une nouvelle session</a>
-           
+            @endif 
             <div class="content">
-                <div id="calendar"></div>
+            <h1>Liste des Sessions</h1>
+            <a href="{{ route('sessions.create') }}" class="btn btn-primary mb-3 mt-5">Créer une nouvelle session</a>
+            <div id="calendar"></div>
             </div>
-    
-  
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
+ 
     <script src='fullcalendar/packages/core/main.js'></script>
     <script src='fullcalendar/packages/interaction/main.js'></script>
     <script src='fullcalendar/packages/daygrid/main.js'></script>
 
+  
     <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var calendarEl = document.getElementById('calendar');
-
-                    var calendar = new FullCalendar.Calendar(calendarEl, {
-                        plugins: ['interaction', 'dayGrid'],
-                        initialView: 'dayGridMonth',
-                        events: {
-                            url: '{{ route("sessions.calendar") }}',
-                            failure: function() {
-                                alert('Erreur lors de la récupération des événements.');
-                            }
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay'
+            },
+            navLinks: true,
+            editable: true,
+            events: "getevents",  
+            displayEventTime: false,
+            eventClick: function(calEvent, jsEvent, view) {
+                if (confirm("Voulez-vous supprimer cette session ?")) {
+                    $.ajax({
+                        url: '/sessions/' + calEvent.id,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            $('#calendar').fullCalendar('refetchEvents');
+                            alert('Session supprimée avec succès');
                         }
                     });
+                }
+            }
+        });
+    });
+</script>
 
-                    calendar.render();
-                });
-            </script>
             <table class="table">
                 <thead>
                     <tr>
@@ -121,12 +134,12 @@
                             <td>{{ $session->date_fin }}</td>
                             <td>{{ $session->annee_univ }}</td>
                             <td>
-                                <a href="{{ route('sessions.edit', $session->id) }}" class="btn btn-sm btn-warning">modifier</a>
-                                <!-- <form action="{{ route('sessions.destroy', $session->id) }}" method="POST" style="display:inline;">
+                              <a href="{{ route('sessions.edit', $session->id) }}" class="btn btn-sm btn-warning">modifier</a>
+                                <form action="{{ route('sessions.destroy', $session->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette session?')">supprimer</button>
-                                </form> -->
+                                </form>
                             </td>
                         </tr>
                     @endforeach

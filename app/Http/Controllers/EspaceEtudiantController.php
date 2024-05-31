@@ -16,4 +16,13 @@ class EspaceEtudiantController extends Controller
         // Retourner la vue avec les sujets publiés
         return view('espaceetudiant', compact('sujets'));
     }
+    public function indexpublier()
+    {
+        $sujets = Sujet::where('publier', true)
+        ->where('typeSujet', 'interne')
+        ->get();
+
+        // Retourner la vue avec les sujets publiés
+        return view('sujets.sujetpublier', compact('sujets'));
+    }
 }

@@ -17,16 +17,16 @@
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
             <!-- Navbar Brand-->
-            <img src="images/logo20.png" alt=""  style="width: 180px;height: 50px;">
+            <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
             <!-- Sidebar Toggle-->
            
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
+               {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
+             </div>
             </form>
+           
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -62,6 +62,10 @@
              
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="{{ url('enseignant') }}"><h5>retour</h5></a></li>
+                    </ol>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="{{route('affecter')}}" class="nav-link"><button type="button"  class="btn btn-primary">Sujets affecte</button></a>   
+</li>
                     </ol>
                     <div class="card mb-4">
                         @if (session('success'))

@@ -12,6 +12,7 @@ use App\Http\Controllers\GestionAdminController;
 use App\Http\Controllers\SujetexterneController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ChoixController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AffichageController;
 Route::get('/', function () {
     return view('home');
@@ -20,7 +21,6 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -49,9 +49,15 @@ Route::get('/searchetudiant', [etudiantController::class, 'search'])->name('etud
 Route::get('/adminsujet', function () { return view('gestionadmin.sujet');})->name('adminsujet');
 Route::get('/adminsujetexterne', function () { return view('gestionadmin.sujetexterne');})->name('adminsujetexterne');
 ////////////////////////les routes conernant les session
-// Route::resource('sessions', SessionController::class);
-// Route::get('getevents', [SessionController::class, 'getEvents'])->name('getevents');
-// Route::delete('sessions/{session}', [SessionController::class, 'destroy'])->name('sessions.destroy');
+Route::resource('sessions', SessionController::class);
+Route::get('getevents', [SessionController::class, 'getEvents'])->name('getevents');
+Route::delete('sessions/{session}', [SessionController::class, 'destroy'])->name('sessions.destroy');
+Route::get('/sessions/{id}/edit', [SessionController::class, 'edit'])->name('sessions.edit');
+Route::put('/sessions/{id}', [SessionController::class, 'updatte'])->name('sessions.update');
+///////// les route pour liste des sujet affecte non affecter avec aussi le nombre de sujet proposer et non proposer
+Route::get('/sujets-par-enseignant', [GestionAdminController::class, 'sujetsParEnseignant'])->name('sujets-par-enseignant');
+Route::get('/etudiants-avec-sujets', [GestionAdminController::class, 'etudiantsAvecSujets'])->name('etudiants-avec-sujets');
+Route::get('/etudiants-sans-etat-true', [GestionAdminController::class, 'etudiantsAvecEtatNullOuFalse'])->name('etudiants-sans-etat-true');
  });
 ///les route securise que l'enseignant a le droit d'acceder
 Route::middleware(['auth' , 'enseignant'])->group(function () {
@@ -66,6 +72,8 @@ Route::get('/sujetsindex', [App\Http\Controllers\SujetController::class, 'index'
 Route::get('/adminsujet', [App\Http\Controllers\SujetController::class, 'gestionsujet'])->name('adminsujet');
 //3- pour affiche les sujet inetrene apre valider paer l'admin dans l'espace etudiant 
 Route::get('/espaceetudiant', [App\Http\Controllers\EspaceEtudiantController::class, 'index'])->name('espaceetudiant');
+////// un enseignant peut voir la liste des sujet publier par l'admin
+Route::get('/enseignantpublier', [App\Http\Controllers\EspaceEtudiantController::class, 'indexpublier'])->name('enseignantpublier');
 //5- la liste de chaque enseigant 
 Route::get('/maliste', [App\Http\Controllers\SujetController::class, 'maListe'])->name('maliste');
 //6- l'admin qui valide le sujet de l'enseignant
@@ -114,17 +122,11 @@ Route::resource('/choix', 'App\Http\Controllers\ChoixController');
 Route::get('/choix/ajouter', [App\Http\Controllers\ChoixController::class, 'show'])->name('choix.ajouter');
 Route::delete('/choix/{id}', [App\Http\Controllers\ChoixController::class, 'destroy'])->name('choix.destroy');
 Route::post('/choix/updateBinome', [App\Http\Controllers\ChoixController::class, 'updateBinome'])->name('choix.updateBinome');
-
+Route::get('/affecter', [App\Http\Controllers\ChoixController::class, 'afficherSujetsAffectes'])->name('affecter');
 //la route d'envoie la fiche et l'affectation
 Route::post('/choix/envoyer', [App\Http\Controllers\ChoixController::class, 'envoyer'] )->name('choix.envoyer');
 Route::get('/affectation', [App\Http\Controllers\ChoixController::class, 'affectation'])->name('affectation');
 
-//les routes pour les actions CRUD (Create, Read, Update, Delete) pour session crer par moi
-Route::resource('sessions', SessionController::class);
-Route::get('sessions', [SessionController::class, 'index'])->name('sessions.index');
-Route::get('sessions/create', [SessionController::class, 'create'])->name('sessions.create');
-Route::post('sessions', [SessionController::class, 'store'])->name('sessions.store');
-Route::get('/sessions/calendar', [SessionController::class, 'getSessionsForCalendar'])->name('sessions.calendar');
-Route::get('/sessions/{id}/edit', [SessionController::class, 'edit'])->name('sessions.edit');
-Route::put('/sessions/{id}', [SessionController::class, 'update'])->name('sessions.update');
-Route::delete('/sessions/{id}', [SessionController::class, 'destroy'])->name('sessions.destroy');
+// //les routes pour les actions CRUD (Create, Read, Update, Delete) pour session crer par moi
+
+

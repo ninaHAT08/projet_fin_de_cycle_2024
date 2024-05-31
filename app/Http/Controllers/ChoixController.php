@@ -197,7 +197,10 @@ public function affectation()
     $idEnseignant = Auth::id();
 
     // Récupérer les sujets proposés par cet enseignant
-    $sujets = Sujet::where('iduser1', $idEnseignant)->pluck('idSujet');
+    $sujets = Sujet::where('iduser1', $idEnseignant)
+    //ajouter 
+    ->where('Sujet_affecter', false)
+    ->pluck('idSujet');
 
     // Récupérer les choix pour les sujets proposés par cet enseignant où "envoyer" est à true
     $choixs = Choix::whereIn('idSujet1', $sujets)->where('envoyer', true)->get();
@@ -249,6 +252,26 @@ public function affecter(Request $request, $choixId)
     
         return redirect()->back()->with('success', 'Le sujet a été affecté avec succès.');
     }
-    
+  
+/// pour affiche les sujet affecter 
+public function afficherSujetsAffectes(Request $request)
+    {
+ // Vérifiez que l'utilisateur est connecté et est un enseignant
+ if (!Auth::check() || Auth::user()->usertype !== 'enseignant') {
+    return redirect()->route('login')->with('error', 'Vous devez être connecté en tant qu\'enseignant pour accéder à cette page.');
+}
+$idEnseignant = Auth::id();
+
+// Récupérer les sujets proposés par cet enseignant qui sont affectés
+$choixs = Sujet::where('iduser1', $idEnseignant)
+                        ->where('Sujet_affecter', true)
+                        ->get();
+// Récupérer les choix envoyés
+$choixsEnvoyes = Choix::where('envoyer', true)->get();
+return view('sujets.affecter', compact('choixs'));
+}
+
+
+
 
 }

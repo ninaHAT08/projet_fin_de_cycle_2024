@@ -9,21 +9,33 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Espace enseignant</title>
+        <style>
+        .night-blue {
+            background-color: #1e3d59; 
+            /* background-color: #1e847f; */
+        }
+        .text-white {
+            color: white;
+        }
+        .bg-beige {
+    background-color: #ff6e40;
+}
+       
+    </style>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark  bg-primary">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark  night-blue">
             <!-- Navbar Brand-->
-            <img src="images/logo20.png" alt=""  style="width: 180px;height: 50px;">
+            <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                <div class="input-group text-white">
+                {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
                 </div>
             </form>
             <!-- Navbar-->
@@ -51,43 +63,45 @@
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-secondary"  id="sidenavAccordion">
+                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
          
                     <div class="sb-sidenav-menu">
-                        <div class="nav">
+                        <div class="nav " >
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link"   href="#">
-                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
-                               PROJETS FIN DE CYCLE
+                                <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
+                             <div class="text-white"> PROJETS FIN DE CYCLE</div> 
                             </a>
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                             Sujets PFC 
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-columns"></i></div>
+                             <div class="text-white">Sujets PFC </div>
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{route('sujets.create')}}">proposer un sujet </a>
-                                    <a class="nav-link" href="{{route('maliste')}}"> voir ma liste des sujets</a>
-                                    <a class="nav-link" href="{{ route('affectation') }}">Voir la liste des choix</a>
+                                <nav class="sb-sidenav-menu-nested nav text-white">
+                                    <a class="nav-link text-white" href="{{route('sujets.create')}}">proposer un sujet </a>
+                                    <a class="nav-link text-white" href="{{route('maliste')}}"> voir ma liste des sujets  ({{ $nombreDeSujets }})</a>
+                                    <a class="nav-link text-white" href="{{ route('affectation') }}">Voir la liste des choix</a>
+                                    <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">La liste des sujet publier</a>
+                                    
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                               AUTRE
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-book-open"></i></div>
+                              <div class="text-white">AUTRE</div> 
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    <a class="nav-link collapsed text-white" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                       Gestion des sujets externes
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="#"></a> 
-                                            <a class="nav-link" href="{{url('enseaignantsujetexterne')}}">voir la liste des sujets externes</a>
+                                            <a class="nav-link text-white" href="{{url('enseaignantsujetexterne')}}">voir la liste des sujets externes</a>
                                         </nav>
                                     </div>
                                    

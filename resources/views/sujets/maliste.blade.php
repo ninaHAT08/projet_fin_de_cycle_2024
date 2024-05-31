@@ -14,14 +14,13 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
             <!-- Navbar Brand-->
-            <img src="images/logo20.png" alt=""  style="width: 180px;height: 50px;">
+            <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
             <!-- Sidebar Toggle-->
            
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
                 </div>
             </form>
             <!-- Navbar-->

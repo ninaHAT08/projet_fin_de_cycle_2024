@@ -141,7 +141,7 @@
                                         <td>{{ $item->grade }}</td>
                                         <td>{{ $item->diplome }}</td>
                                         <td>{{ $item->annee_rec }}</td>
-                                        <td>{{ $item->selectedDomainsString }}</td>
+                                        <td>{{ $item->domaine_exp }}</td>
                                         <td>{{ $item->email }}</td>
   
                                         <td>

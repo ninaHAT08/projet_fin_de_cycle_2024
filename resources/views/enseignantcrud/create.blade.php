@@ -43,14 +43,23 @@
         <label for="usertype">Type d'utilisateur</label><br>
         <input type="text" name="usertype" id="usertype" class="form-control" value="enseignant"><br>
     
-        <label for="domaine_exp">Domaine d'expertise</label><br>
+        <!-- <label for="domaine_exp">Domaine d'expertise</label><br>
         <select name="domaine_exp[]" id="domaine_exp" class="form-control" multiple required>
         <option value=" disabled selected hidden">Sélectionnez une spécialité</option>
         <option value="Administration et Sécurité des Réseaux">Administration et Sécurité des Réseaux</option>
 <option value="Génie Logiciel">Génie Logiciel</option>
 <option value="Intelligence Artificielle">Intelligence Artificielle</option>
 <option value="Réseaux et Sécurité">Réseaux et Sécurité</option>
+<option value="Systèmes d'Information Avancés">Systèmes d'Information Avancés</option> -->
+<label for="domaine_exp">Domaine d'expertise</label><br>
+        <select name="domaine_exp" id="domaine_exp" class="form-control">
+        <option value=" disabled selected hidden">Sélectionnez une spécialité</option>
+        <option value="Administration et Sécurité des Réseaux">Administration et Sécurité des Réseaux</option>
+<option value="Génie Logiciel">Génie Logiciel</option>
+<option value="Intelligence Artificielle">Intelligence Artificielle</option>
+<option value="Réseaux et Sécurité">Réseaux et Sécurité</option>
 <option value="Systèmes d'Information Avancés">Systèmes d'Information Avancés</option>
+
 
     <!-- Ajoutez autant d'options que nécessaire -->
 </select><br>
