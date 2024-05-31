@@ -24,7 +24,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
         <!-- Navbar Brand-->
-        <img src="images/pfc.png" alt="" style="width: 180px;height: 50px;">
+        <img src="images/pfcc.png" alt="" style="width: 180px;height: 50px;">
         <!-- Sidebar Toggle-->
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -54,6 +54,57 @@
             </li>
         </ul>
     </nav>
+    <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
+         
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link"   href="{{url('dashboard')}}">
+                                <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
+                               <div class="text-white">PROJETS FIN DE CYCLE</div>
+                            </a>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-columns"></i></div>
+                            <div class="text-white">Sujets PFC </div> 
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link text-white" href="{{ url('espaceetudiant') }}">consulter liste sujet </a>
+                                    <a class="nav-link text-white" href="{{route('choix.ajouter')}}"> ma fiche de voeux</a>
+                                    <a class="nav-link text-white" href="{{route('affichage.affectation')}}"> mes affectations </a>
+                                    <!-- <a href="{{route('choix.ajouter')}}" class="nav-link"><button type="button" class="btn btn-secondary">Consulter ma fiche de veoux</button></a> -->
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-book-open"></i></div>
+                              <div class="text-white">AUTRE</div> 
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                     <div class="text-white">Gestion des sujets externes</div> 
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link text-white" href="{{route('sujetss.create')}}">proposer un sujet</a>
+                                         
+                                            <a class="nav-link text-white" href="{{url('sujetss')}}">voir la liste des sujets externes</a>
+                                        </nav>
+                                    </div>
+                                   
+                                </nav>
+                            </div>
+                          
+                    </div>
+                   
+                </nav>
+            </div>
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
             <main>
