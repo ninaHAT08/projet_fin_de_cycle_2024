@@ -71,7 +71,7 @@
                 <div class="text-center">
                     <input type="submit" value="ajouter" class="btn btn-primary">
                
-                    <a href="{{url('enseignant')}}" class="nav-link btn-retour"><button type="button" class="btn btn-primary">retour</button></a>
+                    <a href="{{url('enseignant')}}" class="nav-link btn-retour"><button type="button" class="btn btn-primary">annuler</button></a>
                 </div>
             </form>
         </div>

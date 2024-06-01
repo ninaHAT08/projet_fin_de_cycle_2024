@@ -18,11 +18,11 @@
 <div class="card">
 <div class="card-body border border-primary" style=" margin:20px;">
 <div style="display: inline-block;" class="info-item">
-<p style="font-size: 20px; color: black; "><strong>Nom:</strong> {{ Auth::user()->nom }}</p>
+
     <p style="font-size: 20px; color: black; "><strong>Spécialité:</strong> {{ Auth::user()->specialite }}</p>
 </div>
 <div style="display: inline-block;" class="info-item">
-<p style="font-size: 20px; color: black; "><strong>Prénom:</strong> {{ Auth::user()->prenom }}</p>
+
    
 <p style="font-size: 20px; color: black; "><strong>Email:</strong> {{ Auth::user()->email }}</p>
 </div>
@@ -50,7 +50,7 @@
 </div>
 <div class="container-fluid px-4">
 <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="{{ url('admin') }}"><h5>Retour</h5></a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('admin') }}"><h5>retour</h5></a></li>
                         <li class="breadcrumb-item active"></li>
                     </ol>
     <div class="col-12">

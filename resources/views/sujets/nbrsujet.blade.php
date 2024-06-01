@@ -129,9 +129,9 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Le nombre de sujets propse par chaque enseignant</h1>
+                    <h1 class="mt-4">Le nombre de sujets propsé par chaque enseignant</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><h5>retour</h5></a></li>
+                        <!-- <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><h5>retour</h5></a></li> -->
                      
                         <li class="breadcrumb-item active"></li>
                     </ol>
@@ -150,7 +150,7 @@
                  
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            <h4>Le nombre de sujets propse par chaque enseignant</h4>
+                            <h4> SUJETS</h4>
                         </div>
                         <div class="card-body">
                          
@@ -181,13 +181,13 @@
                                             <tr>
                                                 <td>{{ $enseignant->nom }}</td>
                                                 <td>{{ $enseignant->prenom }}</td>
-                                                <td>{{ $enseignant->nombre_de_sujets }}</td>
+                                                <td><strong>{{ $enseignant->nombre_de_sujets }}</strong></td>
                                                
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                    <p>Nombre total de sujets : {{ $nombreTotalDeSujets }}</p>
-                                    <p>Nombre de sujets publiés : {{ $nombreDeSujetsPublies }}</p>
+                                    <p >Nombre total de sujets : <strong >{{ $nombreTotalDeSujets }}</strong></p>
+                                    <p>Nombre de sujets publiés : <strong>{{ $nombreDeSujetsPublies }}</strong></p>
                                 </table>
                             </div>
                    

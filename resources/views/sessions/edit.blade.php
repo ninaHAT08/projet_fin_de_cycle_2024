@@ -1,7 +1,7 @@
-@extends('enseignantcrud.layout')
-@section('content')
+<x-app-layout>
+@extends('layout')
 <div class="container">
-    <h1>Modifier la session</h1>
+    <h3>Modifier la session</h3>
     @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -44,4 +44,4 @@
         <button type="submit" class="btn btn-primary  mt-3">enregistrer</button>
     </form>
 </div>
-@stop
+</x-app-layout>

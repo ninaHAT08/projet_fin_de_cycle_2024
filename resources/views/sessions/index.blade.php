@@ -70,10 +70,10 @@
         </ul>
     </nav>
     
+
     <div id="layoutSidenav">
         <div class="container">
-           
-            @if(session('success'))
+        @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
@@ -89,6 +89,46 @@
             <a href="{{ route('sessions.create') }}" class="btn btn-primary mb-3 mt-5">Créer une nouvelle session</a>
             <div id="calendar"></div>
             </div>
+    <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Intitulé</th>
+                        <th>Date Début</th>
+                        <th>Date Fin</th>
+                        <th>Année Universitaire</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($sessions as $session)
+                        <tr>
+                            <td>{{ $session->id }}</td>
+                            <td>{{ $session->intitule_session }}</td>
+                            <td>{{ $session->date_debut }}</td>
+                            <td>{{ $session->date_fin }}</td>
+                            <td>{{ $session->annee_univ }}</td>
+                            <td>
+                              <a href="{{ route('sessions.edit', $session->id) }}" class="btn btn-sm btn-warning">modifier</a>
+                                <form action="{{ route('sessions.destroy', $session->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette session?')">supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <a href="{{url('admin')}}" class="btn btn-primary mb-3 mt-5">retour</a>
+
+
+
+
+
+
+           
+           
  
     <script src='fullcalendar/packages/core/main.js'></script>
     <script src='fullcalendar/packages/interaction/main.js'></script>
@@ -126,38 +166,7 @@
     });
 </script>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Intitulé</th>
-                        <th>Date Début</th>
-                        <th>Date Fin</th>
-                        <th>Année Universitaire</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($sessions as $session)
-                        <tr>
-                            <td>{{ $session->id }}</td>
-                            <td>{{ $session->intitule_session }}</td>
-                            <td>{{ $session->date_debut }}</td>
-                            <td>{{ $session->date_fin }}</td>
-                            <td>{{ $session->annee_univ }}</td>
-                            <td>
-                              <a href="{{ route('sessions.edit', $session->id) }}" class="btn btn-sm btn-warning">modifier</a>
-                                <form action="{{ route('sessions.destroy', $session->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette session?')">supprimer</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <a href="{{url('admin')}}" class="btn btn-primary mb-3 mt-5">retour</a>
+          
         </div>
       
     </div>

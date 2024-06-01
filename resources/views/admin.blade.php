@@ -84,6 +84,23 @@
 
                                 </nav>
                             </div>
+
+
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                              <div class="text-white">Session</div> 
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+
+                                    <a class="nav-link text-white" href="{{ route('sessions.index') }}">Gestion des sessions </a>
+                                          
+
+                                </nav>
+                            </div>
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                               <div class="text-white">Autres</div> 
@@ -102,14 +119,20 @@
                                         <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link text-white" href="{{ url('adminsujet') }}">Gestion des sujets interne </a>
                                     <a class="nav-link text-white" href="{{ url('adminsujetexterne') }}">gestion des sujets externe</a>
-                                    <a class="nav-link text-white" href="{{ route('sessions.index') }}">Gestion des sessions </a>
-                                    <a class="nav-link text-white" href="{{ route('sujets-par-enseignant') }}">Nombre de sujet</a>
-                                    <a class="nav-link text-white" href="{{ route('etudiants-avec-sujets') }}">Liste des affectations</a>
-                                    <a class="nav-link text-white" href="{{ route('etudiants-sans-etat-true') }}">Liste des non Affecté</a>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                      <div class="text-white">Statistique</div> 
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
+                                    </div>
+                                    </a>
+                                    <a class="nav-link text-white" href="{{ route('sujets-par-enseignant') }}">Nombre de sujet total </a>
+                                    <a class="nav-link text-white" href="{{ route('etudiants-avec-sujets') }}">Etudiant avec sujet</a>
+                                    <a class="nav-link text-white" href="{{ route('etudiants-sans-etat-true') }}">Etudiant sans sujet</a>
                                 </nav>
                                     </div>
                                    
                                 </nav>
+
+                               
 
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -119,7 +142,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link text-white" href="#">Register</a>
+                                            <a class="nav-link text-white" href="#"></a>
                                           
                                         </nav>
                                     </div>

@@ -249,7 +249,8 @@ public function affecter(Request $request, $choixId)
             $etudiant2->idSujet =$sujet->idSujet; 
             $etudiant2->save();
         }
-    
+     // Supprimer le choix de la liste des choix
+     $choix->delete();
         return redirect()->back()->with('success', 'Le sujet a été affecté avec succès.');
     }
   
