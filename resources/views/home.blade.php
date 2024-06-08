@@ -90,57 +90,54 @@
 
 
 
-  <section class="contact_section layout_padding  " id="connexion"  >
-    <!-- <h2 class="custom_heading text-center">
-            Connexion
-    </h2> -->
-    <div class="container mt-5 pt-5 ">
+     <section class="contact_section layout_padding" id="connexion">
+    <div class="container mt-5 pt-5">
+        <form method="POST" action="{{ route('login') }}" class="mt-4">
+            @csrf
 
-    
-    <form method="POST" action="{{ route('login') }}" class="mt-4">
-    @csrf
+            <!-- Email Address -->
+             
 
-    <!-- Email Address -->
-    <div class="mb-2">
-        
-        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="exp@gmail.com"/>
-        <x-input-error :messages="$errors->get('email')" class="mt-1" />
+            <!-- Email Address -->
+            <div class="mb-2">
+                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="exp@gmail.com"/>
+                @if ($errors->has('email'))
+                    <span class="error-message">{{ $errors->first('email') }}</span>
+                @endif
+            </div>
+
+            <!-- Password -->
+            <div class="mb-2">
+                <x-input-label for="password" :value="__('')" />
+                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="password" />
+                @if ($errors->has('password'))
+                    <span class="error-message">{{ $errors->first('password') }}</span>
+                @endif
+            </div>
+
+            <!-- Remember Me and Forgot Password Link on the same line -->
+            <div class="flex-container mb-2 mt-4">
+                <label for="remember_me" class="inline-flex items-center">
+                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Se souvenir de moi') }}</span>
+                </label>
+                
+                @if (Route::has('password.request'))
+                    <a class="text-sm" href="{{ route('password.request') }}">
+                       <strong> {{ __('Mot de passe oublié?') }}</strong>
+                    </a>
+                @endif
+            </div>
+
+            <!-- Login Button -->
+            <div class="ml-10">
+                <x-primary-button style="width:15em">
+                    {{ __('Connexion') }}
+                </x-primary-button>
+            </div>
+        </form>
     </div>
-
-    <!-- Password -->
-    <div class="mb-2">
-        <x-input-label for="password" :value="__('')" />
-        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="password" />
-        <x-input-error :messages="$errors->get('password')" class="mt-1" />
-    </div>
-
-    <!-- Remember Me -->
-    <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Se souvenir de moi') }}</span>
-            </label>
-        </div>
-
-    <!-- Forgot Password Link -->
-    <div class="mb-2">
-        @if (Route::has('password.request'))
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                {{ __('Mot de passe oublié?') }}
-            </a>
-        @endif
-    </div>
-
-    <!-- Login Button -->
-    <div class=" ml-10 ">
-        <x-primary-button style="width:15em">
-            {{ __('Connexion') }}
-        </x-primary-button>
-    </div>
-</form>
-
-    </div>
-  </section>
+</section>
 
   <!-- end contact section -->
 
@@ -221,17 +218,15 @@
           </div>
         </a>
         <a href="">
-          <div class="item ">
-            <div class="img-box box-2">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-              00213 34 81 37 27
-              </p>
-            </div>
-          </div>
-        </a>
+    <div class="item d-flex align-items-center">
+        <div class="img-box box-2 me-2">
+            <img src="" alt="">
+        </div>
+        <div class="detail-box">
+            <p class="mb-0">00213 34 81 37 27</p>
+        </div>
+    </div>
+</a>
         <a href="">
           <div class="item ">
             <div class="img-box box-3">

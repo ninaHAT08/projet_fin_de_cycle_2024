@@ -68,9 +68,15 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav " >
                             <div class="sb-sidenav-menu-heading"></div>
+<<<<<<< HEAD
                             <a class="nav-link"   href="enseignant">
                                 <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
                              <div class="text-white"> PROJETS FIN DE CYCLE</div> 
+=======
+                            <a class="nav-link"   href="{{ url('enseignant') }}">
+                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
+                              Accueil
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
                             </a>
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

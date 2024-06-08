@@ -10,6 +10,10 @@
        }
     </style>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
 <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
             <!-- Navbar Brand-->
             <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
@@ -20,8 +24,11 @@
                 <div class="input-group text-white">
                 {{ Auth::user()->nom }} {{ Auth::user()->prenom }}</div>
             </form>    
+<<<<<<< HEAD
           
           
+=======
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">

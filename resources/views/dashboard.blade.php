@@ -72,7 +72,7 @@
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link"   href="{{url('dashboard')}}">
                                 <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
-                               <div class="text-white">PROJETS FIN DE CYCLE</div>
+                               <div class="text-white">Accueil</div>
                             </a>
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link"   href="{{url('/profil/edit')}}">

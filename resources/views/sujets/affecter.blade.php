@@ -1,5 +1,8 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,10 +13,24 @@
     <style>
         .night-blue {
             background-color: #2a5b85; /* Couleur bleu nuit */
+=======
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Espace enseignant</title>
+        <style>
+        .night-blue {
+            background-color: #1e3d59; 
+            /* background-color: #1e847f; */
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
         }
         .text-white {
             color: white;
         }
+<<<<<<< HEAD
        .bg-beige{
         background-color: #1e3d59; 
        }
@@ -27,17 +44,33 @@
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
+=======
+        .bg-beige {
+    background-color: #ff6e40;
+}
+       
+    </style>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet">
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark  night-blue">
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
             <!-- Navbar Brand-->
             <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
             <!-- Sidebar Toggle-->
-           
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group text-white">
+<<<<<<< HEAD
               {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
+=======
+                {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
                 </div>
             </form>
-            
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -68,9 +101,15 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav " >
                             <div class="sb-sidenav-menu-heading"></div>
+<<<<<<< HEAD
                             <a class="nav-link"   href="enseignant">
                                 <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
                              <div class="text-white"> PROJETS FIN DE CYCLE</div> 
+=======
+                            <a class="nav-link"   href="{{ url('enseignant') }}">
+                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
+                              Accueil
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
                             </a>
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -81,7 +120,11 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav text-white">
                                     <a class="nav-link text-white" href="{{route('sujets.create')}}">proposer un sujet </a>
+<<<<<<< HEAD
                                     <a class="nav-link text-white" href="{{route('maliste')}}"> voir ma liste des sujets </a>
+=======
+                                    <a class="nav-link text-white" href="{{route('maliste')}}"> voir ma liste des sujets  </a>
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
                                     <a class="nav-link text-white" href="{{ route('affectation') }}">Voir la liste des choix</a>
                                     <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">La liste des sujet publier</a>
                                     
@@ -109,7 +152,11 @@
                             </div>
                           
                     </div>
+<<<<<<< HEAD
                         
+=======
+                   
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
                 </nav>
             </div>
     <div id="layoutSidenav">
@@ -136,7 +183,7 @@
                         @endif
                         <div class="card-header ">
                             <i class="fas fa-table me-1"></i>
-                            <h4>Liste sujet affecte pour les etudiants</h4>
+                            <h4>Liste sujet affecté pour les etudiants</h4>
                         </div>
                         <div class="card-body">
                           
