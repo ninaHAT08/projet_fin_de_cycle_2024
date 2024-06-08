@@ -11,14 +11,16 @@
     <title>Table- Sessions</title>
     <style>
         .night-blue {
-            background-color: #2a5b85; /* Couleur bleu nuit */
+            /* background-color: #037492; Couleur bleu nuit */
+            background-color:#058FB2;
         }
         .text-white {
             color: white;
         }
        .bg-beige{
-        background-color: #1e3d59; 
+        background-color: #058FB2; 
        }
+   
     </style>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
@@ -157,7 +159,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <a href="{{url('admin')}}" class="btn btn-primary mb-3 mt-5">retour</a>
+            <a href="{{url('sujets_pfc')}}" class="btn btn-primary mb-3 mt-5">retour</a>
         </div>
       
     </div>

@@ -34,7 +34,11 @@
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group text-white">
                 {{ Auth::user()->nom }} {{ Auth::user()->prenom }}</div>
+                 
+
             </form>    
+          
+          
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -58,6 +62,7 @@
                 </li>
             </ul>
         </nav>
+       
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
@@ -69,6 +74,12 @@
                                 <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
                                <div class="text-white">PROJETS FIN DE CYCLE</div>
                             </a>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link"   href="{{url('/profil/edit')}}">
+                                <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
+                               <div class="text-white">Profil</div>
+                            </a>
+                           
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-columns"></i></div>
@@ -116,7 +127,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
-                       
+                      
                         <img src="images/19896.jpg" alt="Image description" style="width:  60%;    height: auto;">
                         <div class="card mb-4 pl-32">
                             <div class="card-body  ">

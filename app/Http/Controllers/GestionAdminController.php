@@ -57,9 +57,6 @@ public function etudiantsAvecSujets()
 // Retourner la vue avec les résultats
 return view('sujets.nbraffectation', compact('etudiantsAvecSujets', 'nombreEtudiantsEtatTrue'));
 }
-
-
-
 public function etudiantsAvecEtatNullOuFalse()
 {
     // Récupérer la liste des étudiants avec leurs sujets où l'état est null ou false
@@ -84,6 +81,27 @@ public function etudiantsAvecEtatNullOuFalse()
 
     // Retourner la vue avec les résultats
     return view('sujets.nbrnonaffectation', compact('etudiantsAvecEtatNullOuFalse', 'nombreEtudiantsEtatNullOuFalse'));
+}
+
+
+
+
+public function getSujetsStatistiques()
+{
+    // Récupérer le nombre total de sujets
+    $nombreTotalDeSujets = DB::table('sujet')->count();
+
+    // Récupérer le nombre de sujets affectés
+    $nombreSujetsAffectes = DB::table('sujet')
+    ->where('Sujet_affecter', 1)
+    ->count();
+
+    // Retourner les données en JSON
+    return response()->json([
+        'nombreTotalDeSujets' => $nombreTotalDeSujets,
+        'nombreSujetsAffectes' => $nombreSujetsAffectes,
+        'nombreSujetsNonAffectes' => $nombreTotalDeSujets - $nombreSujetsAffectes
+    ]);
 }
 
 }

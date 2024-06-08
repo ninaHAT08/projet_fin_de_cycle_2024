@@ -8,7 +8,7 @@ use App\Models\users;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 class ChoixController extends Controller
 {
     public function index(Request $request)
@@ -254,24 +254,52 @@ public function affecter(Request $request, $choixId)
     }
   
 /// pour affiche les sujet affecter 
-public function afficherSujetsAffectes(Request $request)
-    {
- // Vérifiez que l'utilisateur est connecté et est un enseignant
- if (!Auth::check() || Auth::user()->usertype !== 'enseignant') {
-    return redirect()->route('login')->with('error', 'Vous devez être connecté en tant qu\'enseignant pour accéder à cette page.');
+// public function afficherSujetsAffectes(Request $request)
+//     {
+//  // Vérifiez que l'utilisateur est connecté et est un enseignant
+//  if (!Auth::check() || Auth::user()->usertype !== 'enseignant') {
+//     return redirect()->route('login')->with('error', 'Vous devez être connecté en tant qu\'enseignant pour accéder à cette page.');
+// }
+// $idEnseignant = Auth::id();
+
+// // Récupérer les sujets proposés par cet enseignant qui sont affectés
+// $choixs = Sujet::where('iduser1', $idEnseignant)
+//                         ->where('Sujet_affecter', true)
+//                         ->get();
+// // Récupérer les choix envoyés
+// $choixsEnvoyes = Choix::where('envoyer', true)->get();
+// return view('sujets.affecter', compact('choixs'));
+// }
+
+public function afficherSujetsAffectes()
+{
+    // Vérifiez que l'utilisateur est connecté et est un enseignant
+    if (!Auth::check() || Auth::user()->usertype !== 'enseignant') {
+        return redirect()->route('login')->with('error', 'Vous devez être connecté en tant qu\'enseignant pour accéder à cette page.');
+    }
+
+    $idEnseignant = Auth::id();
+
+    // Récupérer la liste des étudiants avec leurs sujets proposés par l'enseignant connecté
+    $etudiantsAvecSujets = DB::table('users')
+        ->join('sujet', 'users.idSujet', '=', 'sujet.idSujet')
+        ->select('users.nom', 'users.prenom', 'users.specialite', 'sujet.titre')
+        ->where('users.usertype', 'etudiant')
+        ->where('users.etat', true)
+        ->where('sujet.iduser1', $idEnseignant) // Filtrer par l'enseignant connecté
+        ->get();
+
+    // Compter le nombre d'étudiants avec l'état true pour les sujets de l'enseignant connecté
+    $nombreEtudiantsEtatTrue = DB::table('users')
+        ->join('sujet', 'users.idSujet', '=', 'sujet.idSujet')
+        ->where('users.usertype', 'etudiant')
+        ->where('users.etat', true)
+        ->where('sujet.iduser1', $idEnseignant) // Filtrer par l'enseignant connecté
+        ->count();
+
+    // Retourner la vue avec les résultats
+    return view('sujets.affecter', compact('etudiantsAvecSujets', 'nombreEtudiantsEtatTrue'));
 }
-$idEnseignant = Auth::id();
-
-// Récupérer les sujets proposés par cet enseignant qui sont affectés
-$choixs = Sujet::where('iduser1', $idEnseignant)
-                        ->where('Sujet_affecter', true)
-                        ->get();
-// Récupérer les choix envoyés
-$choixsEnvoyes = Choix::where('envoyer', true)->get();
-return view('sujets.affecter', compact('choixs'));
-}
-
-
 
 
 }

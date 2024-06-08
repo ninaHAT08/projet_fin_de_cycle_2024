@@ -31,7 +31,7 @@
                 </div>
             @endif
 
-            <label>Nom</label>
+            <!-- <label>Nom</label>
             <input type="text" name="nom" id="nom" class="form-control" value="{{ old('nom') }}" required>
             @if ($errors->has('nom'))
                 <div class="alert alert-danger">{{ $errors->first('nom') }}</div>
@@ -78,7 +78,7 @@
             @if ($errors->has('matricule'))
                 <div class="alert alert-danger">{{ $errors->first('matricule') }}</div>
             @endif
-            <br>
+            <br> -->
 
             <label>Email</label>
             <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>

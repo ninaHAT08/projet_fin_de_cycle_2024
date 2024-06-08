@@ -8,14 +8,16 @@
     <meta name="author" content="" />
     <title>Tables - SUJETS</title>
     <style>
-        .night-blue {
-            background-color: #2a5b85; /* Couleur bleu nuit */
+         .night-blue {
+            /* background-color: #037492; Couleur bleu nuit */
+            background-color:#058FB2;
         }
+      
         .text-white {
             color: white;
         }
        .bg-beige{
-        background-color: #1e3d59; 
+        background-color: #058FB2; 
        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
@@ -52,7 +54,7 @@
     </nav>
     <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
+                <nav class="sb-sidenav accordion bg-beige"  id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading"></div>
@@ -60,48 +62,23 @@
                                 <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
                                <div class="text-white">Accueil</div> 
                             </a>
-                            <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                              <div class="text-white">Utilisateurs</div> 
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <a class="nav-link collapsed"   href="{{route('etudiant.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Etudiants</div> 
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link text-white" href="{{ route('etudiant.index') }}">Gestion Etudiants</a>
-                                    <a class="nav-link text-white" href="{{ route('enseignantt.index') }}">Gestion Enseignants</a>
-                                    <a class="nav-link text-white" href=" {{ url('doctorant') }}">Gestion Doctorants</a>
-
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                              <div class="text-white">Autres</div> 
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            
+                            <a class="nav-link collapsed"   href="{{route('enseignantt.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Enseignants</div> 
                             </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                      <div class="text-white">Sujets PFC</div> 
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
-                                    </div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link text-white" href="{{ url('adminsujet') }}">Gestion des sujets interne </a>
-                                    <a class="nav-link text-white" href="{{ url('adminsujetexterne') }}">gestion des sujets externe</a>
-                                    <a class="nav-link text-white" href="{{ route('sessions.index') }}">Gestion des sessions </a>
-                                    <a class="nav-link text-white" href="{{ route('sujets-par-enseignant') }}">Nombre de sujet</a>
-                                    <a class="nav-link text-white" href="{{ route('etudiants-avec-sujets') }}">Liste des affectations</a>
-                                    <a class="nav-link text-white" href="{{ route('etudiants-sans-etat-true') }}">Liste des non Affecté</a>
-                                </nav>
-                                    </div>
-                                   
-                                </nav>
-
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed"   href="{{ url('doctorant')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Doctorants</div> 
+                            </a>
+                            <a class="nav-link collapsed"  href="{{route('sujets_pfc')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="text-white">PFC</div> 
+                            </a>
+                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         <div class="text-white">Authentication</div>
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
@@ -126,11 +103,11 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">La liste des sujets proposés par les enseignants</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="{{ url('admin') }}"><h5>Retour</h5></a></li>
+                    <h3 class="mt-4">La liste des sujets proposés par les enseignants</h3>
+                    <!-- <ol class="breadcrumb mb-4">
+                         <li class="breadcrumb-item"><a href="{{ url('admin') }}"><h5>Retour</h5></a></li> 
                         <li class="breadcrumb-item active"></li>
-                    </ol>
+                    </ol> -->
                     <div class="card mb-4">
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -142,7 +119,7 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                        <div class="card-body"></div>
+                        <!-- <div class="card-body"></div> -->
                     </div>
                     <div class="card mb-4">
                         <div class="card-header">
@@ -150,6 +127,16 @@
                             <h4>Liste des sujets</h4>
                         </div>
                         <div class="card-body">
+                        <form action="{{ route('filter.sujets') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" name="specialite" value="Administration et Sécurité des Réseaux">Administration et Sécurité des Réseaux</button>
+                <button type="submit" class="btn btn-primary" name="specialite" value="Génie Logiciel">Génie Logiciel</button>
+                <button type="submit" class="btn btn-primary" name="specialite" value="Intelligence Artificielle">Intelligence Artificielle</button>
+                <button type="submit" class="btn btn-primary" name="specialite" value="Réseaux et Sécurité">Réseaux et Sécurité</button>
+                <button type="submit" class="btn btn-primary" name="specialite" value="Systèmes d'Information Avancés">Systèmes d'Information Avancés</button>
+            </div>
+        </form>
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>

@@ -11,6 +11,7 @@ class EspaceEtudiantController extends Controller
     {
         $sujets = Sujet::where('publier', true)
         ->where('typeSujet', 'interne')
+        ->where('Sujet_affecter', false)
         ->get();
 
         // Retourner la vue avec les sujets publiés

@@ -9,14 +9,21 @@
         <title>Tables - SB Admin</title>
         <style>
         .night-blue {
-            background-color: #2a5b85; /* Couleur bleu nuit */
+            /* background-color: #037492; Couleur bleu nuit */
+            background-color:#058FB2;
         }
+      
         .text-white {
             color: white;
         }
        .bg-beige{
-        background-color: #1e3d59; 
+        background-color: #058FB2; 
        }
+       .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
     </style>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
@@ -60,33 +67,47 @@
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige" id="sidenavAccordion">
+                <nav class="sb-sidenav accordion bg-beige"  id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="{{url('admin')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                <div class="text-white">Accueil</div>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link"   href="{{url('admin')}}">
+                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
+                               <div class="text-white">Accueil</div> 
                             </a>
-                            <div class="sb-sidenav-menu-heading">Paramètre</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                <div class="text-white"> Ajout</div>
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <a class="nav-link collapsed"   href="{{route('etudiant.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Etudiants</div> 
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link text-white" href="{{ url('/etudiantuser/create') }}">ajouter un etudiant</a>
+                            <a class="nav-link collapsed"   href="{{route('enseignantt.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Enseignants</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{ url('doctorant')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Doctorants</div> 
+                            </a>
+                            <a class="nav-link collapsed"  href="{{route('sujets_pfc')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="text-white">PFC</div> 
+                            </a>
+                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        <div class="text-white">Authentication</div>
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
+                                    </div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link text-white" href="#">Register</a>
+                                          
+                                        </nav>
+                                    </div>
                                    
                                 </nav>
-                            </div>
-                            
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                
                             </div>
-                            <div class="sb-sidenav-menu-heading"></div>
                           
-                        </div>
                     </div>
                    
                 </nav>
@@ -94,22 +115,28 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">La liste des etudiants</h1>
-                        <ol class="breadcrumb mb-4">
+                        <h3 class="mt-4">La liste des etudiants</h3>
+                        <!-- <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="{{url('admin')}}">Retour</a></li>
                             <li class="breadcrumb-item active"></li>
-                        </ol>
+                        </ol> -->
                         <div class="card mb-4">
-                            <div class="card-body">
+                            <!-- <div class="card-body">
                                
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                liste des etudiant 
                             </div>
+                          
                             <div class="card-body">
+                            <div class="button-container">
+                                 <button type="submit" class="btn btn-success">
+                            <a class="nav-link btn btn-success text-white" href="{{ url('/etudiantuser/create') }}">Ajouter un étudiant</a>
+                            </button>
+                        </div>
                                 <table id="datatablesSimple">
                                     <thead>
                                       

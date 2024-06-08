@@ -11,7 +11,7 @@
         <title>Espace enseignant</title>
         <style>
         .night-blue {
-            background-color: #1e3d59; 
+            background-color: #2a5b85;
             /* background-color: #1e847f; */
         }
         .text-white {
@@ -68,7 +68,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav " >
                             <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link"   href="#">
+                            <a class="nav-link"   href="enseignant">
                                 <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
                              <div class="text-white"> PROJETS FIN DE CYCLE</div> 
                             </a>

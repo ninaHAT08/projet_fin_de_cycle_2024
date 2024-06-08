@@ -58,7 +58,13 @@ Route::put('/sessions/{id}', [SessionController::class, 'updatte'])->name('sessi
 Route::get('/sujets-par-enseignant', [GestionAdminController::class, 'sujetsParEnseignant'])->name('sujets-par-enseignant');
 Route::get('/etudiants-avec-sujets', [GestionAdminController::class, 'etudiantsAvecSujets'])->name('etudiants-avec-sujets');
 Route::get('/etudiants-sans-etat-true', [GestionAdminController::class, 'etudiantsAvecEtatNullOuFalse'])->name('etudiants-sans-etat-true');
- });
+ /////////statistique
+ Route::get('/sujets_pfc', function () { return view('sujets_pfc');})->name('sujets_pfc');
+Route::get('/statistique', function () { return view('statistique');})->name('statistique');
+
+Route::get('/diagramme', function () { return view('diagramme');})->name('diagramme');
+
+});
 ///les route securise que l'enseignant a le droit d'acceder
 Route::middleware(['auth' , 'enseignant'])->group(function () {
     //route important apre l'authentification
@@ -127,6 +133,19 @@ Route::get('/affecter', [App\Http\Controllers\ChoixController::class, 'afficherS
 Route::post('/choix/envoyer', [App\Http\Controllers\ChoixController::class, 'envoyer'] )->name('choix.envoyer');
 Route::get('/affectation', [App\Http\Controllers\ChoixController::class, 'affectation'])->name('affectation');
 
-// //les routes pour les actions CRUD (Create, Read, Update, Delete) pour session crer par moi
 
 
+
+Route::get('/profil', function () { return view('etudiant.profil');})->name('profil');
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profil/edit', [usersController::class, 'edit'])->name('profil.edit');
+    Route::patch('/profil/update', [usersController::class, 'update'])->name('profil.update');
+});
+
+
+
+Route::post('/filter-sujets', [App\Http\Controllers\SujetController::class, 'filterSujets'])->name('filter.sujets');
+Route::post('/filter-sujets2', [App\Http\Controllers\SujetController::class, 'filterSujets2'])->name('filter.sujets2');
