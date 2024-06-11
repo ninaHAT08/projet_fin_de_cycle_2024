@@ -34,7 +34,7 @@ class doctorant extends Controller
             'date_naiss' => 'required|date',
             'type_these' => 'required|string|max:255',
             'annee_ins' => 'required|integer',
-        
+            'diplome_doctorant' => 'required|string|in:Master,Ingéniorat',
             'usertype' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
@@ -51,8 +51,9 @@ class doctorant extends Controller
             'type_these' => $request->input('type_these'),
            
             'annee_ins' => $request->input('annee_ins'),
-          
-            'email' => $request->input('email'),
+        
+          'diplome_doctorant' => $request->input('diplome_doctorant'),
+          'email' => $request->input('email'),
             'password' => $hashedPassword,
             'usertype' => 'doctorant', // Assurez-vous d'ajouter le type d'utilisateur
             // Ajoutez d'autres champs du formulaire au besoin

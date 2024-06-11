@@ -1,19 +1,20 @@
 <style>
-        .night-blue {
-            background-color: #2a5b85; /* Couleur bleu nuit */
+      .night-blue {
+            /* background-color: #037492; Couleur bleu nuit */
+            background-color:#058FB2;
         }
         .text-white {
             color: white;
         }
        .bg-beige{
-        background-color: #1e3d59; 
+        background-color: #058FB2; 
        }
     </style>
 
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
             <!-- Navbar Brand-->
-            <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
+            <img src="{{ asset('images/pfcc.png') }}" alt="" style="width: 130px;height: 49px;">
             <!-- Sidebar Toggle-->
             <!-- <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button> -->
             <!-- Navbar Search-->

@@ -1,28 +1,20 @@
 <x-app-layout>
 @extends('layout')
 <div class="card" style="margin:20px;">
-  <div class="card-header  bg-primary">Sujet externes</div>
+  <div class="card-header "><h3>Sujet externes</h3></div>
   <div class="card-body">
         <div class="card-body">
-        <h5 class="card-title">Titre de sujet: {{ $sujets -> titre }}</h5>
-        <p class="card-text">Description de sujet : {{ $sujets-> description }}</p>
-        <p class="card-text">Mot_clé de sujet: {{ $sujets -> mot_clé }}</p>
-        <p class="card-text">Specialite concerne de sujet: {{ $sujets -> specialite }}</p>
-        <p class="card-text">Année universitaire: {{ $sujets -> anneeUniv }}</p>
-        <p class="card-text">Type de sujet: {{ $sujets -> typeSujet }}</p>
-        <p class="card-text">Nom de l'entreprise: {{ $sujets -> nomEntreprise }}</p>
-        <p class="card-text">Maitre du stage : {{ $sujets -> maitre_du_stage }}</p>
+        <p class="card-title"><strong>Titre de sujet:</strong> {{ $sujets -> titre }}</p>
+        <p class="card-text"><strong>Description de sujet :</strong> {{ $sujets-> description }}</p>
+        <p class="card-text"><strong>Mot_clé de sujet:</strong> {{ $sujets -> mot_cle }}</p>
+        <p class="card-text"><strong>Specialite concerne de sujet:</strong> {{ $sujets -> specialite }}</p>
+        <p class="card-text"><strong>Année universitaire:</strong> {{ $sujets -> anneeUniv }}</p>
+        <p class="card-text"><strong>Type de sujet:</strong> {{ $sujets -> typeSujet }}</p>
+        <p class="card-text"><strong>Nom de l'entreprise:</strong> {{ $sujets -> nomEntreprise }}</p>
+        <p class="card-text"><strong>Maitre du stage :</strong> {{ $sujets -> maitre_du_stage }}</p>
 
-
-    <!--    @can('delete', $sujets)
-          <form method="POST" action="{{ route('sujetss.destroy', $sujets->idsujete) }}" accept-charset="UTF-8" style="display:inline">
-        @method('DELETE') 
-          @csrf
-           <button type="submit" class="btn btn-danger btn-sm">
-           <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer
-           </button>
-        </form>
-        @endcan-->
+        <a href="{{ url('sujetss') }}" class="nav-link btn-retour"><button type="button" class="btn btn-primary">annuler</button></a>
+   
       </th>
     </div>
     </hr>

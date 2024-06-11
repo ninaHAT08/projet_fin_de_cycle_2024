@@ -57,4 +57,11 @@ class Sujet extends Model
     {
         return $this->hasMany(Choix::class, 'idSujet1');
     }
+
+    public function choixSujets()
+    {
+        return $this->hasMany(ChoixSujet::class, 'id_sujetE');
+    }
+
+
 }

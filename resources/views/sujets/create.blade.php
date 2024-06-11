@@ -1,10 +1,19 @@
+<x-app-layout>
 @extends('layout')
+@if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-@section('content')
-
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 <div class="container" style="margin-top: 20px;">
     <div class="card">
-        <div class="card-header bg-primary text-white">ajouter un nouveau sujet</div>
+        <div class="card-header  "><strong>ajouter un nouveau sujet</strong></div>
         <div class="card-body">
             <form action="{{ route('sujets.store') }}" method="POST">
                 @csrf
@@ -69,10 +78,10 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <input type="submit" value="ajouter" class="btn btn-primary">
-               
-                    <a href="{{url('enseignant')}}" class="nav-link btn-retour"><button type="button" class="btn btn-primary">annuler</button></a>
-                </div>
+                        <input type="submit" value="Ajouter" class="btn btn-primary">
+                       
+                        <a href="{{ url('enseignant') }}" class="btn btn-secondary">Annuler</a>
+                    </div>
             </form>
         </div>
     </div>
@@ -85,4 +94,5 @@
         autreForm.style.display = this.checked ? 'block' : 'none';
     });
 </script>
-@endsection
+
+</x-app-layout>

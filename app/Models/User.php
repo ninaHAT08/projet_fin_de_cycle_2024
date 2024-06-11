@@ -34,6 +34,7 @@ class User extends Authenticatable
         'domaine_exp',
         'email',
         'password',
+        'diplome_doctorant'
     ];
 
     /**
@@ -69,5 +70,8 @@ class User extends Authenticatable
      {
          return $this->hasMany(Choix::class, 'idUser3');
      }
- 
+     public function choixSujets()
+     {
+         return $this->hasMany(ChoixSujet::class, 'id_enseignant');
+     }
 }

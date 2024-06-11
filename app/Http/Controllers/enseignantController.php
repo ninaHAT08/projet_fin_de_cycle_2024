@@ -46,30 +46,8 @@ class enseignantController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
- // Récupérer les choix envoyés pour les sujets appartenant à l'enseignant connecté
-    // public function showStudentChoices()
-    // {
-    //     $enseignantId = Auth::id();
-
-    //     // Récupérer les choix envoyés pour les sujets appartenant à l'enseignant connecté
-    //     $choix = Choix::whereHas('Sujet', function ($query) use ($enseignantId) {
-    //         $query->where('iduser1', $enseignantId);
-    //     })->where('envoyer', true)->get();
-
-    //     return view('enseignantcrud.choix', compact('choix'));
-    // }
-
-
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
+    
+    
     /**
      * Remove the specified resource from storage.
      */

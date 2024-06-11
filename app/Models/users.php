@@ -13,7 +13,7 @@ class users extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['nom', 'prenom','usertype','specialite','matricule','date_naiss','etat',
  'type_these','annee_ins','grade', 'diplome', 'annee_rec','idSujet',
-  'poste','domaine_exp','email','password',];
+  'poste','domaine_exp','email','password','diplome_doctorant'];
   
   
   

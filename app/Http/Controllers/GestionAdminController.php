@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class GestionAdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Récupérer tous les sujets
-        $sujets = Sujet::all(); 
+        
+        
+      
+            // Si aucun filtre de spécialité, récupérer tous les sujets
+            $sujets = Sujet::all();
+        
+        
         // Retourner la vue avec les sujets
         return view('gestionadmin.sujet', compact('sujets'));
     }
@@ -84,6 +89,24 @@ public function etudiantsAvecEtatNullOuFalse()
 
     // Retourner la vue avec les résultats
     return view('sujets.nbrnonaffectation', compact('etudiantsAvecEtatNullOuFalse', 'nombreEtudiantsEtatNullOuFalse'));
+}
+
+public function getSujetsStatistiques()
+{
+    // Récupérer le nombre total de sujets
+    $nombreTotalDeSujets = DB::table('sujet')->count();
+
+    // Récupérer le nombre de sujets affectés
+    $nombreSujetsAffectes = DB::table('sujet')
+    ->where('sujet_affecter', true)
+    ->count();
+
+    // Retourner les données en JSON
+    return response()->json([
+        'nombreTotalDeSujets' => $nombreTotalDeSujets,
+        'nombreSujetsAffectes' => $nombreSujetsAffectes,
+        'nombreSujetsNonAffectes' => $nombreTotalDeSujets - $nombreSujetsAffectes
+    ]);
 }
 
 }

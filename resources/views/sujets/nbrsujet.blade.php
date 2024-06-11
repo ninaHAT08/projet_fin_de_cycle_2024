@@ -8,12 +8,16 @@
     <meta name="author" content="" />
     <title>Tables - SUJETS</title>
     <style>
-        .night-blue {
-            background-color: #1e3d59; /* Couleur bleu nuit */
+          .night-blue {
+            /* background-color: #037492; Couleur bleu nuit */
+            background-color:#058FB2;
         }
         .text-white {
             color: white;
         }
+       .bg-beige{
+        background-color: #058FB2; 
+       }
        
     </style>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
@@ -23,8 +27,8 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
         <!-- Navbar Brand-->
-        <img src="images/pfcc.png" alt="" style="width: 180px;height: 50px;">
-        <!-- Sidebar Toggle-->
+        <img src="images/pfcc.png" alt="" style="width: 145px;height: 50px;">
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group text-white ">
@@ -53,87 +57,57 @@
             </li>
         </ul>
     </nav>
-    <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link"   href="{{url('admin')}}">
-                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
-                               <div class="text-white">Accueil</div> 
+   
+    <div id="layoutSidenav" style="display: flex;">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion bg-beige" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a class="nav-link" href="{{ url('admin') }}">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="text-white">Accueil</div>
+                        </a>
+                        <a class="nav-link" href="{{ route('enseignantt.index') }}">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-user-tie"></i></div>
+                            <div class="text-white">Enseignants</div>
+                        </a>
+                        <a class="nav-link" href="{{ url('doctorant') }}">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-user-graduate"></i></div>
+                            <div class="text-white">Doctorants</div>
+                        </a>
+                        <a class="nav-link" href="{{ route('etudiant.index') }}">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-user"></i></div>
+                            <div class="text-white">Etudiants</div>
+                        </a>
+                        <nav class="menu-nested">
+                            <a class="nav-link text-white" href="{{ route('sessions.index') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar"></i></div>
+                                Sessions
                             </a>
-                            <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                              <div class="text-white">Utilisateurs</div> 
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <a class="nav-link collapsed"  href="{{route('sujets_pfc')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book"></i></i></div>
+                            <div class="text-white">PFC</div> 
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link text-white" href="{{ route('etudiant.index') }}">Gestion Etudiants</a>
-                                    <a class="nav-link text-white" href="{{ route('enseignantt.index') }}">Gestion Enseignants</a>
-                                    <a class="nav-link text-white" href=" {{ url('doctorant') }}">Gestion Doctorants</a>
 
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                              <div class="text-white">Autres</div> 
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            
+                            <a class="nav-link text-white" href="{{ route('statistique') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-chart-pie"></i></div>
+                                Statistiques
                             </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                      <div class="text-white">Sujets PFC</div> 
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
-                                    </div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link text-white" href="{{ url('adminsujet') }}">Gestion des sujets interne </a>
-                                    <a class="nav-link text-white" href="{{ url('adminsujetexterne') }}">gestion des sujets externe</a>
-                                    <a class="nav-link text-white" href="{{ route('sessions.index') }}">Gestion des sessions </a>
-                                    <a class="nav-link text-white" href="{{ route('sujets-par-enseignant') }}">Nombre de sujet</a>
-                                    <a class="nav-link text-white" href="{{ route('etudiants-avec-sujets') }}">Liste des affectations</a>
-                                    <a class="nav-link text-white" href="{{ route('etudiants-sans-etat-true') }}">Liste des non Affecté</a>
-                                </nav>
-                                    </div>
-                                   
-                                </nav>
-
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        <div class="text-white">Authentication</div>
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
-                                    </div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link text-white" href="#">Register</a>
-                                          
-                                        </nav>
-                                    </div>
-                                   
-                                </nav>
-                               
-                            </div>
-                          
+                         
+                        </nav>
                     </div>
-                   
-                </nav>
-            </div>
+                </div>
+            </nav>
+        </div>
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Le nombre de sujets propsé par chaque enseignant</h1>
+                    <h1 class="mt-4">Le nombre de sujets proposé par chaque enseignant</h1>
                     <ol class="breadcrumb mb-4">
                         <!-- <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><h5>retour</h5></a></li> -->
                      
-                        <li class="breadcrumb-item active"></li>
+                        <li class="breadcrumb-item"><a href="{{ route('statistique') }}"><h5>retour</h5></a></li>
                     </ol>
                     @if (session('success'))
                                 <div class="alert alert-success">

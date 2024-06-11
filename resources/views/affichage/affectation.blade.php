@@ -14,14 +14,15 @@
 
     <!-- Custom CSS -->
     <style>
-         .night-blue {
-            background-color: #2a5b85; /* Couleur bleu nuit */
+     .night-blue {
+            /* background-color: #037492; Couleur bleu nuit */
+            background-color:#058FB2;
         }
         .text-white {
             color: white;
         }
        .bg-beige{
-        background-color: #1e3d59; 
+        background-color: #058FB2; 
        }
     .congratulations-card {
         border: 2px solid #28a745;
@@ -63,7 +64,7 @@
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
             <!-- Navbar Brand-->
-            <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
+            <img src="images/pfcc.png" alt=""  style="width: 145px;height: 50px;">
             <!-- Sidebar Toggle-->
             <!-- /<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button> -->
             <!-- Navbar Search-->

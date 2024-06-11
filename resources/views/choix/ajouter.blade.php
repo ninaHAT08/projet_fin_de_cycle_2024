@@ -98,7 +98,7 @@
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Student" onclick="return confirm('Confirmation de la suppression?')"><i class="fa fa-trash-o" aria-hidden="true"></i> supprimer</button>
                                             </form> -->
-                                            <form method="POST" action="{{ route('choix.destroy', $choix->id) }}" accept-charset="UTF-8" style="display:inline"  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce user ?');">
+                                            <form method="POST" action="{{ route('choix.destroy', $choix->id) }}" accept-charset="UTF-8" style="display:inline"  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce choix ?');">
                                                        @method('DELETE') 
                                                        @csrf
                                                     <button type="submit" class="btn btn-danger btn-sm "  >
@@ -117,7 +117,7 @@
                             </table>
                        
                         </div>
-                        <div class="d-flex gap-2 mt-1">
+                        <div class="d-flex gap-2 mt-1 mb-3">
                         <form action="{{ route('choix.envoyer') }}" method="POST">
     @csrf
  

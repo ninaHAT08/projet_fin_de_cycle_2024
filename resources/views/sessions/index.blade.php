@@ -10,65 +10,70 @@
     <meta name="author" content="" />
     <title>Table- Sessions</title>
     <style>
-        .night-blue {
-            background-color: #2a5b85; /* Couleur bleu nuit */
+          .night-blue {
+            /* background-color: #037492; Couleur bleu nuit */
+            background-color:#058FB2;
         }
         .text-white {
             color: white;
         }
        .bg-beige{
-        background-color: #1e3d59; 
+        background-color: #058FB2; 
        }
-    </style>
+   h1{
+    text-align:center;
+   }
+   
+   </style>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-  
-    <!-- <link href='fullcalendar/packages/core/main.css' rel='stylesheet' /> -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+
     <link href='fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
     
    
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css1/bootstrap.min.css">
-    
-    <!-- Style -->
-    <link rel="stylesheet" href="css1/style.css">
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="css1/bootstrap.min.css">
+   
+   <!-- Style -->
+   <link rel="stylesheet" href="css1/style.css">
+   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
-        <img src="images/pfcc.png" alt="" style="width: 180px;height: 50px;">
+        <!-- Navbar Brand-->
+        <img src="images/pfcc.png" alt="" style="width: 145px;height: 50px;">
+        <!-- <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button> -->
+            <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group text-white">
-            {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
+                {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
             </div>
         </form>
+        <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li>
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profil') }}
-                        </x-dropdown-link>
-                    </li>
+                    <li><x-dropdown-link :href="route('profile.edit')">{{ __('Profil') }}</x-dropdown-link></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
-                                {{ __('Deconnexion') }}
-                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Deconnexion') }}</x-dropdown-link>
                         </form>
                     </li>
                 </ul>
             </li>
         </ul>
     </nav>
+    
     
 
     <div id="layoutSidenav">
@@ -84,8 +89,8 @@
                     {{ session('error') }}
                 </div>
             @endif 
-            <div class="content">
-            <h1>Liste des Sessions</h1>
+            <div class="content center">
+            <h1  >Liste des Sessions</h1>
             <a href="{{ route('sessions.create') }}" class="btn btn-primary mb-3 mt-5">Créer une nouvelle session</a>
             <div id="calendar"></div>
             </div>

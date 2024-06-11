@@ -1,25 +1,23 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Espace enseignant</title>
-        <style>
-        .night-blue {
-            background-color: #1e3d59; 
-            /* background-color: #1e847f; */
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Tables - SUJETS</title>
+    <style>
+           .night-blue {
+            /* background-color: #037492; Couleur bleu nuit */
+            background-color:#058FB2;
         }
         .text-white {
             color: white;
         }
-        .bg-beige {
-    background-color: #ff6e40;
-}
+       .bg-beige{
+        background-color: #058FB2; 
+       }
        
     </style>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
@@ -29,7 +27,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark  night-blue">
             <!-- Navbar Brand-->
-            <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
+            <img src="images/pfcc.png" alt=""  style="width: 145px;height: 50px;">
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -61,57 +59,60 @@
                 </li>
             </ul>
         </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
-         
-                    <div class="sb-sidenav-menu">
-                        <div class="nav " >
-                            <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link"   href="{{ url('enseignant') }}">
-                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
-                              Accueil
+       
+    <div id="layoutSidenav" style="display: flex;">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion bg-beige" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a class="nav-link" href="{{ url('enseignant') }}">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="text-white">Accueil</div>
+                        </a>
+                        <a class="nav-link" href="{{ route('enseignantP.edit', Auth::user()->id) }}">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-user-edit"></i></div>
+                            <div class="text-white">Modifier Profil</div>
+                        </a>
+                        <nav class="menu-nested">
+                        <a class="nav-link text-white" href="{{ route('sujets.create') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-plus"></i></div>
+                                proposer un sujet
                             </a>
-                            <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon text-white"><i class="fas fa-columns"></i></div>
-                             <div class="text-white">Sujets PFC </div>
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <a class="nav-link text-white" href="{{route('maliste')}}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-file-alt"></i></div>
+                                voir ma liste des sujets  
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav text-white">
-                                    <a class="nav-link text-white" href="{{route('sujets.create')}}">proposer un sujet </a>
-                                    <a class="nav-link text-white" href="{{route('maliste')}}"> voir ma liste des sujets  </a>
-                                    <a class="nav-link text-white" href="{{ route('affectation') }}">Voir la liste des choix</a>
-                                    <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">La liste des sujet publier</a>
-                                    
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon text-white"><i class="fas fa-book-open"></i></div>
-                              <div class="text-white">AUTRE</div> 
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <a class="nav-link text-white" href="{{ route('affectation') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></i></div>
+                                Voir la liste des choix
                             </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed text-white" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                      Gestion des sujets externes
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="#"></a> 
-                                            <a class="nav-link text-white" href="{{url('enseaignantsujetexterne')}}">voir la liste des sujets externes</a>
-                                        </nav>
-                                    </div>
-                                   
-                                </nav>
-                            </div>
-                          
+                            <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-check-circle"></i></div>
+                                La liste des sujet publier
+                            </a>
+                        
+                        
+                        </nav>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-book-open"></i></div>
+                            <div class="text-white">AUTRE</div>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <nav class="sb-sidenav-menu-nested nav">
+                           
+                            <a class="nav-link text-white" href="{{url('enseaignantsujetexterne')}}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-external-link-alt"></i></div>
+                                voir la liste des sujets externes
+                            </a>
+                            <a class="nav-link text-white" href="{{ route('voir.choix') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></div>
+                                 mes   choix 
+                            </a>
+                        </nav>
                     </div>
-                   
-                </nav>
-            </div>
+                </div>
+            </nav>
+        </div>
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
             <main>
@@ -139,71 +140,37 @@
                             <h4>Liste sujet affecté pour les etudiants</h4>
                         </div>
                         <div class="card-body">
-                            @if($choixs->isEmpty())
-                                <p>Aucun sujet n'a été envoyé pour le moment.</p>
-                            @else
+                          
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                        <th>Nom</th>
+                                            <th>prenom</th>
+                                             <th>Spécialité Étudiant </th>
                                             <th>Titre</th>
-                                            <th>Étudiant </th>
-                                            <th>Spécialité Étudiant </th>
-                                            <th>Binôme</th>
-                                            <th>Spécialité Binôme</th>
-                                            <th>Date de la Sélection</th>
-                                           
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Titre</th>
-                                            <th>Étudiant 1</th>
-                                            <th>Spécialité Étudiant 1</th>
-                                            <th>Binôme</th>
-                                            <th>Spécialité Binôme</th>
-                                            <th>Date de la Sélection</th>
-                                         
-                                        </tr>
-                                    </tfoot>
+                                
                                     <tbody>
-                                    @forelse ($choixs as $sujet)
-                @php
-                    $choix = $sujet->choix()->where('envoyer', true)->first();
-                    $etudiant = \App\Models\User::find($choix->idUser3);
-                    $binome = $choix->binome ? \App\Models\User::find($choix->binome) : null;
-                @endphp
-                                            <tr>
-                                            <td>{{ $sujet->titre }}</td>
-                    <td>{{ $etudiant->nom }} {{ $etudiant->prenom }}</td>
+                                   
+                                    @forelse ($etudiantsAvecSujets as $etudiant)
+                <tr>
+                    <td>{{ $etudiant->nom }}</td>
+                    <td>{{ $etudiant->prenom }}</td>
                     <td>{{ $etudiant->specialite }}</td>
-                    <td>
-                        @if ($binome)
-                            {{ $binome->nom }} {{ $binome->prenom }}
-                        @else
-                            Aucun binôme
-                        @endif
-                    </td>
-                    <td>
-                        @if ($binome)
-                            {{ $binome->specialite }}
-                        @else
-                            Aucun binôme
-                        @endif
-                    </td>
-                    <td>{{ $choix->date }}</td>
+                    <td>{{ $etudiant->titre }}</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">Aucun sujet affecté.</td>
+                    <td colspan="4">Aucun étudiant affecté.</td>
                 </tr>
             @endforelse
-                            </tbody>
-                        </table>
-                    @endif
-                        </div>
-                    </div>
-                </div>
-            </main>
+            </tbody>
+                                </table>
+           </div>
+      </div>
+     </div>
+ </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">

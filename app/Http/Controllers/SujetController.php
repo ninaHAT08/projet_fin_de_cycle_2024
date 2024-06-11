@@ -17,15 +17,34 @@ class SujetController extends Controller
         ->get();
         return view('gestionadmin.sujet', compact('sujets'));
     }
+    /////filltrage des sujets par spécialité
+    
+    public function filterSujets(Request $request)
+{
+    $specialite = $request->input('specialite');
+
+    if ($specialite) {
+        // Filtrer par spécialité si spécifié
+        $sujets = Sujet::where('specialite', $specialite)->get();
+    } else {
+        // Récupérer tous les sujets si aucune spécialité n'est spécifiée
+        $sujets = Sujet::all();
+    }
+
+    return view('gestionadmin.sujet', compact('sujets'));
+}
+    
+    
+    
+    
+  
+    
+    
+    
+    
     public function index()
     {
-        // $sujets = Sujet::whereHas('user1', function ($query) {
-        //  $query->where('usertype', 'enseignant');
-        //     })
-        //     ->where('typeSujet', 'interne') 
-        //     ->get();
-      //  return view('sujets.index', compact('sujets'));
-      // return view('enseignant', compact('sujets'));
+        
       $userId = Auth::id(); 
        $sujets = Sujet::where('iduser1', $userId)
        ->whereHas('user1', function ($query) {

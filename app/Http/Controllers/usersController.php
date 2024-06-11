@@ -36,7 +36,7 @@ class usersController extends Controller
        $rules = [
         'nom' => 'required|string|max:255',
         'prenom' => 'required|string|max:255',
-        'date_naiss' => 'required|date',
+        'date_naiss' => 'date',
         'specialite' => 'required|string|max:255',
         'usertype' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
@@ -95,19 +95,56 @@ class usersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        // Récupérer l'utilisateur par son identifiant
+        $etudiant = User::findOrFail($id);
+        
+        // Retourner la vue avec les données de l'utilisateur
+        return view('etudiant.edit', compact('etudiant'));
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Règles de validation
+        $rules = [
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'date_naiss' => 'required|date',
+            'specialite' => 'required|string|max:255',
+        ];
+    
+        // Ajouter une règle conditionnelle pour 'matricule' si 'usertype' est 'etudiant'
+        if ($request->input('usertype') === 'etudiant') {
+            $rules['matricule'] = [
+                'required',
+                'string',
+                'min:12',
+                Rule::unique('users')->ignore($id)->where(function ($query) {
+                    return $query->where('usertype', 'etudiant');
+                }),
+            ];
+        } else {
+            $rules['matricule'] = [
+                'nullable',
+                'string',
+                'min:12',
+            ];
+        }
+    
+        $validatedData = $request->validate($rules);
+    
+        // Récupérer l'utilisateur par son identifiant
+        $user = User::findOrFail($id);
+    
+        // Mettre à jour les informations de l'utilisateur
+        $user->update($validatedData);
+    
+        // Redirection avec un message de réussite
+        return redirect()->route('etudiantP.edit', $user->id)->with('flash_message', 'Profil mis à jour avec succès!');
     }
-
     /**
      * Remove the specified resource from storage.
      */

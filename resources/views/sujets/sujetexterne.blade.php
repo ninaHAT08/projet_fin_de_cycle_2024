@@ -6,58 +6,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Tables - SUJETS</title>
+    <title>Tables - SUJETS_EXTERNES</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-</head>
-<body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
-        <!-- Navbar Brand-->
-        <img src="images/pfcc.png" alt="" style="width: 180px;height: 50px;">
-        <!-- Sidebar Toggle-->
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li> <x-dropdown-link :href="route('profile.edit')">
+    
+    <style>
+           .night-blue {
+            /* background-color: #037492; Couleur bleu nuit */
+            background-color:#058FB2;
+        }
+        .text-white {
+            color: white;
+        }
+       .bg-beige{
+        background-color: #058FB2; 
+       }
+       
+    </style>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet">
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark  night-blue">
+            <!-- Navbar Brand-->
+            <img src="images/pfcc.png" alt=""  style="width: 145px;height: 50px;">
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group text-white">
+                {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li> <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profil') }}
                         </x-dropdown-link></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
+                        <li><form method="POST" action="{{ route('logout') }}">
                             @csrf
+
                             <x-dropdown-link :href="route('logout')"
-                                             onclick="event.preventDefault();
-                                                 this.closest('form').submit();">
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
                                 {{ __('Deconnexion') }}
                             </x-dropdown-link>
                         </form>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    
+                        </li>
+                      
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+       
+    <div id="layoutSidenav" style="display: flex;">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion bg-beige" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a class="nav-link" href="{{ url('enseignant') }}">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="text-white">Accueil</div>
+                        </a>
+                        <a class="nav-link" href="{{ route('enseignantP.edit', Auth::user()->id) }}">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-user-edit"></i></div>
+                            <div class="text-white">Modifier Profil</div>
+                        </a>
+                        <nav class="menu-nested">
+                        <a class="nav-link text-white" href="{{ route('sujets.create') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-plus"></i></div>
+                                proposer un sujet
+                            </a>
+                            <a class="nav-link text-white" href="{{route('maliste')}}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-file-alt"></i></div>
+                                voir ma liste des sujets  
+                            </a>
+                            <a class="nav-link text-white" href="{{ route('affectation') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></i></div>
+                                Voir la liste des choix
+                            </a>
+                            <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-check-circle"></i></div>
+                                La liste des sujet publier
+                            </a>
+                        
+                        
+                        </nav>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-book-open"></i></div>
+                            <div class="text-white">AUTRE</div>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <nav class="sb-sidenav-menu-nested nav">
+                           
+                            <a class="nav-link text-white" href="{{url('enseaignantsujetexterne')}}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-external-link-alt"></i></div>
+                                voir la liste des sujets externes
+                            </a>
+                            <a class="nav-link text-white" href="{{ route('voir.choix') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></div>
+                                 mes   choix 
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </nav>
+        </div>
+       
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">  la liste des sujets proposé par les etudiants</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="{{ url('enseignant') }}"><h5>retour</h5></a></li>
+                       
                      
                         <li class="breadcrumb-item active"></li>
                     </ol>
                     <div class="card mb-4">
-                        <div class="card-header bg-primary">
+                        <div class="card-header ">
                             <i class="fas fa-table me-1"></i>
                             <h4>Liste des sujets</h4>
                         </div>
@@ -73,7 +144,21 @@
                                     {{ session('error') }}
                                 </div>
                             @endif
-                            
+                            <div class="card-body">
+                        <form action="{{ route('filter.sujets5') }}" method="POST">
+            @csrf
+
+                        <div class="d-flex mb-3">
+                        <button type="submit" class="btn btn-primary me-2" name="specialite" value="">Tous</button> 
+                        <button type="submit" class="btn btn-secondary me-2" name="specialite" value="Administration et Sécurité des Réseaux">ASR</button>
+                <button type="submit" class="btn btn-danger me-2 "name="specialite" value="Génie Logiciel">GL</button>
+                <button type="submit" class="btn btn-warning me-2 "name="specialite" value="Intelligence Artificielle">IA</button>
+                <button type="submit" class="btn btn-success me-2 "name="specialite" value="Réseaux et Sécurité">RS</button>
+                <button type="submit" class="btn btn-info me-2 "name="specialite" value="Systèmes d'Information Avancés">SIA</button>
+    
+</div>
+</form>               
+</div>                    
                            
 
                             <div class="table-responsive">
@@ -117,18 +202,21 @@
             <td>{{ $sujet->mot_cle }}</td>
             <td>{{ $sujet->anneeUniv }}</td>
             <td>{{ $sujet->typeSujet }}</td>
-            <td>{{ $sujet->user1->nom }}{{ $sujet->user1->prenom }}</td>
+            <td>{{ $sujet->user1->nom }} {{ $sujet->user1->prenom }}</td>
             <td>{{ $sujet->nomEntreprise }}</td>
             <td>{{ $sujet->maitre_du_stage }}</td>
                                                 <td>
                                                     <div class="d-flex gap-2">
                                                         <!-- <a href="{{ route('sujets.show', $sujet) }}" title="Voir le sujet"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> voir</button></a> -->
                                                        
-                                                        <form action="#" method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="idSujet" value="{{ $sujet->idSujet }}">
-                                                            <button type="submit" class="btn btn-dark btn-sm  bg-primary" >ajouter</button>
-                                                        </form>
+                                                       
+                                                        <form action="{{ route('ajouter.choix') }}" method="POST">
+                                               @csrf
+                                      <input type="hidden" name="idSujet" value="{{ $sujet->idSujet }}">
+                                     <button type="submit" class="btn btn-dark btn-sm bg-primary">Ajouter</button>
+                                       </form>
+                                                    
+                                                    
                                                     </div>
                                                 </td>
                                             </tr>

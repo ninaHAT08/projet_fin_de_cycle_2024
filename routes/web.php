@@ -14,6 +14,9 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ChoixController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AffichageController;
+use App\Http\Controllers\usersenseignantController;
+
+
 Route::get('/', function () {
     return view('home');
 });
@@ -30,8 +33,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth' , 'admin'])->group(function () {
 Route::get('/admin', [HomeController::class, 'index'])->middleware(['auth' , 'admin']);
 Route::get('/enseignant', [HomeController::class, 'indexens'])->middleware(['auth','enseignant']);
-Route::get('/doctorant', [HomeController::class, 'indexdoct'])->middleware(['auth','doctorant']);
 
+Route::middleware(['auth', 'doctorant'])->group(function () {
+    Route::get('/doctorant', [HomeController::class, 'indexdoct'])->name('doctorant.dashboard');
+});
 /// la route pour la gestion des etudiant
 Route::resource('/etudiant', 'App\Http\Controllers\etudiantController');
 Route::resource('/etudiantt', 'App\Http\Controllers\usersController');
@@ -42,11 +47,16 @@ Route::resource('/doctorant', 'App\Http\Controllers\doctorant');
 
 // pour les sujet ineterne admin
 Route::get('/gestionadmin/sujet', function () {return view('gestionadmin.sujet');})->name('gestionadmin.sujet');
+
+
+
 //pour la barre de recherche
+
+
 Route::get('/searchensg', [enseignantController::class, 'search'])->name('enseignant.search');
 Route::get('/searchetudiant', [etudiantController::class, 'search'])->name('etudiant.search');
-//l'espace sujet exterene admin
-Route::get('/adminsujet', function () { return view('gestionadmin.sujet');})->name('adminsujet');
+//l'espace sujet exterene interne admin
+Route::get('/adminsujet', [GestionAdminController::class, 'index'])->name('adminsujet');
 Route::get('/adminsujetexterne', function () { return view('gestionadmin.sujetexterne');})->name('adminsujetexterne');
 ////////////////////////les routes conernant les session
 Route::resource('sessions', SessionController::class);
@@ -58,11 +68,30 @@ Route::put('/sessions/{id}', [SessionController::class, 'updatte'])->name('sessi
 Route::get('/sujets-par-enseignant', [GestionAdminController::class, 'sujetsParEnseignant'])->name('sujets-par-enseignant');
 Route::get('/etudiants-avec-sujets', [GestionAdminController::class, 'etudiantsAvecSujets'])->name('etudiants-avec-sujets');
 Route::get('/etudiants-sans-etat-true', [GestionAdminController::class, 'etudiantsAvecEtatNullOuFalse'])->name('etudiants-sans-etat-true');
- });
+ ////////////////////////////////////////////////////////SSSSSSSSSSSSSSSSSSSSSSS
+Route::get('/sujets/statistiques', [GestionAdminController::class, 'getSujetsStatistiques']);
+
+
+ /////////statistique
+ Route::get('/sujets_pfc', function () { return view('sujets_pfc');})->name('sujets_pfc');
+Route::get('/statistique', function () { return view('statistique');})->name('statistique');
+
+Route::get('/diagramme', function () { return view('diagramme');})->name('diagramme');
+
+
+
+});
+
+
 ///les route securise que l'enseignant a le droit d'acceder
 Route::middleware(['auth' , 'enseignant'])->group(function () {
-    //route important apre l'authentification
+     //route important apre l'authentification
 Route::resource('/enseignant', 'App\Http\Controllers\SujetController');
+
+Route::put('enseignantP/{id}', [usersenseignantController::class, 'update'])->name('enseignantP.update');
+// Route spécifique pour l'édition d'un enseignant
+Route::get('enseignantP/{id}/edit', [usersenseignantController::class, 'edit'])->name('enseignantP.edit');
+
 //route pour modifier sujet mm s'il existe une 
 Route::resource('/sujets', 'App\Http\Controllers\SujetController');
 // toute les route concernant les sujet interne 
@@ -89,17 +118,25 @@ Route::get('/sujets/{id}/show', [App\Http\Controllers\SujetController::class, 's
 Route::post('/sujets/affecter/{id}', [ChoixController::class, 'affecter'])->name('sujets.affecter');
 //liste choix des etudiant
    Route::get('/affectation', [App\Http\Controllers\ChoixController::class, 'affectation'])->name('affectation');
+
 });
 //afficher laffectation dans etudiant
 Route::middleware('auth')->get('/affichage-affectation', [AffichageController::class, 'showAffectationNotification'])->name('affichage.affectation');  
 
 require __DIR__.'/auth.php';
 // pour la gestion des etudiant enseignant par l'admin ca rentre dans l'authentification
+
+
+
 Route::resource('/etudiantuser', 'App\Http\Controllers\usersController');
 Route::resource('/enseignantuser', 'App\Http\Controllers\usersenseignantController');
 //pour affiche les sujet propose par l'enseignant et valider par l'admin au etudiant
 Route::get('/espaceetudiant', function () { return view('espaceetudiant');})->name('espaceetudiant');
 Route::get('/espaceetudiant', [App\Http\Controllers\EspaceEtudiantController::class, 'index'])->name('espaceetudiant');
+//////////////modifier profile etudiant
+Route::middleware('auth')->put('etudiantP/{id}', [usersController::class, 'update'])->name('etudiantP.update');
+// Route spécifique pour l'édition d'un enseignant
+Route::middleware('auth')->get('etudiantP/{id}/edit', [usersController::class, 'edit'])->name('etudiantP.edit');
 
 
 /// toute les route concernant la creation la suppression la modification des sujet externe
@@ -127,6 +164,20 @@ Route::get('/affecter', [App\Http\Controllers\ChoixController::class, 'afficherS
 Route::post('/choix/envoyer', [App\Http\Controllers\ChoixController::class, 'envoyer'] )->name('choix.envoyer');
 Route::get('/affectation', [App\Http\Controllers\ChoixController::class, 'affectation'])->name('affectation');
 
-// //les routes pour les actions CRUD (Create, Read, Update, Delete) pour session crer par moi
+// //les routes pour les actions CRUD (Create, Read, Update, Delete) pour sujet externes choix enseignat
+Route::middleware(['auth'])->group(function () {
+    Route::post('/ajouter-choix', [SujetexterneController::class, 'ajouterChoix'])->name('ajouter.choix');
+    Route::get('/voir-choix', [SujetexterneController::class, 'voirChoix'])->name('voir.choix');
+    Route::post('/affecter-sujets', [SujetexterneController::class, 'affecterSujets'])->name('affecter.sujets');
+   
+   ///les sujets externes choisi par enseignat afficher dans les etudiants
 
+});
 
+Route::get('/etudiant/sujetsEX', [etudiantController::class, 'voirSujetsChoisis'])->name('etudiant.sujets');
+////////////filtrages sujets 
+Route::post('/filter-sujets', [App\Http\Controllers\SujetController::class, 'filterSujets'])->name('filter.sujets');
+Route::post('/filter-sujets2', [App\Http\Controllers\SujetexterneController::class, 'filterSujets2'])->name('filter.sujets2');
+Route::post('/filter-sujets3', [App\Http\Controllers\EspaceEtudiantController::class, 'filterSujets3'])->name('filter.sujets3');
+Route::post('/filter-sujets4', [App\Http\Controllers\EspaceEtudiantController::class, 'filterSujets4'])->name('filter.sujets4');
+Route::post('/filter-sujets5', [App\Http\Controllers\SujetexterneController::class, 'filterSujets5'])->name('filter.sujets5');

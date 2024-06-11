@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\etudiant;
+use App\Models\Sujet;
+use App\Models\User;
 use App\Models\users;
+use Illuminate\Support\Facades\Auth;
 class etudiantController extends Controller
 {
     /**
@@ -91,5 +94,15 @@ class etudiantController extends Controller
         $etudiant = $query->paginate(6);
     
         return view('etudiant.index')->with('etudiant', $etudiant);
+    }
+   
+   
+   
+   
+    public function voirSujetsChoisis()
+    {
+        $etudiantId = Auth::id();
+        $sujets = Sujet::where('iduser1', $etudiantId)->with('choixSujets.enseignant')->get();
+        return view('etudiant.sujets', compact('sujets'));
     }
 }
