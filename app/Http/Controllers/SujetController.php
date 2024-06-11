@@ -5,7 +5,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Sujet;
-
+use Illuminate\Support\Facades\Log;
+use App\Models\Notification;
+use Illuminate\Support\Facades\DB;
 class SujetController extends Controller
 {
     public function gestionsujet()
@@ -17,6 +19,7 @@ class SujetController extends Controller
         ->get();
         return view('gestionadmin.sujet', compact('sujets'));
     }
+<<<<<<< HEAD
     /////filltrage des sujets par spécialité
     
     public function filterSujets(Request $request)
@@ -42,6 +45,20 @@ class SujetController extends Controller
     
     
     
+=======
+    public function filterSujets(Request $request)
+{
+    $specialite = $request->input('specialite');
+    $sujets = Sujet::where('specialite', $specialite)->get();
+    return view('gestionadmin.sujet', compact('sujets'));
+}
+public function filterSujets2(Request $request)
+{
+    $specialite = $request->input('specialite');
+    $sujets = Sujet::where('specialite', $specialite)->get();
+    return view('gestionadmin.sujetexterne', compact('sujets'));
+}
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
     public function index()
     {
         
@@ -254,4 +271,43 @@ public function valider($idSujet)
         return response()->json(['success' => false, 'message' => 'Une erreur s\'est produite lors de l\'affectation du sujet.']);
     }
 }
+
+/////////pour les notification
+// public function assignSujet(Request $request, $userId, $sujetId)
+// {
+//     $user = User::findOrFail($userId);
+//     $user->etat = true;
+//     $user->idSujet = $sujetId;
+//     $user->save();
+
+//     // Créer une notification
+//     Notification::create([
+//         'user_id' => $userId,
+//         'message' => 'Un enseignant vous a affecté un nouveau sujet.',
+//     ]);
+
+//     return redirect()->back()->with('success', 'Sujet assigné avec succès');
+// }
+// public function showDashboard()
+//     {
+//         $user = auth()->user();
+//         if ($user) {
+//             Log::info('User authenticated: ' . $user->id);
+//         } else {
+//             Log::info('User not authenticated');
+//         }
+
+//         $notifications = Notification::where('user_id', $user->id)->where('is_read', false)->get();
+//         Log::info('Notifications: ' . $notifications->count());
+
+//         return view('dashboard', compact('notifications'));
+//     }
+// public function markAsRead($id)
+// {
+//     $notification = Notification::findOrFail($id);
+//     $notification->is_read = true;
+//     $notification->save();
+
+//     return redirect()->back();
+// }
 }

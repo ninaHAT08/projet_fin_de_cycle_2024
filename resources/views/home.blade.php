@@ -14,9 +14,24 @@
 
 
   <title>Informatique</title>
+<<<<<<< HEAD
  
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <!-- slider stylesheet -->
+=======
+  <style>
+        .night-blue {
+            background-color: #2a5b85; /* Couleur bleu nuit */
+        }
+        .text-white {
+            color: white;
+        }
+       .bg-beige{
+        background-color: #1e3d59; 
+       }
+    </style>
+  <!-- slider stylesheet -->
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
   <!-- bootstrap core css -->
@@ -30,18 +45,19 @@
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   <link href="css/responsive.css" rel="stylesheet" />
 </head>
-
-<body class="antialiased">
-  <div class="hero_area">
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container pt-2">
-          <a class="navbar-brand" href="index.html">
+<body class="sb-nav-fixed"> 
+<!-- <body class="antialiased"> -->
+  <!-- <div class="hero_area">
+ 
+    <header class="header_section"> -->
+      <!-- <div class="container-fluid"> -->
+        <!-- <nav class="navbar navbar-expand-lg custom_nav-container pt-2"> -->
+        <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
+          <!-- <a class="navbar-brand" href="index.html"> -->
       
             <img src="images/pfcc.png" alt=""  style="width: 145px;height: 49px;">
           
-          </a>
+          <!-- </a> -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -72,8 +88,8 @@
             </div>
           </div>
         </nav>
-      </div>
-    </header>
+      <!-- </div>
+    </header> -->
     <!-- end header section -->
    
    

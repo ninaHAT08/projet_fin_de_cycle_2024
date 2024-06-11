@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+<<<<<<< HEAD
     <title>Tables - SUJETS_EXTERNES</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
@@ -45,6 +46,41 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li> <x-dropdown-link :href="route('profile.edit')">
+=======
+    <title>Tables - SUJETS</title>
+    <style>
+        .night-blue {
+            background-color: #2a5b85; /* Couleur bleu nuit */
+        }
+        .text-white {
+            color: white;
+        }
+       .bg-beige{
+        background-color: #1e3d59; 
+       }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
+        <!-- Navbar Brand-->
+        <img src="images/pfcc.png" alt="" style="width: 180px;height: 50px;">
+        <!-- Sidebar Toggle-->
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group text-white">
+              {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
+                </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li> <x-dropdown-link :href="route('profile.edit')">
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                             {{ __('Profil') }}
                         </x-dropdown-link></li>
                         <li><form method="POST" action="{{ route('logout') }}">
@@ -56,6 +92,7 @@
                                 {{ __('Deconnexion') }}
                             </x-dropdown-link>
                         </form>
+<<<<<<< HEAD
                         </li>
                       
                     </ul>
@@ -117,11 +154,69 @@
             </nav>
         </div>
        
+=======
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
+         
+                    <div class="sb-sidenav-menu">
+                        <div class="nav " >
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link"   href="enseignant">
+                                <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
+                             <div class="text-white"> PROJETS FIN DE CYCLE</div> 
+                            </a>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-columns"></i></div>
+                             <div class="text-white">Sujets PFC </div>
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav text-white">
+                                    <a class="nav-link text-white" href="{{route('sujets.create')}}">proposer un sujet </a>
+                                    <a class="nav-link text-white" href="{{route('maliste')}}"> voir ma liste des sujets </a>
+                                    <a class="nav-link text-white" href="{{ route('affectation') }}">Voir la liste des choix</a>
+                                    <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">La liste des sujet publier</a>
+                                    
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-book-open"></i></div>
+                              <div class="text-white">AUTRE</div> 
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed text-white" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                      Gestion des sujets externes
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="#"></a> 
+                                            <a class="nav-link text-white" href="{{url('enseaignantsujetexterne')}}">voir la liste des sujets externes</a>
+                                        </nav>
+                                    </div>
+                                   
+                                </nav>
+                            </div>
+                          
+                    </div>
+                        
+                </nav>
+            </div>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">  la liste des sujets proposé par les etudiants</h1>
+                    <h1 class="mt-4">  La liste des sujets proposé par les etudiants</h1>
                     <ol class="breadcrumb mb-4">
                        
                      

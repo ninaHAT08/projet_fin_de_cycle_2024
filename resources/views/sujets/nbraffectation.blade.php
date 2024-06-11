@@ -6,12 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Tables - SUJETS</title>
     <style>
+<<<<<<< HEAD
               .night-blue {
+=======
+        .night-blue {
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
             /* background-color: #037492; Couleur bleu nuit */
             background-color:#058FB2;
         }
+      
         .text-white {
             color: white;
         }
@@ -57,6 +63,7 @@
             </li>
         </ul>
     </nav>
+<<<<<<< HEAD
    
     <div id="layoutSidenav" style="display: flex;">
         <div id="layoutSidenav_nav">
@@ -106,9 +113,65 @@
                     <h1 class="mt-4">Liste des étudiants avec Sujets</h1>
                     <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="{{ route('statistique') }}"><h5>retour</h5></a></li>
+=======
+    <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion bg-beige"  id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link"   href="{{url('admin')}}">
+                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
+                               <div class="text-white">Accueil</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{route('etudiant.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Etudiants</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{route('enseignantt.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Enseignants</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{ url('doctorant')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Doctorants</div> 
+                            </a>
+                            <a class="nav-link collapsed"  href="{{route('sujets_pfc')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="text-white">PFC</div> 
+                            </a>
+                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        <div class="text-white">Authentication</div>
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
+                                    </div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link text-white" href="#">Register</a>
+                                          
+                                        </nav>
+                                    </div>
+                                   
+                                </nav>
+                               
+                            </div>
+                          
+                    </div>
+                   
+                </nav>
+            </div>
+      <div id="layoutSidenav">     
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h3 class="mt-4">La liste des Étudiants avec Sujets</h3>
+                    <!-- <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><h5>retour</h5></a></li>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                      
                         <li class="breadcrumb-item active"></li>
-                    </ol>
+                    </ol> -->
                     @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
@@ -123,14 +186,19 @@
                     <div class="card mb-4 ">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
+<<<<<<< HEAD
                             <h4>Liste des étudiants avec sujets</h4>
+=======
+                            <!-- <h4>Liste des Étudiants avec Sujets</h4> -->
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                         </div>
                         <div class="card-body ">
                          
                             
                             <div class="table-responsive">
                                 <table id="datatablesSimple" class="table" style="background-color: #F5F5F5;">
-                                    <thead>
+                                <!-- <table id="datatablesSimple"> -->
+                                <thead>
                                         <tr>
                                             <th>Nom</th>
                                             <th>Prenom</th>
@@ -168,6 +236,7 @@
                         </div>
                     </div>
                 </div>
+              
             </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
@@ -186,6 +255,11 @@
     <script src="js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
 </body>
 
 </html>

@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\etudiant;
 use App\Models\Sujet;
 use App\Models\User;
 use App\Models\users;
 use Illuminate\Support\Facades\Auth;
+<<<<<<< HEAD
+=======
+use Illuminate\Validation\Rule; 
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 class etudiantController extends Controller
 {
     /**
@@ -38,9 +42,7 @@ class etudiantController extends Controller
         //return redirect('etudiant')->with('flash_message', 'Student Addedd!');  
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(string $id)
     {
        $etudiant = users::find($id);
@@ -50,18 +52,18 @@ class etudiantController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    // public function edit(string $id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    // public function update(Request $request, string $id)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -95,6 +97,7 @@ class etudiantController extends Controller
     
         return view('etudiant.index')->with('etudiant', $etudiant);
     }
+<<<<<<< HEAD
    
    
    
@@ -105,4 +108,8 @@ class etudiantController extends Controller
         $sujets = Sujet::where('iduser1', $etudiantId)->with('choixSujets.enseignant')->get();
         return view('etudiant.sujets', compact('sujets'));
     }
+=======
+  
+    
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 }

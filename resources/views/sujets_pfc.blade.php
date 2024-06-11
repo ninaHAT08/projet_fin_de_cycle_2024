@@ -20,25 +20,40 @@
        }
        .page-title {
     text-align: center;
+<<<<<<< HEAD
     margin-top:5px;
     margin-bottom: 10px;
+=======
+    margin-bottom: 20px;
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
     font-size: 3em;
     color: #333;
     font-weight: bold;
 }
 .card-container {
     display: flex;
+<<<<<<< HEAD
   
     flex-wrap: wrap;
     padding: 10px;
     margin-left: 180px; /* Adjust this if you have a sidebar */
+=======
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin-left: 40px; /* Adjust this if you have a sidebar */
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 }
 
 .card {
     background: white;
     border: 1px solid #ddd;
     border-radius: 5px;
+<<<<<<< HEAD
     width: 30%; /* Adjusted width to fit four cards in a row */
+=======
+    width: 22%; /* Adjusted width to fit four cards in a row */
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
     margin: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -50,7 +65,11 @@
 }
 
 .card-body {
+<<<<<<< HEAD
     padding: 30px;
+=======
+    padding: 15px;
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 }
 
 .card-title {
@@ -93,7 +112,11 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark  night-blue">
             <!-- Navbar Brand-->
+<<<<<<< HEAD
             <img src="images/pfcc.png" alt=""  style="width: 145px;height: 50px;">
+=======
+            <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -126,6 +149,7 @@
             </ul>
 </nav>
 
+<<<<<<< HEAD
 
 <div id="layoutSidenav" style="display: flex;">
         <div id="layoutSidenav_nav">
@@ -168,6 +192,55 @@
                 </div>
             </nav>
         </div>
+=======
+<div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion bg-beige"  id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link"   href="{{url('admin')}}">
+                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
+                               <div class="text-white">Accueil</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{route('etudiant.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Etudiants</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{route('enseignantt.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Enseignants</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{ url('doctorant')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Doctorants</div> 
+                            </a>
+                            <a class="nav-link collapsed"  href="{{route('sujets_pfc')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="text-white">PFC</div> 
+                            </a>
+                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        <div class="text-white">Authentication</div>
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
+                                    </div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link text-white" href="#">Register</a>
+                                          
+                                        </nav>
+                                    </div>
+                                   
+                                </nav>
+                               
+                            </div>
+                          
+                    </div>
+                   
+                </nav>
+            </div>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
             <div id="layoutSidenav_content">
             <main>
             <h1 class="page-title">Sujets PFC</h1>
@@ -191,7 +264,29 @@
                     <a class="card-button" href="{{ url('adminsujetexterne') }}">Voir Plus</a>
                     </div>
                 </div>
+<<<<<<< HEAD
               
+=======
+                <div class="card">
+                    <img class="card-img-top" src="images/99.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">Statistique</h4>
+                       
+                    </div>
+                    <div class="card-footer">
+                    <a class="card-button" href="{{ route('statistique') }}">Voir Plus</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="images/00.PNG">
+                    <div class="card-body">
+                        <h4 class="card-title">Sessions</h4>
+                        </div>
+                    <div class="card-footer">
+                    <a class="card-button" href="{{ route('sessions.index') }}">Voir Plus</a>
+                    </div>
+                </div>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
             </div>
         </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -216,3 +311,8 @@
         <script src="js/datatables-simple-demo.js"></script>
     </body>
 </html>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27

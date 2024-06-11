@@ -68,21 +68,28 @@ Route::put('/sessions/{id}', [SessionController::class, 'updatte'])->name('sessi
 Route::get('/sujets-par-enseignant', [GestionAdminController::class, 'sujetsParEnseignant'])->name('sujets-par-enseignant');
 Route::get('/etudiants-avec-sujets', [GestionAdminController::class, 'etudiantsAvecSujets'])->name('etudiants-avec-sujets');
 Route::get('/etudiants-sans-etat-true', [GestionAdminController::class, 'etudiantsAvecEtatNullOuFalse'])->name('etudiants-sans-etat-true');
+<<<<<<< HEAD
  ////////////////////////////////////////////////////////SSSSSSSSSSSSSSSSSSSSSSS
 Route::get('/sujets/statistiques', [GestionAdminController::class, 'getSujetsStatistiques']);
 
 
+=======
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
  /////////statistique
  Route::get('/sujets_pfc', function () { return view('sujets_pfc');})->name('sujets_pfc');
 Route::get('/statistique', function () { return view('statistique');})->name('statistique');
 
 Route::get('/diagramme', function () { return view('diagramme');})->name('diagramme');
 
+<<<<<<< HEAD
 
 
 });
 
 
+=======
+});
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 ///les route securise que l'enseignant a le droit d'acceder
 Route::middleware(['auth' , 'enseignant'])->group(function () {
      //route important apre l'authentification
@@ -164,6 +171,7 @@ Route::get('/affecter', [App\Http\Controllers\ChoixController::class, 'afficherS
 Route::post('/choix/envoyer', [App\Http\Controllers\ChoixController::class, 'envoyer'] )->name('choix.envoyer');
 Route::get('/affectation', [App\Http\Controllers\ChoixController::class, 'affectation'])->name('affectation');
 
+<<<<<<< HEAD
 // //les routes pour les actions CRUD (Create, Read, Update, Delete) pour sujet externes choix enseignat
 Route::middleware(['auth'])->group(function () {
     Route::post('/ajouter-choix', [SujetexterneController::class, 'ajouterChoix'])->name('ajouter.choix');
@@ -171,9 +179,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/affecter-sujets', [SujetexterneController::class, 'affecterSujets'])->name('affecter.sujets');
    
    ///les sujets externes choisi par enseignat afficher dans les etudiants
+=======
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 
 });
 
+<<<<<<< HEAD
 Route::get('/etudiant/sujetsEX', [etudiantController::class, 'voirSujetsChoisis'])->name('etudiant.sujets');
 ////////////filtrages sujets 
 Route::post('/filter-sujets', [App\Http\Controllers\SujetController::class, 'filterSujets'])->name('filter.sujets');
@@ -181,3 +192,19 @@ Route::post('/filter-sujets2', [App\Http\Controllers\SujetexterneController::cla
 Route::post('/filter-sujets3', [App\Http\Controllers\EspaceEtudiantController::class, 'filterSujets3'])->name('filter.sujets3');
 Route::post('/filter-sujets4', [App\Http\Controllers\EspaceEtudiantController::class, 'filterSujets4'])->name('filter.sujets4');
 Route::post('/filter-sujets5', [App\Http\Controllers\SujetexterneController::class, 'filterSujets5'])->name('filter.sujets5');
+=======
+
+Route::get('/profil', function () { return view('etudiant.profil');})->name('profil');
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profil/edit', [usersController::class, 'edit'])->name('profil.edit');
+    Route::patch('/profil/update', [usersController::class, 'update'])->name('profil.update');
+});
+
+
+
+Route::post('/filter-sujets', [App\Http\Controllers\SujetController::class, 'filterSujets'])->name('filter.sujets');
+Route::post('/filter-sujets2', [App\Http\Controllers\SujetController::class, 'filterSujets2'])->name('filter.sujets2');
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27

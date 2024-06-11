@@ -9,11 +9,19 @@ class EspaceEtudiantController extends Controller
 {
     public function index()
     {
+<<<<<<< HEAD
         // Récupérer les sujets publiés et non affectés qui sont de type interne
     $sujets = Sujet::where('publier', true)
     ->where('typeSujet', 'interne')
     ->where('sujet_affecter', false)
     ->get();
+=======
+        $sujets = Sujet::where('publier', true)
+        ->where('typeSujet', 'interne')
+        ->where('Sujet_affecter', false)
+        ->get();
+
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
         // Retourner la vue avec les sujets publiés
         return view('espaceetudiant', compact('sujets'));
     }

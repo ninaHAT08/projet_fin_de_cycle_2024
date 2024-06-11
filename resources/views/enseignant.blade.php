@@ -10,9 +10,15 @@
         <meta name="author" content="" />
         <title>Espace enseignant</title>
         <style>
+<<<<<<< HEAD
            .night-blue {
             /* background-color: #037492; Couleur bleu nuit */
             background-color:#058FB2;
+=======
+        .night-blue {
+            background-color: #2a5b85;
+            /* background-color: #1e847f; */
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
         }
         .text-white {
             color: white;
@@ -61,6 +67,7 @@
                 </li>
             </ul>
         </nav>
+<<<<<<< HEAD
        
     <div id="layoutSidenav" style="display: flex;">
         <div id="layoutSidenav_nav">
@@ -79,6 +86,24 @@
                         <a class="nav-link text-white" href="{{ route('sujets.create') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-plus"></i></div>
                                 proposer un sujet
+=======
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
+         
+                    <div class="sb-sidenav-menu">
+                        <div class="nav " >
+                            <div class="sb-sidenav-menu-heading"></div>
+<<<<<<< HEAD
+                            <a class="nav-link"   href="enseignant">
+                                <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
+                             <div class="text-white"> PROJETS FIN DE CYCLE</div> 
+=======
+                            <a class="nav-link"   href="{{ url('enseignant') }}">
+                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
+                              Accueil
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                             </a>
                             <a class="nav-link text-white" href="{{route('maliste')}}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-file-alt"></i></div>

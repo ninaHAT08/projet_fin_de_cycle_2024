@@ -19,6 +19,7 @@
         background-color: #058FB2; 
        }
     </style>
+<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -41,6 +42,33 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li>
                         <x-dropdown-link :href="route('profile.edit')">
+=======
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet">
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
+            <!-- Navbar Brand-->
+            <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group text-white">
+                {{ Auth::user()->nom }} {{ Auth::user()->prenom }}</div>
+                 
+
+            </form>    
+          
+          
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li> <x-dropdown-link :href="route('profile.edit')">
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                             {{ __('Profil') }}
                         </x-dropdown-link>
                     </li>
@@ -53,6 +81,7 @@
                                 {{ __('Deconnexion') }}
                             </x-dropdown-link>
                         </form>
+<<<<<<< HEAD
                     </li>
                 </ul>
             </li>
@@ -82,6 +111,37 @@
                             <a class="nav-link text-white" href="{{ route('choix.ajouter') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-file-alt"></i></div>
                                 ma fiche de voeux
+=======
+                        </li>
+                      
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+       
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
+         
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link"   href="{{url('dashboard')}}">
+                                <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
+                               <div class="text-white">Accueil</div>
+                            </a>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link"   href="{{url('/profil/edit')}}">
+                                <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
+                               <div class="text-white">Profil</div>
+                            </a>
+                           
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-columns"></i></div>
+                            <div class="text-white">Sujets PFC </div> 
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                             </a>
                             <a class="nav-link text-white" href="{{ route('affichage.affectation') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-check-circle"></i></div>
@@ -112,8 +172,46 @@
                             </a>
                         </nav>
                     </div>
+<<<<<<< HEAD
                 </div>
             </nav>
+=======
+                   
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                       
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active"></li>
+                        </ol>
+                      
+                        <img src="images/19896.jpg" alt="Image description" style="width:  60%;    height: auto;">
+                        <div class="card mb-4 pl-32">
+                            <div class="card-body  ">
+                                <p ><strong>Cet espace a été créé pour vous afin de faciliter la gestion de vos projets de fin de cycle (PFC).
+                                     Vous pouvez consulter la liste des sujets proposés par vos enseignants et sélectionner ceux qui vous intéressent. 
+                                     Ensuite, vérifiez votre fiche de vœux finale. Vous avez également la possibilité de proposer 
+                                     vos propres sujets et de voir les propositions de vos camarades ! </strong></p>
+                    
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted"><p>
+      © 2024 All Rights Reserved By  <strong>GndznHtm</strong>
+     
+    </p></div>
+                           
+                        </div>
+                    </div>
+                </footer>
+            </div>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
         </div>
         <div id="layoutSidenav_content">
             <main>

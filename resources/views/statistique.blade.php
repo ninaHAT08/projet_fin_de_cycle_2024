@@ -124,6 +124,7 @@
             </ul>
 </nav>
 
+<<<<<<< HEAD
 
 <div id="layoutSidenav" style="display: flex;">
         <div id="layoutSidenav_nav">
@@ -166,6 +167,55 @@
                 </div>
             </nav>
         </div>
+=======
+<div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion bg-beige"  id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link"   href="{{url('admin')}}">
+                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
+                               <div class="text-white">Accueil</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{route('etudiant.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Etudiants</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{route('enseignantt.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Enseignants</div> 
+                            </a>
+                            <a class="nav-link collapsed"   href="{{ url('doctorant')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               <div class="text-white">Doctorants</div> 
+                            </a>
+                            <a class="nav-link collapsed"  href="{{route('sujets_pfc')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="text-white">PFC</div> 
+                            </a>
+                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        <div class="text-white">Authentication</div>
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
+                                    </div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link text-white" href="#">Register</a>
+                                          
+                                        </nav>
+                                    </div>
+                                   
+                                </nav>
+                               
+                            </div>
+                          
+                    </div>
+                   
+                </nav>
+            </div>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
             <div id="layoutSidenav_content">
             <main>
             <h1 class="page-title">Statistique</h1>
@@ -174,7 +224,11 @@
                     <img class="card-img-top" src="images/tis.jpg">
                     <div class="card-body">
                         <h4 class="card-title">Nombre de sujet</h4>
+<<<<<<< HEAD
                         <p class="card-text">Le nombre de sujets propsé par chaque enseignant</p>
+=======
+                        <p class="card-text">Le nombre de sujets propse par chaque enseignant</p>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                     </div>
                     <div class="card-footer">
                     <a class="card-button" href="{{ route('sujets-par-enseignant') }}">Voir Plus</a>
@@ -184,7 +238,11 @@
                     <img class="card-img-top" src="images/sta.jpg">
                     <div class="card-body">
                         <h4 class="card-title">Liste des affectations</h4>
+<<<<<<< HEAD
                         <p class="card-text">La liste et le nombre des étudiants avec sujets</p>
+=======
+                        <p class="card-text">La liste et le nombre des Étudiants avec Sujets</p>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                     </div>
                     <div class="card-footer">
                     <a class="card-button" href="{{ route('etudiants-avec-sujets') }}">Voir Plus</a>
@@ -227,3 +285,7 @@
     </body>
 </html>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27

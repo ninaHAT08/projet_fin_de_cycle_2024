@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,16 +12,55 @@
     <meta name="author" content="" />
     <title>Tables - SUJETS</title>
     <style>
+<<<<<<< HEAD
            .night-blue {
             /* background-color: #037492; Couleur bleu nuit */
             background-color:#058FB2;
+=======
+        .night-blue {
+            background-color: #2a5b85; /* Couleur bleu nuit */
+=======
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Espace enseignant</title>
+        <style>
+        .night-blue {
+            background-color: #1e3d59; 
+            /* background-color: #1e847f; */
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
         }
         .text-white {
             color: white;
         }
+<<<<<<< HEAD
        .bg-beige{
         background-color: #058FB2; 
        }
+=======
+<<<<<<< HEAD
+       .bg-beige{
+        background-color: #1e3d59; 
+       }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-switch-button@2.1.0/dist/bootstrap-switch-button.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-switch-button@2.1.0/dist/bootstrap-switch-button.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+<nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
+=======
+        .bg-beige {
+    background-color: #ff6e40;
+}
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
        
     </style>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
@@ -26,6 +69,7 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark  night-blue">
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
             <!-- Navbar Brand-->
             <img src="images/pfcc.png" alt=""  style="width: 145px;height: 50px;">
             <!-- Sidebar Toggle-->
@@ -33,7 +77,11 @@
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group text-white">
+<<<<<<< HEAD
+              {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
+=======
                 {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
                 </div>
             </form>
             <!-- Navbar-->
@@ -59,6 +107,7 @@
                 </li>
             </ul>
         </nav>
+<<<<<<< HEAD
        
     <div id="layoutSidenav" style="display: flex;">
         <div id="layoutSidenav_nav">
@@ -77,14 +126,52 @@
                         <a class="nav-link text-white" href="{{ route('sujets.create') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-plus"></i></div>
                                 proposer un sujet
+=======
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
+         
+                    <div class="sb-sidenav-menu">
+                        <div class="nav " >
+                            <div class="sb-sidenav-menu-heading"></div>
+<<<<<<< HEAD
+                            <a class="nav-link"   href="enseignant">
+                                <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
+                             <div class="text-white"> PROJETS FIN DE CYCLE</div> 
+=======
+                            <a class="nav-link"   href="{{ url('enseignant') }}">
+                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
+                              Accueil
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                             </a>
                             <a class="nav-link text-white" href="{{route('maliste')}}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-file-alt"></i></div>
                                 voir ma liste des sujets  
                             </a>
+<<<<<<< HEAD
                             <a class="nav-link text-white" href="{{ route('affectation') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></i></div>
                                 Voir la liste des choix
+=======
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav text-white">
+                                    <a class="nav-link text-white" href="{{route('sujets.create')}}">proposer un sujet </a>
+<<<<<<< HEAD
+                                    <a class="nav-link text-white" href="{{route('maliste')}}"> voir ma liste des sujets </a>
+=======
+                                    <a class="nav-link text-white" href="{{route('maliste')}}"> voir ma liste des sujets  </a>
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
+                                    <a class="nav-link text-white" href="{{ route('affectation') }}">Voir la liste des choix</a>
+                                    <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">La liste des sujet publier</a>
+                                    
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-book-open"></i></div>
+                              <div class="text-white">AUTRE</div> 
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                             </a>
                             <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-check-circle"></i></div>
@@ -110,9 +197,19 @@
                             </a>
                         </nav>
                     </div>
+<<<<<<< HEAD
                 </div>
             </nav>
         </div>
+=======
+<<<<<<< HEAD
+                        
+=======
+                   
+>>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
+                </nav>
+            </div>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
             <main>
@@ -150,7 +247,22 @@
                                             <th>Titre</th>
                                         </tr>
                                     </thead>
+<<<<<<< HEAD
                                 
+=======
+                                    <tfoot>
+                               
+                                        <tr>
+                                           
+                                            <th>Nom</th>
+                                            <th>prenom</th>
+                                             <th>Spécialité Étudiant </th>
+                                            <th>Titre</th>
+                                           
+                                         
+                                        </tr>
+                                    </tfoot>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                                     <tbody>
                                    
                                     @forelse ($etudiantsAvecSujets as $etudiant)

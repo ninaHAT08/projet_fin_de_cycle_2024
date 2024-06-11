@@ -1,5 +1,6 @@
 <x-app-layout>
 @extends('layout')
+<<<<<<< HEAD
 @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -14,6 +15,55 @@
 <div class="container" style="margin-top: 20px;">
     <div class="card">
         <div class="card-header  "><strong>ajouter un nouveau sujet</strong></div>
+=======
+<nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
+        <!-- Navbar Brand-->
+        <img src="images/pfcc.png" alt="" style="width: 180px;height: 50px;">
+        <!-- Sidebar Toggle-->
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group text-white">
+              {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
+                </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li> <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profil') }}
+                        </x-dropdown-link></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                 this.closest('form').submit();">
+                                {{ __('Deconnexion') }}
+                            </x-dropdown-link>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+@section('content')
+<style>
+        .night-blue {
+            background-color: #2a5b85; /* Couleur bleu nuit */
+        }
+        .text-white {
+            color: white;
+        }
+       .bg-beige{
+        background-color: #1e3d59; 
+       }
+    </style>
+<div class="container" style="margin-top: 20px;">
+    <div class="card">
+        <div class="card-header night-blue text-white">Ajouter un nouveau sujet</div>
+>>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
         <div class="card-body">
             <form action="{{ route('sujets.store') }}" method="POST">
                 @csrf

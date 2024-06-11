@@ -1,4 +1,5 @@
  <x-app-layout>
+
 @extends('layout') 
 
 <!-- Afficher les messages de succès ou d'erreur -->
