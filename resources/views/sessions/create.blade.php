@@ -1,5 +1,5 @@
-@extends('enseignantcrud.layout')
-@section('content')
+<x-app-layout>
+    @extends('layout')
     <div class="container">
         <h1>Créer une nouvelle Session</h1>
         @if(session('success'))
@@ -36,7 +36,9 @@
                 <input type="text" class="form-control" id="annee_univ" name="annee_univ" required>
             </div>
            
+            <a href="  {{ route('sessions.index') }}" class="btn btn-secondary">Annuler</a>
+          
             <button type="submit" class="btn btn-primary">Créer</button>
         </form>
     </div>
-    @stop
+    </x-app-layout> 

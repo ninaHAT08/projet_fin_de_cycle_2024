@@ -12,17 +12,7 @@
             /* background-color: #037492; Couleur bleu nuit */
             background-color:#058FB2;
         }
-<<<<<<< HEAD
-        .page-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 3em;
-    color: #333;
-    font-weight: bold;
-}
-=======
       
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
         .text-white {
             color: white;
         }
@@ -35,7 +25,6 @@
             justify-content: space-around;
             flex-wrap: wrap;
            
-<<<<<<< HEAD
             margin-bottom: 40px;
         }
        .chart-wrapper {
@@ -52,18 +41,6 @@
           padding: top 30px;;
         }
       
-=======
-            margin-bottom: 10px;
-        }
-       .chart-wrapper {
-           width: 35%; 
-            margin: 2px;
-            text-align: center;
-        } 
-        h2 {
-            margin-bottom: 10px;
-        }
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
         canvas {
             width: 100% !important;
             height: auto !important;
@@ -77,7 +54,6 @@
     height:10px; 
 }
 .row{
-<<<<<<< HEAD
     padding: 20px 30px 30px 30px;
     padding-left: 150px;
 }
@@ -90,14 +66,6 @@
     display: flex;
     
   }
-=======
-        margin-left: 5%;
-    }
-.card{
-    max-width: 600px;
-}
-   
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
     </style>
        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet">
@@ -106,7 +74,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark  night-blue">
             <!-- Navbar Brand-->
-            <img src="images/pfcc.png" alt=""  style="width: 180px;height: 50px;">
+            <img src="images/pfcc.png" alt=""  style="width: 145px;height: 50px;">
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -138,7 +106,7 @@
                 </li>
             </ul>
 </nav>
-<<<<<<< HEAD
+
 <div id="layoutSidenav" style="display: flex;">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion bg-beige" id="sidenavAccordion">
@@ -169,112 +137,16 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-book"></i></i></div>
                             <div class="text-white">PFC</div> 
                             </a>
-=======
-<div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion bg-beige"  id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link"   href="{{url('admin')}}">
-                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
-                               <div class="text-white">Accueil</div> 
-                            </a>
-                            <a class="nav-link collapsed"   href="{{route('etudiant.index')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               <div class="text-white">Etudiants</div> 
-                            </a>
-<<<<<<< HEAD
-                            <a class="nav-link collapsed"   href="{{route('enseignantt.index')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               <div class="text-white">Enseignants</div> 
-                            </a>
-                            <a class="nav-link collapsed"   href="{{ url('doctorant')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               <div class="text-white">Doctorants</div> 
-                            </a>
-                            <a class="nav-link collapsed"  href="{{route('sujets_pfc')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            <div class="text-white">PFC</div> 
-                            </a>
-                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-=======
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link text-white" href="{{ route('etudiant.index') }}">Gestion Etudiants</a>
-                                    <a class="nav-link text-white" href="{{ route('enseignantt.index') }}">Gestion Enseignants</a>
-                                    <a class="nav-link text-white" href=" {{ url('doctorant') }}">Gestion Doctorants</a>
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 
+                            
                             <a class="nav-link text-white" href="{{ route('statistique') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-chart-pie"></i></div>
                                 Statistiques
                             </a>
-<<<<<<< HEAD
+
                          
                         </nav>
-=======
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
 
-                                    <a class="nav-link text-white" href="{{ route('sessions.index') }}">Gestion des sessions </a>
-                                          
-
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                              <div class="text-white">Autres</div> 
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                      <div class="text-white">Sujets PFC</div> 
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
-                                    </div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link text-white" href="{{ url('adminsujet') }}">Gestion des sujets interne </a>
-                                    <a class="nav-link text-white" href="{{ url('adminsujetexterne') }}">gestion des sujets externe</a>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                      <div class="text-white">Statistique</div> 
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
-                                    </div>
-                                    </a>
-                                    <a class="nav-link text-white" href="{{ route('sujets-par-enseignant') }}">Nombre de sujet total </a>
-                                    <a class="nav-link text-white" href="{{ route('etudiants-avec-sujets') }}">Etudiant avec sujet</a>
-                                    <a class="nav-link text-white" href="{{ route('etudiants-sans-etat-true') }}">Etudiant sans sujet</a>
-                                </nav>
-                                    </div>
-                                   
-                                </nav>
-
-                               
-
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
->>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        <div class="text-white">Authentication</div>
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
-                                    </div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link text-white" href="#"></a>
-                                          
-                                        </nav>
-                                    </div>
-                                   
-                                </nav>
-                               
-                            </div>
-                          
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                     </div>
                 </div>
             </nav>
@@ -283,11 +155,9 @@
                 <main>
                 <?php
         // Connexion à la base de données
-<<<<<<< HEAD
+
         $pdo = new PDO('mysql:host=127.0.0.1;port=3307;dbname=gestionpfc', 'root', '');
-=======
-        $pdo = new PDO('mysql:host=127.0.0.1;dbname=app-pfc-1', 'root', '');
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
+
         
         // Récupérer le nombre total de sujets
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM sujet");
@@ -304,23 +174,17 @@
         $stmt->execute();
         $nombreSujetsAffectes = $stmt->fetchColumn();
     ?>
-<<<<<<< HEAD
+
               
 
                
-<div class="row">
-    <div class="col-md-2">
-        <div class="card text-white bg-info mb-5">
-            <div class="card-header ">
-=======
-                
 
-               
+         
                 <div class="row">
     <div class="col-md-2">
         <div class="card text-white bg-info mb-5">
             <div class="card-header">
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
+
                 <i class="fas fa-check-circle"></i> Sujets totaux
             </div>
             <div class="card-body">
@@ -330,11 +194,9 @@
     </div>
     <div class="col-md-2">
         <div class="card text-white bg-info mb-5">
-<<<<<<< HEAD
-            <div class="card-header ">
-=======
+
             <div class="card-header">
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
+
                 <i class="fas fa-check-circle"></i> Sujets publiés
             </div>
             <div class="card-body">
@@ -373,7 +235,6 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 <div class="row1">
     <div class="chart-container">
         <div class="chart-wrapper1" >
@@ -397,32 +258,7 @@
     </div>
  
 </div>
-=======
 
-    <div class="chart-container">
-        <div class="chart-wrapper" >
-            <h5>Diagramme à Barres - Sujets</h5>
-            <canvas id="sujetsChart" ></canvas>
-        </div>
-        <div class="chart-wrapper" >
-            <h5>Diagramme à Barres - Sujets Affectés</h5>
-            <canvas id="sujetsAffectesChart" ></canvas>
-        </div>
-        
-    </div>
-    <div class="chart-container">
-    <div class="chart-wrapper" >
-            <h5>Diagramme Circulaire - Sujets Publiés</h5>
-            <canvas id="sujetsPieChart" width="50px" height="50px">></canvas>
-        </div>
-        <div class="chart-wrapper" >
-            <h5>Diagramme en Anneau - Répartition des Sujets</h5>
-            <canvas id="sujetsDoughnut" width="50px" height="50px"></canvas>
-        </div>
-    </div>
- 
-   
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>

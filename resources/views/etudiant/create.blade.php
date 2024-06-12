@@ -33,7 +33,6 @@
                     </div>
                 @endif
 
-<<<<<<< HEAD
                 <!-- Ligne pour Nom et Prénom -->
                 <div class="row g-3 align-items-center mb-3">
                     <div class="col-auto mt-1">
@@ -42,30 +41,6 @@
                     <div class="col-auto ">
                         <input type="text" name="nom" id="nom" class="form-control" value="{{ old('nom') }}" required>
                     </div>
-=======
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-<<<<<<< HEAD
-            <!-- <label>Nom</label>
-            <input type="text" name="nom" id="nom" class="form-control" value="{{ old('nom') }}" required>
-            @if ($errors->has('nom'))
-                <div class="alert alert-danger">{{ $errors->first('nom') }}</div>
-            @endif
-            <br>
-=======
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="nom" class="form-label">Nom</label>
-                    <input type="text" name="nom" id="nom" class="form-control" value="{{ old('nom') }}" required>
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                     @if ($errors->has('nom'))
                         <div class="alert alert-danger col-auto">{{ $errors->first('nom') }}</div>
                     @endif
@@ -80,14 +55,9 @@
                         <div class="alert alert-danger col-auto">{{ $errors->first('prenom') }}</div>
                     @endif
                 </div>
-<<<<<<< HEAD
-=======
-            </div>
->>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
 
                 <!-- Ligne pour Date de Naissance -->
-                <!-- <div class="row g-3 align-items-center mb-3">
+                <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto mt-1">
                         <label for="date_naiss" class="col-form-label">Date de Naissance</label>
                     </div>
@@ -97,7 +67,7 @@
                     @if ($errors->has('date_naiss'))
                         <div class="alert alert-danger col-auto">{{ $errors->first('date_naiss') }}</div>
                     @endif
-                </div> -->
+                </div>
 
                 <!-- Ligne pour Matricule et Type d'utilisateur -->
                 <div class="row g-3 align-items-center mb-3">
@@ -139,7 +109,6 @@
                     @endif
                 </div>
 
-<<<<<<< HEAD
                 <!-- Ligne pour Email et Mot de passe -->
                 <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto mt-1">
@@ -148,58 +117,6 @@
                     <div class="col-auto">
                         <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
                     </div>
-=======
-            <div class="mb-3">
-                <label for="usertype" class="form-label">Type d'utilisateur</label>
-                <input type="text" name="usertype" id="usertype" class="form-control" value="etudiant" readonly>
-                @if ($errors->has('usertype'))
-                    <div class="alert alert-danger">{{ $errors->first('usertype') }}</div>
-                @endif
-            </div>
-
-            <div class="mb-3">
-                <label for="specialite" class="form-label">Spécialité</label>
-                <select name="specialite" id="specialite" class="form-control">
-                    <option value="" disabled selected hidden>Sélectionnez une spécialité</option>
-                    <option value="Administration et Sécurité des Réseaux">Administration et Sécurité des Réseaux</option>
-                    <option value="Génie Logiciel">Génie Logiciel</option>
-                    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
-                    <option value="Réseaux et Sécurité">Réseaux et Sécurité</option>
-                    <option value="Systèmes d'Information Avancés">Systèmes d'Information Avancés</option>
-                </select>
-                @if ($errors->has('specialite'))
-                    <div class="alert alert-danger">{{ $errors->first('specialite') }}</div>
-                @endif
-            </div>
-
-
-<<<<<<< HEAD
-            <label>Matricule</label>
-            <input type="text" name="matricule" id="matricule" class="form-control" value="{{ old('matricule') }}" required>
-            @if ($errors->has('matricule'))
-                <div class="alert alert-danger">{{ $errors->first('matricule') }}</div>
-            @endif
-            <br> -->
-=======
-            <div class="row mb-3">
-                <div class="col-md-6 offset-md-3">
-                    <label for="date_naiss" class="form-label">Matricule</label>
-                    <input type="text" name="matricule" id="matricule" class="form-control" value="{{ old('matricule') }}" required>
-                @if ($errors->has('matricule'))
-                    <div class="alert alert-danger">{{ $errors->first('matricule') }}</div>
-                @endif
-                </div>
-            </div>
->>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
-
-
-           
-            <!-- Email et Mot de passe -->
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                     @if ($errors->has('email'))
                         <div class="alert alert-danger col-auto">{{ $errors->first('email') }}</div>
                     @endif
@@ -222,4 +139,4 @@
             </form>
         </div>
     </div>
-</x-app-layout>
+</x-app-layout> 

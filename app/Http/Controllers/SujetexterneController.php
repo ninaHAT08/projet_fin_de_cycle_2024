@@ -216,6 +216,32 @@ class SujetexterneController extends Controller
        return view('enseignantcrud.choix', compact('choixSujets'));
    }
 
+   ///////////recuper les choix sujets externe pour l'etudiant
+   public function voirEnseignantsChoisis()
+   {
+       // Vérifie si l'utilisateur est authentifié
+       if (!Auth::check()) {
+           return redirect()->route('login')->with('error', 'Veuillez vous connecter pour accéder à cette page.');
+       }
+   
+       
+       // Récupère l'ID de l'utilisateur connecté (étudiant)
+       $userId = Auth::id();
+   
+       // Récupère les sujets externes proposés par l'étudiant avec les enseignants qui les ont choisis
+       $sujets = Sujet::where(function ($query) use ($userId) {
+                       $query->where('iduser1', $userId)
+                             ->orWhere('iduser2', $userId);
+                   })
+                   ->with(['choixSujets' => function ($query) {
+                       $query->with('enseignant'); // Charge la relation choixSujets avec enseignant
+                   }])
+                   ->get();
+   
+       // Retourne la vue avec les sujets et les choix chargés
+       return view('etudiant.enseignants_choisis', compact('sujets'));
+   }
+   
    // Méthode pour affecter les sujets
    public function affecterSujets(Request $request)
    {

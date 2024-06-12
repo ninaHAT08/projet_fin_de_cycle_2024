@@ -40,8 +40,11 @@
             <label for="annee_univ">Année Universitaire</label>
             <input type="text" name="annee_univ" class="form-control" value="{{ $session->annee_univ }}">
         </div>
-
+       
+        <div class="mb-3">
+        <a href="  {{ route('sessions.index') }}" class="btn btn-secondary">Annuler</a>
         <button type="submit" class="btn btn-primary  mt-3">enregistrer</button>
+        </div>
     </form>
 </div>
 </x-app-layout>

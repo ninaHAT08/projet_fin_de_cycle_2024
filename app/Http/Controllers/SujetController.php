@@ -19,25 +19,24 @@ class SujetController extends Controller
         ->get();
         return view('gestionadmin.sujet', compact('sujets'));
     }
-<<<<<<< HEAD
     /////filltrage des sujets par spécialité
     
-    public function filterSujets(Request $request)
+
+    
+public function filterSujets(Request $request)
 {
     $specialite = $request->input('specialite');
+    $sujetsQuery = Sujet::where('typeSujet', 'interne'); // Ajout de la condition pour les sujets externes
 
     if ($specialite) {
         // Filtrer par spécialité si spécifié
-        $sujets = Sujet::where('specialite', $specialite)->get();
-    } else {
-        // Récupérer tous les sujets si aucune spécialité n'est spécifiée
-        $sujets = Sujet::all();
+        $sujetsQuery->where('specialite', $specialite);
     }
+
+    $sujets = $sujetsQuery->get(); // Exécuter la requête
 
     return view('gestionadmin.sujet', compact('sujets'));
 }
-    
-    
     
     
   
@@ -45,20 +44,6 @@ class SujetController extends Controller
     
     
     
-=======
-    public function filterSujets(Request $request)
-{
-    $specialite = $request->input('specialite');
-    $sujets = Sujet::where('specialite', $specialite)->get();
-    return view('gestionadmin.sujet', compact('sujets'));
-}
-public function filterSujets2(Request $request)
-{
-    $specialite = $request->input('specialite');
-    $sujets = Sujet::where('specialite', $specialite)->get();
-    return view('gestionadmin.sujetexterne', compact('sujets'));
-}
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
     public function index()
     {
         

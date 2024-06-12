@@ -53,22 +53,13 @@
                                 {{ __('Deconnexion') }}
                             </x-dropdown-link>
                         </form>
-<<<<<<< HEAD
+
                     </li>
                 </ul>
             </li>
         </ul>
     </nav>
-    <div id="layoutSidenav">
-=======
-                        </li>
-                      
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-<<<<<<< HEAD
-       
+        
     <div id="layoutSidenav" style="display: flex;">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion bg-beige" id="sidenavAccordion">
@@ -86,53 +77,14 @@
                         <a class="nav-link text-white" href="{{ route('sujets.create') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-plus"></i></div>
                                 proposer un sujet
-=======
-        <div id="layoutSidenav">
->>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark  bg-beige"  id="sidenavAccordion">
-         
-                    <div class="sb-sidenav-menu">
-                        <div class="nav " >
-                            <div class="sb-sidenav-menu-heading"></div>
-<<<<<<< HEAD
-                            <a class="nav-link"   href="enseignant">
-                                <div class="sb-nav-link-icon text-white" ><i class="fas fa-tachometer-alt"  ></i></div>
-                             <div class="text-white"> PROJETS FIN DE CYCLE</div> 
-=======
-                            <a class="nav-link"   href="{{ url('enseignant') }}">
-                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
-                              Accueil
->>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                             </a>
                             <a class="nav-link text-white" href="{{route('maliste')}}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-file-alt"></i></div>
                                 voir ma liste des sujets  
                             </a>
-<<<<<<< HEAD
                             <a class="nav-link text-white" href="{{ route('affectation') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></i></div>
                                 Voir la liste des choix
-=======
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav text-white">
-                                    <a class="nav-link text-white" href="{{route('sujets.create')}}">proposer un sujet </a>
-<<<<<<< HEAD
-                                    <a class="nav-link text-white" href="{{route('maliste')}}"> voir ma liste des sujets </a>
-=======
-                                    <a class="nav-link text-white" href="{{route('maliste')}}"> voir ma liste des sujets  </a>
->>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
-                                    <a class="nav-link text-white" href="{{ route('affectation') }}">Voir la liste des choix</a>
-                                    <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">La liste des sujet publier</a>
-                                    
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon text-white"><i class="fas fa-book-open"></i></div>
-                              <div class="text-white">AUTRE</div> 
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                             </a>
                             <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-check-circle"></i></div>
@@ -158,22 +110,9 @@
                             </a>
                         </nav>
                     </div>
-<<<<<<< HEAD
                 </div>
             </nav>
         </div>
-=======
-<<<<<<< HEAD
-                        
-                </nav>
-            </div>
-=======
-                   
-                </nav>
-            </div>
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
-    
->>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
             <main>

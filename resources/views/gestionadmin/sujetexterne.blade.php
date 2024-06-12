@@ -8,11 +8,7 @@
         <meta name="author" content="" />
         <title>Tables - SUJETS</title>
         <style>
-<<<<<<< HEAD
       .night-blue {
-=======
-         .night-blue {
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
             /* background-color: #037492; Couleur bleu nuit */
             background-color:#058FB2;
         }
@@ -34,87 +30,9 @@
         <img src="images/pfcc.png" alt="" style="width: 145px;height: 50px;">
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-<<<<<<< HEAD
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group text-white">
                 {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
-=======
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group text-white">
-                {{ Auth::user()->nom }} {{ Auth::user()->prenom }}</div>
-            </form>
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li> <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profil') }}
-                        </x-dropdown-link></li>
-                        <li><form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Deconnexion') }}
-                            </x-dropdown-link>
-                        </form>
-                        </li>
-                      
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion bg-beige"  id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link"   href="{{url('admin')}}">
-                                <div class="sb-nav-link-icon" ><i class="fas fa-tachometer-alt"  ></i></div>
-                               <div class="text-white">Accueil</div> 
-                            </a>
-                            <a class="nav-link collapsed"   href="{{route('etudiant.index')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               <div class="text-white">Etudiants</div> 
-                            </a>
-                            <a class="nav-link collapsed"   href="{{route('enseignantt.index')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               <div class="text-white">Enseignants</div> 
-                            </a>
-                            <a class="nav-link collapsed"   href="{{ url('doctorant')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               <div class="text-white">Doctorants</div> 
-                            </a>
-                            <a class="nav-link collapsed"  href="{{route('sujets_pfc')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            <div class="text-white">PFC</div> 
-                            </a>
-                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        <div class="text-white">Authentication</div>
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"> </i>
-                                    </div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link text-white" href="#">Register</a>
-                                          
-                                        </nav>
-                                    </div>
-                                   
-                                </nav>
-                               
-                            </div>
-                          
-                    </div>
-                   
-                </nav>
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
             </div>
         </form>
         <!-- Navbar-->
@@ -179,7 +97,6 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-<<<<<<< HEAD
                         <h1 class="mt-4">  la liste des sujets proposé par les etudiants </h1>
                         <ol class="breadcrumb mb-4">
                          
@@ -205,30 +122,6 @@
 </div>
                         
                         <div class="card-header ">
-=======
-                        <h3 class="mt-4"> La liste des sujets proposé par les etudiants </h3>
-                        <!-- <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="{{url('admin')}}"><h5>retour</h5></a></li>
-                            <li class="breadcrumb-item active"></li>
-                        </ol> -->
-                        <div class="card mb-4">
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                        @if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
-                            <!-- <div class="card-body">
-                               
-                            </div> -->
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header ">
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
                                 <i class="fas fa-table me-1"></i>
                                <h4>La liste des sujets externes</h4>
                             </div>
@@ -236,16 +129,7 @@
 
 
                             <div class="card-body">
-                            <form action="{{ route('filter.sujets2') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary" name="specialite" value="Administration et Sécurité des Réseaux">Administration et Sécurité des Réseaux</button>
-                <button type="submit" class="btn btn-primary" name="specialite" value="Génie Logiciel">Génie Logiciel</button>
-                <button type="submit" class="btn btn-primary" name="specialite" value="Intelligence Artificielle">Intelligence Artificielle</button>
-                <button type="submit" class="btn btn-primary" name="specialite" value="Réseaux et Sécurité">Réseaux et Sécurité</button>
-                <button type="submit" class="btn btn-primary" name="specialite" value="Systèmes d'Information Avancés">Systèmes d'Information Avancés</button>
-            </div>
-        </form>
+         
                                 <table id="datatablesSimple">
                                     <thead>
                                       

@@ -10,11 +10,7 @@
     <meta name="author" content="" />
     <title>Table- Sessions</title>
     <style>
-<<<<<<< HEAD
           .night-blue {
-=======
-        .night-blue {
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
             /* background-color: #037492; Couleur bleu nuit */
             background-color:#058FB2;
         }
@@ -24,16 +20,11 @@
        .bg-beige{
         background-color: #058FB2; 
        }
-<<<<<<< HEAD
    h1{
     text-align:center;
    }
    
    </style>
-=======
-   
-    </style>
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -180,45 +171,7 @@
     });
 </script>
 
-<<<<<<< HEAD
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Intitulé</th>
-                        <th>Date Début</th>
-                        <th>Date Fin</th>
-                        <th>Année Universitaire</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($sessions as $session)
-                        <tr>
-                            <td>{{ $session->id }}</td>
-                            <td>{{ $session->intitule_session }}</td>
-                            <td>{{ $session->date_debut }}</td>
-                            <td>{{ $session->date_fin }}</td>
-                            <td>{{ $session->annee_univ }}</td>
-                            <td>
-                              <a href="{{ route('sessions.edit', $session->id) }}" class="btn btn-sm btn-warning">modifier</a>
-                                <form action="{{ route('sessions.destroy', $session->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette session?')">supprimer</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <a href="{{url('sujets_pfc')}}" class="btn btn-primary mb-3 mt-5">retour</a>
-=======
-          
->>>>>>> 6f0ae8ae2bbdaf68754483a57a1618dec30d531d
-        </div>
-      
-    </div>
+           
      <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>

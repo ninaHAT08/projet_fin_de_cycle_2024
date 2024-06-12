@@ -14,11 +14,6 @@
 
 
   <title>Informatique</title>
-<<<<<<< HEAD
- 
-<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-<!-- slider stylesheet -->
-=======
   <style>
         .night-blue {
             background-color: #2a5b85; /* Couleur bleu nuit */
@@ -29,9 +24,9 @@
        .bg-beige{
         background-color: #1e3d59; 
        }
-    </style>
-  <!-- slider stylesheet -->
->>>>>>> 5b54ef798732f5a5d27919a4f65c271890d62f27
+    </style> 
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+<!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
   <!-- bootstrap core css -->
@@ -69,12 +64,12 @@
                   <a class="nav-link" href="/">Accueil </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#aboute"> A propos </a>
+                  <a class="nav-link text-white" href="#aboute"> A propos </a>
                 </li>
                 
 
                 <li class="nav-item">
-                  <a class="nav-link" href="#contact">Contact</a>
+                  <a class="nav-link text-white" href="#contact">Contact</a>
                 </li>
                <!-- <li class="nav-item">
                   <a class="nav-link" href="{{ url('/dashboard') }}">Connexion</a>
@@ -101,10 +96,10 @@
             @csrf
 
             <!-- Email Address -->
-            <div class="mb-3">
+            <div class="mb-1">
                 <div class="relative">
                     <x-input-label for="email" />
-                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <div class="absolute left-3 transform -translate-y-1/2 text-gray-400">
                         <i class="fas fa-envelope text-lg"></i>
                     </div>
                     <x-text-input id="email" class="block mt-1/2 w-full pl-12 pr-4 py-2 rounded-lg border-gray-300 bg-transparent text-white focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="exp@gmail.com" />
@@ -115,13 +110,13 @@
             </div>
 
             <!-- Password -->
-            <div class="mb-4">
+            <div class="mb-2">
                 <div class="relative">
                     <x-input-label for="password" />
-                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <div class="absolute left-3 transform -translate-y-1/2 text-gray-400">
                         <i class="fas fa-key text-lg"></i>
                     </div>
-                    <x-text-input id="password" class="block mt-1 w-full pl-12 pr-4 py-2 rounded-lg border-gray-300 bg-transparent text-white focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="password" name="password" required autocomplete="current-password" placeholder="password" />
+                    <x-text-input id="password" class="block mt-1/2 w-full pl-12 pr-4 py-2 rounded-lg border-gray-300 bg-transparent text-white focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="password" name="password" required autocomplete="current-password" placeholder="password" />
                 </div>
                 @if ($errors->has('password'))
                     <span class="error-message">{{ $errors->first('password') }}</span>
@@ -143,7 +138,7 @@
             </div>
 
             <!-- Login Button -->
-            <div class="flex justify-center">
+            <div class="flex justify-center mt-2"> <!-- Adjusted margin to move the button up -->
                 <x-primary-button style="width: 20em; border-radius: 999px;">
                     {{ __('Connexion') }}
                 </x-primary-button>
@@ -151,7 +146,6 @@
         </form>
     </div>
 </section>
-
   <!-- end contact section -->
 
  
