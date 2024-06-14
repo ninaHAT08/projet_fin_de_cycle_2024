@@ -28,17 +28,17 @@
 }
 .card-container {
     display: flex;
-  
+  gap:30px;
     flex-wrap: wrap;
     padding: 10px;
-    margin-left: 180px; /* Adjust this if you have a sidebar */
+    margin-left: 120px; /* Adjust this if you have a sidebar */
 }
 
 .card {
     background: white;
     border: 1px solid #ddd;
     border-radius: 5px;
-    width: 30%; /* Adjusted width to fit four cards in a row */
+    width: 40%; /* Adjusted width to fit four cards in a row */
     margin: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }

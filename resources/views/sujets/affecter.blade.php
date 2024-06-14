@@ -96,7 +96,7 @@
 
                             <a class="nav-link text-white" href="{{ route('affectation') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></i></div>
-                                Voir la liste des choix
+                                Affectation
                                 </a>
                           
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -129,7 +129,7 @@
                     </div>
              
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="{{ url('enseignant') }}"><h5>retour</h5></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('affectation') }}"><h5>retour</h5></a></li>
                     </ol>
                     <div class="card mb-4">
                         @if (session('success'))

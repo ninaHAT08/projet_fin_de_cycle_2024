@@ -25,22 +25,22 @@ class usersenseignantController extends Controller
 
     
 
-public function store(Request $request)
+    public function store(Request $request)
     {
        // $input = $request->all();
        // users::create($input);
        // return redirect('enseignantt')->with('flash_message', 'Student Addedd!');  
 
        $validatedData = $request->validate([
-        'nom' => 'required|string|max:255',
-        'prenom' => 'required|string|max:255',
-        'date_naiss' => 'date',
-        'grade' => 'required|string|max:255',
-        'diplome' => 'required|string|max:255',
-        'annee_rec' => 'required|integer',
+        'nom' => 'nullable|string|max:255',
+        'prenom' => 'nullable|string|max:255',
+        'date_naiss' =>  'nullable|date',
+        'grade' => 'nullable|string|max:255',
+        'diplome' => 'nullable|string|max:255',
+        'annee_rec' => 'nullable|integer',
       
-        'domaine_exp' => 'required|string|max:255',
-        'usertype' => 'required|string|max:255',
+        'domaine_exp' => 'nullable|string|max:255',
+        'usertype' => 'nullable|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:8',
     ]);
@@ -50,13 +50,13 @@ public function store(Request $request)
 
     // Création de l'enseignant avec mot de passe hashé
     $enseignant = new Users([
-        'nom' => $request->input('nom'),
-        'prenom' => $request->input('prenom'),
-        'date_naiss' => $request->input('date_naiss'),
-        'grade' => $request->input('grade'),
-        'diplome' => $request->input('diplome'),
-        'annee_rec' => $request->input('annee_rec'),
-        'domaine_exp' => $request->input('domaine_exp'),
+        'nom' => $request->input('nom', null),
+        'prenom' => $request->input('prenom', null),
+        'date_naiss' => $request->input('date_naiss', null),
+        'grade' => $request->input('grade', null),
+        'diplome' => $request->input('diplome', null),
+        'annee_rec' => $request->input('annee_rec', null),
+        'domaine_exp' => $request->input('domaine_exp', null),
         'email' => $request->input('email'),
         'password' => $hashedPassword,
         'usertype' => 'enseignant', // Assurez-vous d'ajouter le type d'utilisateur
@@ -69,7 +69,6 @@ public function store(Request $request)
     // Redirection avec un message de réussite
     return redirect('enseignantt')->with('flash_message', 'Enseignant ajouté avec succès!');
 }
-
     public function show(string $id)
     {
         //

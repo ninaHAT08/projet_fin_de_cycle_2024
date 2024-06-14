@@ -167,7 +167,7 @@
                                                 <td>
                                                 <form action="{{ route('affecter.sujets', $choix->sujet->idSujet) }}" method="POST">
     @csrf
-    <button type="submit" class="btn btn-primary btn-sm">Non affecté</button>
+    <button type="submit" class="btn btn-primary btn-sm">confirmer</button>
 </form>
                                                 </td>
                                             </tr>

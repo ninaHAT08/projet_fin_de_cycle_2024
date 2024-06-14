@@ -16,13 +16,13 @@
   <title>Informatique</title>
   <style>
         .night-blue {
-            background-color: #2a5b85; /* Couleur bleu nuit */
+            background-color: #058FB2; /* Couleur bleu nuit */
         }
         .text-white {
             color: white;
         }
        .bg-beige{
-        background-color: #1e3d59; 
+        background-color: #058FB2; 
        }
     </style> 
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
@@ -225,12 +225,12 @@
           </div>
         </a>
         <a href="">
-    <div class="item d-flex align-items-center">
+    <div class="item ">
         <div class="img-box box-2 me-2">
             <img src="" alt="">
         </div>
         <div class="detail-box">
-            <p class="mb-0">00213 34 81 37 27</p>
+            <p class="mb-0">0213 34 81 37 27</p>
         </div>
     </div>
 </a>
@@ -249,6 +249,9 @@
       </div>
     </div>
   </section>
+
+
+
 
 
 

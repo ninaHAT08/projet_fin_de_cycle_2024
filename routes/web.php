@@ -175,7 +175,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::get('/etudiant/sujetsEX', [etudiantController::class, 'voirSujetsChoisis'])->name('etudiant.sujets');
+
 ////////////filtrages sujets 
 Route::post('/filter-sujets', [App\Http\Controllers\SujetController::class, 'filterSujets'])->name('filter.sujets');
 Route::post('/filter-sujets2', [App\Http\Controllers\SujetexterneController::class, 'filterSujets2'])->name('filter.sujets2');

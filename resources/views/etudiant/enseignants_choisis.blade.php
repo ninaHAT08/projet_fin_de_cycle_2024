@@ -65,15 +65,13 @@
             <div class="center-div">
                 <div class="congratulations-card">
                     @foreach($sujets as $sujet)
-                       
-                    <h2> votre sujet a été choisi !! </h2>
-                   <p><strong>Titre : </strong>{{ $sujet->titre }}</p> 
-                   
-                        <p><strong>Année universitaire:</strong> {{ $sujet->anneeUniv }}</p>
-                        <p><strong>Nom de l'entreprise:</strong> {{ $sujet->nomEntreprise }}</p>
-                        <p><strong>Maître du stage:</strong> {{ $sujet->maitre_du_stage }}</p>
+                        <h2>Votre sujet a été choisi !!</h2>
+                        <p><strong>Titre : </strong>{{ $sujet->titre }}</p>
+                        <p><strong>Année universitaire :</strong> {{ $sujet->anneeUniv }}</p>
+                        <p><strong>Nom de l'entreprise :</strong> {{ $sujet->nomEntreprise }}</p>
+                        <p><strong>Maître de stage :</strong> {{ $sujet->maitre_du_stage }}</p>
 
-                        <h3>Enseignants ayant choisi ce sujet:</h3>
+                        <h3>Enseignants ayant choisi ce sujet :</h3>
                         <ul>
                             @foreach($sujet->choixSujets as $choix)
                                 <li class="teacher-info">

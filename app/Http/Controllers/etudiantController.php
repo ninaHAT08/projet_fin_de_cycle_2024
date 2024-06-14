@@ -97,10 +97,5 @@ class etudiantController extends Controller
    
    
    
-    public function voirSujetsChoisis()
-    {
-        $etudiantId = Auth::id();
-        $sujets = Sujet::where('iduser1', $etudiantId)->with('choixSujets.enseignant')->get();
-        return view('etudiant.sujets', compact('sujets'));
-    }
+    
 }

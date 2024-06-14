@@ -70,7 +70,9 @@
                     </div>
                     <div class="text-center">
                         <input type="submit" value="enregistrer" class="btn btn btn-primary bg-primary">
-                    </div>
+              
+                  <a href="{{ url('enseignant') }}" class="btn btn-secondary">annuler</a>
+                </div>
                 </form>
             </div>
         </div>

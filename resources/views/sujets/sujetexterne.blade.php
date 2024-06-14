@@ -87,7 +87,7 @@
                             </a>
                             <a class="nav-link text-white" href="{{ route('affectation') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></i></div>
-                                Voir la liste des choix
+                                Affectation
                             </a>
                             <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-check-circle"></i></div>
