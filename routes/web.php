@@ -168,7 +168,8 @@ Route::get('/affectation', [App\Http\Controllers\ChoixController::class, 'affect
 Route::middleware(['auth'])->group(function () {
     Route::post('/ajouter-choix', [SujetexterneController::class, 'ajouterChoix'])->name('ajouter.choix');
     Route::get('/voir-choix', [SujetexterneController::class, 'voirChoix'])->name('voir.choix');
-    Route::post('/affecter-sujets', [SujetexterneController::class, 'affecterSujets'])->name('affecter.sujets');
+    
+    Route::post('/affecter-sujets/{id}', [SujetexterneController::class, 'affecterSujets'])->name('affecter.sujets');
    
    ///les sujets externes choisi par enseignat afficher dans les etudiants
 
@@ -181,4 +182,4 @@ Route::post('/filter-sujets2', [App\Http\Controllers\SujetexterneController::cla
 Route::post('/filter-sujets3', [App\Http\Controllers\EspaceEtudiantController::class, 'filterSujets3'])->name('filter.sujets3');
 Route::post('/filter-sujets4', [App\Http\Controllers\EspaceEtudiantController::class, 'filterSujets4'])->name('filter.sujets4');
 Route::post('/filter-sujets5', [App\Http\Controllers\SujetexterneController::class, 'filterSujets5'])->name('filter.sujets5');
-Route::get('/etudiant/enseignants-choisis', [SujetexterneController::class, 'voirEnseignantsChoisis'])->name('etudiant.enseignants-choisis');
+Route::get('/enseignants-choisis', [SujetexterneController::class, 'voirEnseignantsChoisis'])->name('etudiant.enseignants-choisis');

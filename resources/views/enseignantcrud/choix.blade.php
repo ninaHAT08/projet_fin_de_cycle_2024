@@ -6,58 +6,49 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <style>
-           .night-blue {
-            /* background-color: #037492; Couleur bleu nuit */
-            background-color:#058FB2;
+        .night-blue {
+            background-color: #058FB2;
         }
         .text-white {
             color: white;
         }
-       .bg-beige{
-        background-color: #058FB2; 
-       }
-       
+        .bg-beige {
+            background-color: #058FB2; 
+        }
     </style>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet">
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark  night-blue">
-            <!-- Navbar Brand-->
-            <img src="images/pfcc.png" alt=""  style="width: 145px;height: 50px;">
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group text-white">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark night-blue">
+        <img src="images/pfcc.png" alt="" style="width: 145px;height: 50px;">
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group text-white">
                 {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
-                </div>
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li> <x-dropdown-link :href="route('profile.edit')">
+            </div>
+        </form>
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li>
+                        <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profil') }}
-                        </x-dropdown-link></li>
-                        <li><form method="POST" action="{{ route('logout') }}">
+                        </x-dropdown-link>
+                    </li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                                 {{ __('Deconnexion') }}
                             </x-dropdown-link>
                         </form>
-                        </li>
-                      
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-       
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
     <div id="layoutSidenav" style="display: flex;">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion bg-beige" id="sidenavAccordion">
@@ -72,24 +63,22 @@
                             <div class="text-white">Modifier Profil</div>
                         </a>
                         <nav class="menu-nested">
-                        <a class="nav-link text-white" href="{{ route('sujets.create') }}">
+                            <a class="nav-link text-white" href="{{ route('sujets.create') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-plus"></i></div>
                                 proposer un sujet
                             </a>
                             <a class="nav-link text-white" href="{{route('maliste')}}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-file-alt"></i></div>
-                                voir ma liste des sujets  
+                                voir ma liste des sujets
                             </a>
                             <a class="nav-link text-white" href="{{ route('affectation') }}">
-                                <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></i></div>
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></div>
                                 Voir la liste des choix
                             </a>
                             <a class="nav-link text-white" href="{{ route('enseignantpublier') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-check-circle"></i></div>
                                 La liste des sujet publier
                             </a>
-                        
-                        
                         </nav>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon text-white"><i class="fas fa-book-open"></i></div>
@@ -97,14 +86,13 @@
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <nav class="sb-sidenav-menu-nested nav">
-                           
                             <a class="nav-link text-white" href="{{url('enseaignantsujetexterne')}}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-external-link-alt"></i></div>
                                 voir la liste des sujets externes
                             </a>
                             <a class="nav-link text-white" href="{{ route('voir.choix') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></div>
-                                 mes   choix 
+                                mes choix
                             </a>
                         </nav>
                     </div>
@@ -115,8 +103,7 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Mes choix des sujets externes</h1>
-                    <ol class="breadcrumb mb-4">
-                     
+                    <ol class="breadcrumb mb=4">
                         <li class="breadcrumb-item active"></li>
                     </ol>
                     <div class="card mb-4">
@@ -149,7 +136,6 @@
                                             <th>Nom de l'entreprise</th>
                                             <th>Maître du stage</th>
                                             <th>Affectation</th>
-                                           
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -164,7 +150,6 @@
                                             <th>Nom de l'entreprise</th>
                                             <th>Maître du stage</th>
                                             <th>Affectation</th>
-                                           
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -180,18 +165,11 @@
                                                 <td>{{ $choix->sujet->nomEntreprise }}</td>
                                                 <td>{{ $choix->sujet->maitre_du_stage }}</td>
                                                 <td>
-                                                    <form action="{{ route('affecter.sujets', $choix->id) }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-primary btn-sm">Non affecté</button>
-                                                    </form>
+                                                <form action="{{ route('affecter.sujets', $choix->sujet->idSujet) }}" method="POST">
+    @csrf
+    <button type="submit" class="btn btn-primary btn-sm">Non affecté</button>
+</form>
                                                 </td>
-                                                <!-- <td>
-                                                    <form action="{{ route('ajouter.choix') }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="idSujet" value="{{ $choix->sujet->id }}">
-                                                        <button type="submit" class="btn btn-dark btn-sm bg-primary">Envoyer</button>
-                                                    </form>
-                                                </td> -->
                                             </tr>
                                         @endforeach
                                     </tbody>

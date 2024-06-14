@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Sujet;
 use App\Models\ChoixSujet;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class SujetexterneController extends Controller
 {
     /**
@@ -208,11 +209,12 @@ class SujetexterneController extends Controller
    
        return redirect()->back()->with('success', 'Sujet ajouté à votre liste de choix.');
    }
-   // Méthode pour voir les choix
    public function voirChoix()
    {
+       // Récupère les choix de sujets pour l'enseignant authentifié avec les sujets correspondants
        $choixSujets = ChoixSujet::where('id_enseignant', Auth::id())->with('sujet')->get();
-
+   
+       // Retourne la vue 'enseignantcrud.choix' en passant les choix de sujets récupérés
        return view('enseignantcrud.choix', compact('choixSujets'));
    }
 
@@ -242,28 +244,55 @@ class SujetexterneController extends Controller
        return view('etudiant.enseignants_choisis', compact('sujets'));
    }
    
-   // Méthode pour affecter les sujets
-   public function affecterSujets(Request $request)
-   {
-       $choixSujets = ChoixSujet::where('id_enseignant', Auth::id())->get();
-
-       foreach ($choixSujets as $choix) {
-           $sujet = Sujet::find($choix->id_sujetE);
-           $sujet->iduser2 = Auth::id();  // L'enseignant qui affecte le sujet
-           $sujet->sujet_affecter = true;
-           $sujet->save();
-       }
-
    
-
-       return redirect()->route('voir.choix')->with('success', 'Les sujets ont été affectés avec succès.');
-   }
-
-
-
-
-
-
-
+   
+  // Méthode pour affecter les sujets externes
+  public function affecterSujets(Request $request, $id)
+  {
+      // Vérifie si l'utilisateur est authentifié
+      if (!Auth::check()) {
+          return redirect()->route('voir.choix')->with('error', 'Utilisateur non authentifié.');
+      }
+  
+      try {
+          // Début de la transaction
+          DB::beginTransaction();
+  
+          // Vérifie si le sujet existe
+          $sujet = Sujet::findOrFail($id);
+  
+          // Vérifie si le sujet est déjà affecté
+          if ($sujet->sujet_affecter === true) {
+              return redirect()->route('voir.choix')->with('error', 'Le sujet est déjà affecté à un étudiant.');
+          }
+  
+          // Vérifie si l'utilisateur a déjà une affectation
+          $user = Auth::user();
+          if ($user->etat === true) {
+              return redirect()->route('voir.choix')->with('error', 'L\'étudiant a déjà une affectation de sujet.');
+          }
+  
+          // Met à jour le sujet pour le marquer comme affecté
+          $sujet->update([
+              'iduser2' => Auth::id(),
+              'sujet_affecter' => true
+          ]);
+  
+          // Met à jour l'utilisateur pour marquer l'état comme affecté et associer le sujet
+          $user->update([
+              'etat' => true,
+              'idSujet' => $sujet->idSujet
+          ]);
+  
+          // Fin de la transaction
+          DB::commit();
+  
+          return redirect()->route('voir.choix')->with('success', 'Le sujet a été affecté avec succès.');
+      } catch (\Exception $e) {
+          // En cas d'erreur, annule la transaction
+          DB::rollBack();
+          return redirect()->route('voir.choix')->with('error', 'Une erreur s\'est produite lors de l\'affectation du sujet.');
+      }
+  }
 
 }
