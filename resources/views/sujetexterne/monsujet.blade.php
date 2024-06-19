@@ -107,7 +107,7 @@
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-external-link-alt"></i></div>
                                 voir la liste des sujets externes
                             </a>
-                            <a class="nav-link text-white" href="{{ route('etudiant.sujets') }}">
+                            <a class="nav-link text-white" href="{{ route('etudiant.enseignants-choisis') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></div>
                                 choix sujets
                             </a>

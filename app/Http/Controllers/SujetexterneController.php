@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use App\Models\sujetexterne;
 use Illuminate\Http\Request;
@@ -8,6 +9,7 @@ use App\Models\Sujet;
 use App\Models\ChoixSujet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Session;
 class SujetexterneController extends Controller
 {
     /**
@@ -43,8 +45,35 @@ class SujetexterneController extends Controller
 
        return view('gestionadmin.sujetexterne', compact('sujets'));
    }
+ 
    
-   
+//affichage des sujet externe pour le doctorant
+public function   indexdoctorant()
+{ 
+  
+   $sujets = Sujet::where('typeSujet', 'externe')
+   ->where('publier', true)
+   ->get();
+    return view('sujets.sujetexterneD', compact('sujets'));
+  
+}
+
+public function filterSujetsDD(Request $request)
+   {
+       $specialite = $request->input('specialite');
+       $sujetsQuery = Sujet::where('typeSujet', 'externe') // Ajout de la condition pour les sujets externes
+       ->where('publier', true);
+       if ($specialite) {
+           // Filtrer par spécialité si spécifié
+           $sujetsQuery->where('specialite', $specialite);
+       }
+
+       $sujets = $sujetsQuery->get(); // Exécuter la requête
+
+       return view('sujets.sujetexterneD', compact('sujets'));
+   }
+
+
    //affichage des sujet externe pour l'enseignant
    public function indexenseignant()
    { 
@@ -56,7 +85,7 @@ class SujetexterneController extends Controller
      
    }
 
-   
+   //filtrage sujet externe poue enseignat 
    public function filterSujets5(Request $request)
    {
        $specialite = $request->input('specialite');
@@ -93,6 +122,8 @@ class SujetexterneController extends Controller
                return redirect()->route('dashboard')->with('error', 'Vous avez déjà proposé un sujet.');
            }
    
+     
+       return redirect()->route('sujets.index')->with('error', 'Vous ne pouvez pas proposer un sujet en dehors de la période de la session.');
            // Si l'étudiant n'a pas encore proposé de sujet, affiche le formulaire de création de sujet externe
            $etudiants = User::where('usertype', 'etudiant')->get();
            return view('sujetexterne.create', compact('etudiants'));
@@ -100,6 +131,7 @@ class SujetexterneController extends Controller
            return redirect()->route('login')->with('error', 'Veuillez vous connecter.');
        }
    }
+   
    public function store(Request $request)
    {
       
@@ -271,7 +303,7 @@ class SujetexterneController extends Controller
           if ($user->etat === true) {
               return redirect()->route('voir.choix')->with('error', 'L\'étudiant a déjà une affectation de sujet.');
           }
-  
+          Log::info('Avant mise à jour', ['user' => $user, 'sujet' => $sujet]);
           // Met à jour le sujet pour le marquer comme affecté
           $sujet->update([
               'iduser2' => Auth::id(),
@@ -280,7 +312,8 @@ class SujetexterneController extends Controller
   
           // Met à jour l'utilisateur pour marquer l'état comme affecté et associer le sujet
           $user->update([
-              'etat' => true,
+             'iduser2' => Auth::id(),
+            'etat' => true,
               'idSujet' => $sujet->idSujet
           ]);
   

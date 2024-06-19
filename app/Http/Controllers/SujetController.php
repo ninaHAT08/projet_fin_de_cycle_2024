@@ -8,6 +8,7 @@ use App\Models\Sujet;
 use Illuminate\Support\Facades\Log;
 use App\Models\Notification;
 use Illuminate\Support\Facades\DB;
+use App\Models\Session;
 class SujetController extends Controller
 {
     public function gestionsujet()
@@ -69,7 +70,16 @@ public function filterSujets(Request $request)
         if (Auth::user()->usertype != 'enseignant') {
             return redirect()->route('dashboard')->with('error', 'Vous n\'êtes pas autorisé à créer un sujet.');
         }
-    
+     // Récupérer la session active "proposition" depuis la base de données
+     $session = Session::where('intitule_session', 'Lancement des PFC')->first();
+
+     // Vérifier si la session est définie et si la date actuelle est valide par rapport aux dates de début et fin
+     // if ($session && now()->gte($session->date_debut) && now()->lte($session->date_fin)) {
+     if (!$session || !now()->between($session->date_debut, $session->date_fin)) {
+       
+         return redirect()->route('sujets.index')->with('error', 'Vous ne pouvez pas proposer un sujet en dehors de la période de la session.');
+     }
+
         // Récupérer les enseignants et les doctorants
         $enseignants = User::where('usertype', 'enseignant')->get();
         $doctorants = User::where('usertype', 'doctorant')->get();

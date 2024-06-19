@@ -54,38 +54,47 @@ class ChoixController extends Controller
 
     public function store(Request $request)
     {
-        $idUtilisateur = Auth::id();
-        $userType = User::find($idUtilisateur)->usertype;
-
-        if ($userType === 'etudiant') {
-            if (Choix::where('idUser3', $idUtilisateur)->count() < 4) {
-                $choixEnvoyes = Choix::where('idUser3', $idUtilisateur)->where('envoyer', true)->exists();
-
-                if ($choixEnvoyes) {
-                    return redirect()->route('choix.ajouter')->with('error', 'Vous avez déjà envoyé vos choix et ne pouvez plus effectuer de modifications.');
-                }
-
-                // Ajouter le sujet à la liste de l'utilisateur
-                $idSujet = $request->input('idSujet');
-                if (Choix::where('idUser3', $idUtilisateur)->where('idSujet1', $idSujet)->exists()) {
-                    return redirect()->route('choix.ajouter')->with('error', 'Vous avez déjà ajouté ce sujet.');
-                }
-
-                Choix::create([
-                    'idUser3' => $idUtilisateur,
-                    'idSujet1' => $request->input('idSujet'),
-                    'binome' => $request->input('binome_id'),
-                    'date' => now(),
-                    'envoyer' => false
-                ]);
-
-                return redirect()->route('choix.ajouter')->with('success', 'Le sujet a été ajouté à votre liste.');
-            } else {
-                return redirect()->route('choix.ajouter')->with('error', 'Vous avez déjà ajouté 4 sujets.');
-            }
-        } else {
+        // Vérifier si l'utilisateur est connecté et est un étudiant
+        if (!Auth::check() || Auth::user()->usertype !== 'etudiant') {
             return redirect()->route('choix.ajouter')->with('error', 'Seuls les étudiants peuvent ajouter des sujets.');
         }
+    
+        // Vérifier si l'utilisateur a déjà envoyé ses choix
+        $idUtilisateur = Auth::id();
+        $choixEnvoyes = Choix::where('idUser3', $idUtilisateur)->where('envoyer', true)->exists();
+        if ($choixEnvoyes) {
+            return redirect()->route('choix.ajouter')->with('error', 'Vous avez déjà envoyé vos choix et ne pouvez plus effectuer de modifications.');
+        }
+    
+        // Vérifier si l'utilisateur a déjà ajouté 4 sujets
+        if (Choix::where('idUser3', $idUtilisateur)->count() >= 4) {
+            return redirect()->route('choix.ajouter')->with('error', 'Vous avez déjà ajouté 4 sujets.');
+        }
+    
+        // Vérifier la période de la session "fiche de voeux"
+       
+        $session = Session::where('intitule_session', 'fiche de voeux')->first();
+        // if ($session && now()->gte($session->date_debut) && now()->lte($session->date_fin)) {
+     if (!$session || !now()->between($session->date_debut, $session->date_fin)) {
+            return redirect()->route('espaceetudiant')->with('error', 'Vous ne pouvez pas ajouter de sujet en dehors de la période de la fiche de voeux.');
+        }
+    
+        // Vérifier si l'utilisateur a déjà ajouté ce sujet
+        $idSujet = $request->input('idSujet');
+        if (Choix::where('idUser3', $idUtilisateur)->where('idSujet1', $idSujet)->exists()) {
+            return redirect()->route('choix.ajouter')->with('error', 'Vous avez déjà ajouté ce sujet.');
+        }
+    
+        // Créer un nouveau choix pour l'utilisateur
+        Choix::create([
+            'idUser3' => $idUtilisateur,
+            'idSujet1' => $idSujet,
+            'binome' => $request->input('binome_id'),
+            'date' => now(),
+            'envoyer' => false
+        ]);
+    
+        return redirect()->route('choix.ajouter')->with('success', 'Le sujet a été ajouté à votre liste.');
     }
 
     public function show()
@@ -208,48 +217,46 @@ class ChoixController extends Controller
     {
         // Récupérer le choix spécifique
         $choix = Choix::findOrFail($choixId);
-
+    
         // Vérifier si le sujet associé à ce choix existe
         $sujet = Sujet::findOrFail($choix->idSujet1);
-
+    
         // Vérifier si le sujet est déjà affecté
         if ($sujet->Sujet_affecter) {
             return redirect()->back()->with('error', 'Le sujet est déjà affecté.');
         }
-
-        // Vérifier si l'étudiant 1 est déjà affecté à un sujet
-        $etudiant1 = User::findOrFail($choix->idUser3);
-        if ($etudiant1->etat) {
-            return redirect()->back()->with('error', 'L\'étudiant '.$etudiant1->nom.' '.$etudiant1->prenom.' est déjà affecté à un sujet.');
-        }
-
-        // Vérifier si le binôme de l'étudiant 1 est déjà affecté à un sujet
-        if ($choix->binome) {
-            $binome = User::findOrFail($choix->binome);
-            if ($binome->etat) {
-                return redirect()->back()->with('error', 'Le binôme de l\'étudiant '.$etudiant1->nom.' '.$etudiant1->prenom.' est déjà affecté à un sujet.');
-            }
-        }
-
+     // Vérifier si l'étudiant 1 est déjà affecté à un sujet
+     $etudiant1 = User::findOrFail($choix->idUser3);
+     if ($etudiant1->etat) {
+         return redirect()->back()->with('error', 'L\'étudiant '.$etudiant1->nom.' '.$etudiant1->prenom.' est déjà affecté à un sujet.');
+     }
+ 
+     // Vérifier si le binôme de l'étudiant 1 est déjà affecté à un sujet
+     if ($choix->binome) {
+         $binome = User::findOrFail($choix->binome);
+         if ($binome->etat) {
+             return redirect()->back()->with('error', 'Le binôme de l\'étudiant '.$etudiant1->nom.' '.$etudiant1->prenom.' est déjà affecté à un sujet.');
+         }
+     }
         // Mettre à jour la colonne Sujet_affecter dans la table sujets
         $sujet->Sujet_affecter = true;
         $sujet->save();
-
+    
         // Mettre à jour la colonne etat et idSujet dans la table users pour idUser3
+        $etudiant1 = users::findOrFail($choix->idUser3);
         $etudiant1->etat = true;
-        $etudiant1->idSujet = $sujet->idSujet;
+       $etudiant1->idSujet = $sujet->idSujet =  $choix->idSujet1; 
         $etudiant1->save();
-
+    
         // Mettre à jour la colonne etat et idSujet dans la table users pour le binôme
         if ($choix->binome) {
-            $etudiant2 = User::findOrFail($choix->binome);
+            $etudiant2 = users::findOrFail($choix->binome);
             $etudiant2->etat = true;
-            $etudiant2->idSujet = $sujet->idSujet;
+            $etudiant2->idSujet =$sujet->idSujet; 
             $etudiant2->save();
         }
-
-      
-
+     // Supprimer le choix de la liste des choix
+    //  $choix->delete();
         return redirect()->back()->with('success', 'Le sujet a été affecté avec succès.');
     }
 

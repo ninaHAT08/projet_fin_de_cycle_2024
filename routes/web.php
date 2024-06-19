@@ -15,7 +15,7 @@ use App\Http\Controllers\ChoixController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AffichageController;
 use App\Http\Controllers\usersenseignantController;
-
+use App\Http\Controllers\SoutenanceController;
 
 Route::get('/', function () {
     return view('home');
@@ -33,7 +33,17 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth' , 'admin'])->group(function () {
 Route::get('/admin', [HomeController::class, 'index'])->middleware(['auth' , 'admin']);
 Route::get('/enseignant', [HomeController::class, 'indexens'])->middleware(['auth','enseignant']);
-Route::get('/doctorant', [HomeController::class, 'indexdoct'])->middleware(['auth','doctorant']);
+Route::get('/doctorant', [HomeController::class, 'dashboard'])->middleware(['auth','doctorant']);
+
+
+
+
+
+
+
+
+
+
 
 /// la route pour la gestion des etudiant
 Route::resource('/etudiant', 'App\Http\Controllers\etudiantController');
@@ -117,6 +127,14 @@ Route::post('/sujets/affecter/{id}', [ChoixController::class, 'affecter'])->name
 //liste choix des etudiant
    Route::get('/affectation', [App\Http\Controllers\ChoixController::class, 'affectation'])->name('affectation');
 
+
+////////gestion soutenance
+Route::get('/soutenance/create', [SoutenanceController::class, 'create'])->name('soutenance.create');
+Route::post('/soutenance/store', [SoutenanceController::class, 'store'])->name('soutenance.store');
+Route::get('/soutenances', [SoutenanceController::class, 'index'])->name('soutenance.index');
+Route::get('soutenance/{id}/edit', [SoutenanceController::class, 'edit'])->name('soutenance.edit');
+Route::put('soutenance/{id}', [SoutenanceController::class, 'update'])->name('soutenance.update');
+
 });
 //afficher laffectation dans etudiant
 Route::middleware('auth')->get('/affichage-affectation', [AffichageController::class, 'showAffectationNotification'])->name('affichage.affectation');  
@@ -176,10 +194,36 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+
+
+////////:route pour doctorant
+Route::get('/doctorantsujetexterneD', [App\Http\Controllers\SujetexterneController::class, 'indexdoctorant'])->name('doctorantsujetexterne');
+Route::resource('/doctorant', 'App\Http\Controllers\doctorant');
+Route::get('/doctorant', [App\Http\Controllers\doctorant::class, 'dashboard'])->name('doctorant');
+Route::get('/doctorant/{id}/edit', [DoctorantController::class, 'edit'])->name('doctorant.edit');
+Route::put('/doctorant/{id}', [DoctorantController::class, 'update'])->name('doctorant.update');
+Route::get('/doctorantpublier', [App\Http\Controllers\EspaceEtudiantController::class, 'indexpublierD'])->name('doctorantpublierD');
+
 ////////////filtrages sujets 
 Route::post('/filter-sujets', [App\Http\Controllers\SujetController::class, 'filterSujets'])->name('filter.sujets');
 Route::post('/filter-sujets2', [App\Http\Controllers\SujetexterneController::class, 'filterSujets2'])->name('filter.sujets2');
 Route::post('/filter-sujets3', [App\Http\Controllers\EspaceEtudiantController::class, 'filterSujets3'])->name('filter.sujets3');
 Route::post('/filter-sujets4', [App\Http\Controllers\EspaceEtudiantController::class, 'filterSujets4'])->name('filter.sujets4');
+Route::post('/filter-sujetsD', [App\Http\Controllers\EspaceEtudiantController::class, 'filterSujetsD'])->name('filter.sujetsD');
 Route::post('/filter-sujets5', [App\Http\Controllers\SujetexterneController::class, 'filterSujets5'])->name('filter.sujets5');
+Route::post('/filter-sujetsDD', [App\Http\Controllers\SujetexterneController::class, 'filterSujetsDD'])->name('filter.sujetsDD');
 Route::get('/enseignants-choisis', [SujetexterneController::class, 'voirEnseignantsChoisis'])->name('etudiant.enseignants-choisis');
+
+
+Route::get('/storage/memoires/{file}', function ($file) {
+    $path = storage_path('app/public/memoires/' . $file);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $fileContent = File::get($path);
+    $type = File::mimeType($path);
+
+    return response($fileContent, 200)->header("Content-Type", $type);
+});

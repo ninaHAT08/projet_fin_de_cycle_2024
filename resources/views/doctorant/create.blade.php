@@ -71,7 +71,7 @@
                 </div>
 
                 <!-- Ligne pour Date de Naissance -->
-                <div class="row g-3 align-items-center mb-3">
+                <!-- <div class="row g-3 align-items-center mb-3">
                     <div class="col-auto mt-1">
                         <label for="date_naiss" class="col-form-label">Date de Naissance</label>
                     </div>
@@ -83,7 +83,7 @@
                     @endif
                 </div>
 
-                <!-- Ligne pour Type de Thèse -->
+               
                 <div class="row g-3 align-items-center mb-3">
                     <div class="col-auto mt-1">
                         <label for="type_these" class="col-form-label">Type de Thèse</label>
@@ -112,16 +112,16 @@
     @if ($errors->has('diplome_doctorant'))
         <div class="alert alert-danger col-auto">{{ $errors->first('diplome_doctorant') }}</div>
     @endif
-</div>
+</div> -->
 
                 <!-- Ligne pour Année d'inscription et Type d'utilisateur -->
                 <div class="row g-3 align-items-center mb-3">
-                    <div class="col-auto mt-1">
+                    <!-- <div class="col-auto mt-1">
                         <label for="annee_ins" class="col-form-label">Année d'inscription</label>
                     </div>
                     <div class="col-auto">
                         <input type="text" name="annee_ins" id="annee_ins" class="form-control" required>
-                    </div>
+                    </div> -->
 
                     <div class="col-auto mt-1">
                         <label for="usertype" class="col-form-label">Type d'utilisateur</label>

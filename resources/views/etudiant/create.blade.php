@@ -58,7 +58,7 @@
 
                 <!-- Ligne pour Date de Naissance -->
                 <div class="row g-3 align-items-center mb-3">
-                <div class="col-auto mt-1">
+                <!-- <div class="col-auto mt-1">
                         <label for="date_naiss" class="col-form-label">Date de Naissance</label>
                     </div>
                     <div class="col-auto">
@@ -67,11 +67,11 @@
                     @if ($errors->has('date_naiss'))
                         <div class="alert alert-danger col-auto">{{ $errors->first('date_naiss') }}</div>
                     @endif
-                </div>
+                </div> -->
 
                 <!-- Ligne pour Matricule et Type d'utilisateur -->
                 <div class="row g-3 align-items-center mb-3">
-                <div class="col-auto mt-1">
+                <!-- <div class="col-auto mt-1">
                         <label for="matricule" class="col-form-label">Matricule</label>
                     </div>
                     <div class="col-auto ">
@@ -79,7 +79,7 @@
                     </div>
                     @if ($errors->has('matricule'))
                         <div class="alert alert-danger col-auto">{{ $errors->first('matricule') }}</div>
-                    @endif
+                    @endif -->
 
                     <div class="col-auto mt-1">
                         <label for="usertype" class="col-form-label">Type d'utilisateur</label>
@@ -90,7 +90,7 @@
                 </div>
 
                 <!-- Ligne pour Spécialité -->
-                <div class="row g-3 align-items-center mb-3">
+                <!-- <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto mt-1">
                         <label for="specialite" class="col-form-label">Spécialité</label>
                     </div>
@@ -107,7 +107,7 @@
                     @if ($errors->has('specialite'))
                         <div class="alert alert-danger col-auto">{{ $errors->first('specialite') }}</div>
                     @endif
-                </div>
+                </div> -->
 
                 <!-- Ligne pour Email et Mot de passe -->
                 <div class="row g-3 align-items-center mb-3">

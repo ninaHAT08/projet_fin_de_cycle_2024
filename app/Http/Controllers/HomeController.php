@@ -18,9 +18,10 @@ class HomeController extends Controller
     {
         return view('etudiant.index');
     }
-    public function indexdoct()
+   
+    public function dashboard()
     {
+        // Logique pour afficher le tableau de bord des doctorants
         return view('doctorant');
     }
-    
 }

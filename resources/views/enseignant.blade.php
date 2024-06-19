@@ -103,7 +103,10 @@
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <nav class="sb-sidenav-menu-nested nav">
-                           
+                        <a class="nav-link text-white" href="{{ route('soutenance.index') }}">
+        <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar-check"></i></div>
+        PV Soutenances
+    </a>
                             <a class="nav-link text-white" href="{{url('enseaignantsujetexterne')}}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-external-link-alt"></i></div>
                                 voir la liste des sujets externes
@@ -112,6 +115,7 @@
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-tasks"></i></div>
                                  mes   choix 
                             </a>
+                             
                         </nav>
                     </div>
                 </div>

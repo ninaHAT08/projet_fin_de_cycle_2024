@@ -59,12 +59,11 @@
             font-weight: bold;
         }
     </style>
-
-    <div id="layoutSidenav_center">
+<div id="layoutSidenav_center">
         <div id="layoutSidenav_nav mb-3">
             <div class="center-div">
                 <div class="congratulations-card">
-                    @foreach($sujets as $sujet)
+                    @forelse($sujets as $sujet)
                         <h2>Votre sujet a été choisi !!</h2>
                         <p><strong>Titre : </strong>{{ $sujet->titre }}</p>
                         <p><strong>Année universitaire :</strong> {{ $sujet->anneeUniv }}</p>
@@ -72,15 +71,22 @@
                         <p><strong>Maître de stage :</strong> {{ $sujet->maitre_du_stage }}</p>
 
                         <h3>Enseignants ayant choisi ce sujet :</h3>
-                        <ul>
-                            @foreach($sujet->choixSujets as $choix)
-                                <li class="teacher-info">
-                                    <span class="name">{{ $choix->enseignant->nom }} {{ $choix->enseignant->prenom }}</span>
-                                    <span class="email">{{ $choix->enseignant->email }}</span>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endforeach
+                        @if($sujet->choixSujets->isEmpty())
+                            <p>Aucun enseignant n'a encore choisi ce sujet.</p>
+                        @else
+                            <ul>
+                                @foreach($sujet->choixSujets as $choix)
+                                    <li class="teacher-info">
+                                        <span class="name">{{ $choix->enseignant->nom }} {{ $choix->enseignant->prenom }}</span>
+                                        <span class="email">{{ $choix->enseignant->email }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    @empty
+                        <p>Aucun sujet n'a encore été choisi.</p>
+                    @endforelse
+               
                 </div>
             </div>
         </div>
