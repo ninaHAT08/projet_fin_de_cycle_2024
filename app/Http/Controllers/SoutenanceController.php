@@ -8,48 +8,69 @@ use App\Models\Soutenance;
 use App\Models\Session;
 class SoutenanceController extends Controller
 {
-    public function index()
-    {
- // Récupérer toutes les soutenances avec les relations
- $soutenances = Soutenance::with(['etudiant','etudiant2', 'presidentJury', 'enseignant1', 'enseignant2', 'enseignant3'])->get();
     
-        // Retourner la vue avec les données des soutenances
-        return view('soutenance.index', [
-            'soutenances' => $soutenances,
-        ]);
-    }
+
+  public function index()
+  {
+// Récupérer toutes les soutenances avec les relations
+//  $soutenances = Soutenance::with(['etudiant','etudiant2', 'presidentJury', 'enseignant1', 'enseignant2', 'enseignant3'])->get();
+  
+      // Retourner la vue avec les données des soutenances
+      $enseignantId = Auth::id();
+
+  // Récupérer toutes les soutenances avec les relations où enseignant1_id est égal à l'ID de l'utilisateur authentifié
+  $soutenances = Soutenance::with(['etudiant', 'etudiant2', 'presidentJury', 'enseignant1', 'enseignant2', 'enseignant3'])
+                            ->where('enseignant1_id', $enseignantId)
+                            ->get();
+      return view('soutenance.index', [
+          'soutenances' => $soutenances,
+      ]);
+  }
+  public function indexx()
+  {
+// Récupérer toutes les soutenances avec les relations
+$soutenances = Soutenance::with(['etudiant','etudiant2', 'presidentJury', 'enseignant1', 'enseignant2', 'enseignant3'])->get();
+   return view('soutenance.indexadmin', [
+          'soutenances' => $soutenances,
+      ]);
+  }
 
 
 
 
-    // Méthode pour afficher le formulaire de création de soutenance
+  // Méthode pour afficher le formulaire de création de soutenance
+ public function create()
+  {
+      // Récupérer la session active "dépôts des soutenances session normale" depuis la base de données
+      $sessionNormale = Session::where('intitule_session', 'dépôts des soutenances session normale')->first();
+      $sessionRattrapage = Session::where('intitule_session', 'dépôts des soutenances session rattrapage')->first();
+  
+      // Vérifier si la date actuelle est dans l'intervalle des dates de la session "normale" ou "rattrapage"
+      if (!($sessionNormale && now()->between($sessionNormale->date_debut, $sessionNormale->date_fin)) && 
+          !($sessionRattrapage && now()->between($sessionRattrapage->date_debut, $sessionRattrapage->date_fin))) {
+          
+          return redirect()->route('soutenance.index')->with('error', 'Vous ne pouvez pas créer une soutenance en dehors de la période de dépôt.');
+      }
+  
+      // Récupérer la liste des étudiants et enseignants pour les sélecteurs
+      $etudiants = User::where('usertype', 'etudiant')->get();
+      $enseignants = User::where('usertype', 'enseignant')->get();
+    // Récupérer l'enseignant connecté
+    $enseignantId = Auth::id();
 
+      $etudiants = User::where('usertype', 'etudiant')
+               ->join('sujet', 'users.idSujet', '=', 'sujet.idSujet')
+               ->where('sujet.iduser1', $enseignantId)
+               ->get();
 
+    // Récupérer la liste des enseignants pour les sélecteurs
+$enseignants = User::where('usertype', 'enseignant')->get();
 
-
-    public function create()
-    {
-        // Récupérer la session active "dépôts des soutenances session normale" depuis la base de données
-        $sessionNormale = Session::where('intitule_session', 'dépôts des soutenances session normale')->first();
-        $sessionRattrapage = Session::where('intitule_session', 'dépôts des soutenances session rattrapage')->first();
-    
-        // Vérifier si la date actuelle est dans l'intervalle des dates de la session "normale" ou "rattrapage"
-        if (!($sessionNormale && now()->between($sessionNormale->date_debut, $sessionNormale->date_fin)) && 
-            !($sessionRattrapage && now()->between($sessionRattrapage->date_debut, $sessionRattrapage->date_fin))) {
-            
-            return redirect()->route('soutenance.index')->with('error', 'Vous ne pouvez pas créer une soutenance en dehors de la période de dépôt.');
-        }
-    
-        // Récupérer la liste des étudiants et enseignants pour les sélecteurs
-        $etudiants = User::where('usertype', 'etudiant')->get();
-        $enseignants = User::where('usertype', 'enseignant')->get();
-    
-        return view('soutenance.create', [
-            'etudiants' => $etudiants,
-            'enseignants' => $enseignants,
-        ]);
-    }
-
+      return view('soutenance.create', [
+          'etudiants' => $etudiants,
+          'enseignants' => $enseignants,
+      ]);
+  }
 // Méthode pour enregistrer une nouvelle soutenance
 public function store(Request $request)
 {

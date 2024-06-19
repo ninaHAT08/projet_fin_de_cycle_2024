@@ -54,8 +54,8 @@
     height:10px; 
 }
 .row{
-    padding: 20px 30px 30px 30px;
-    padding-left: 150px;
+    padding: 20px 20px 10px 30px;
+    
 }
 .row1{
     padding: 20px 20px 30px 30px;
@@ -120,7 +120,7 @@
                             <div class="sb-nav-link-icon text-white"><i class="fas fa-user-tie"></i></div>
                             <div class="text-white">Enseignants</div>
                         </a>
-                        <a class="nav-link" href="{{ url('doctorant') }}">
+                        <a class="nav-link" href="{{ url('doctorantt') }}">
                             <div class="sb-nav-link-icon text-white"><i class="fas fa-user-graduate"></i></div>
                             <div class="text-white">Doctorants</div>
                         </a>
@@ -133,7 +133,7 @@
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar"></i></div>
                                 Sessions
                             </a>
-                            <a class="nav-link collapsed"  href="{{route('sujets_pfc')}}">
+                            <a class="nav-link text-white"  href="{{route('sujets_pfc')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-book"></i></i></div>
                             <div class="text-white">PFC</div> 
                             </a>
@@ -143,9 +143,13 @@
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-chart-pie"></i></div>
                                 Statistiques
                             </a>
-
+                          
+                        <a class="nav-link text-white" href="{{ route('soutenance.indexx') }}">
+        <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar-check"></i></div>
+        PV Soutenances
+    </a>
                          
-                        </nav>
+                      
 
                     </div>
                 </div>
@@ -156,15 +160,15 @@
                 <?php
         // Connexion à la base de données
 
-        $pdo = new PDO('mysql:host=127.0.0.1;port=3307;dbname=gestionpfc', 'root', '');
+   $pdo = new PDO('mysql:host=127.0.0.1;port=3307;dbname=gestionpfc', 'root', '');
 
         
-        // Récupérer le nombre total de sujets
+        // Récupérer le nombre total de sujets///counte le nombre de sujet inetrene
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM sujet");
         $stmt->execute();
         $nombreTotalDeSujets = $stmt->fetchColumn();
 
-        // Récupérer le nombre de sujets publiés
+        // Récupérer le nombre de sujets publiés de type interne
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM sujet WHERE publier = 1");
         $stmt->execute();
         $nombreDeSujetsPublies = $stmt->fetchColumn();
@@ -175,16 +179,67 @@
         $nombreSujetsAffectes = $stmt->fetchColumn();
     ?>
 
-              
+<?php
+// Connexion à la base de données
+$pdo = new PDO('mysql:host=127.0.0.1;port=3307;dbname=gestionpfc', 'root', '');
+
+// Préparation de la requête pour récupérer les sessions et le nombre total d'étudiants par session
+$stmt = $pdo->prepare("
+    SELECT session, COUNT(*) as student_count 
+    FROM (
+        SELECT session, etudiant_id as student_id FROM soutenance 
+        UNION ALL 
+        SELECT session, etudiant2_id as student_id FROM soutenance 
+    ) as students
+    WHERE student_id IS NOT NULL 
+    GROUP BY session
+");
+$stmt->execute();
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//////////////
+$stmt_normale = $pdo->prepare("
+    SELECT COUNT(*) as student_count 
+    FROM (
+        SELECT session, etudiant_id as student_id FROM soutenance 
+        UNION ALL 
+        SELECT session, etudiant2_id as student_id FROM soutenance 
+    ) as students
+    WHERE student_id IS NOT NULL AND session = 'normale'
+");
+$stmt_normale->execute();
+$normale_count = $stmt_normale->fetchColumn();
+
+// Préparation de la requête pour récupérer le nombre d'étudiants en session de rattrapage
+$stmt_rattrapage = $pdo->prepare("
+    SELECT COUNT(*) as student_count 
+    FROM (
+        SELECT session, etudiant_id as student_id FROM soutenance 
+        UNION ALL 
+        SELECT session, etudiant2_id as student_id FROM soutenance 
+    ) as students
+    WHERE student_id IS NOT NULL AND session = 'rattrapage'
+");
+$stmt_rattrapage->execute();
+$rattrapage_count = $stmt_rattrapage->fetchColumn();
+// Convertir les données en format JSON pour pouvoir les utiliser dans JavaScript
+$sessions = [];
+$studentsCount = [];
+foreach ($data as $row) {
+    $sessions[] = $row['session'];
+    $studentsCount[] = (int) $row['student_count']; // Assurez-vous que le nombre est un entier
+}
+$sessions = json_encode($sessions);
+$studentsCount = json_encode($studentsCount);
+$normale_count = json_encode($normale_count);
+$rattrapage_count = json_encode($rattrapage_count);
+?>    
 
                
 
-         
-                <div class="row">
+<div class="row">
     <div class="col-md-2">
-        <div class="card text-white bg-info mb-5">
+        <div class="card text-white bg-success mb-5">
             <div class="card-header">
-
                 <i class="fas fa-check-circle"></i> Sujets totaux
             </div>
             <div class="card-body">
@@ -194,9 +249,7 @@
     </div>
     <div class="col-md-2">
         <div class="card text-white bg-info mb-5">
-
             <div class="card-header">
-
                 <i class="fas fa-check-circle"></i> Sujets publiés
             </div>
             <div class="card-body">
@@ -234,7 +287,28 @@
             </div>
         </div>
     </div>
+    <div class="col-md-2">
+        <div class="card text-white bg-primary mb-5">
+            <div class="card-header">
+                <i class="fas fa-times-circle"></i> Session Normale
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ $normale_count }}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-white bg-secondary mb-5">
+            <div class="card-header">
+                <i class="fas fa-times-circle"></i> Session Rattrapage
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ $rattrapage_count }}</h5>
+            </div>
+        </div>
+    </div>
 </div>
+
 <div class="row1">
     <div class="chart-container">
         <div class="chart-wrapper1" >
@@ -256,8 +330,20 @@
             <canvas id="sujetsDoughnut"></canvas>
         </div>
     </div>
+    <div class="chart-container  ">
+        <div class="chart-wrapper1" >
+            <h4>Diagramme à Barres - sessions</h4>
+            <canvas id="studentsChart"></canvas>
+        </div>
+        <div class="chart-wrapper2  " >
+            <h4 >Diagramme en Anneau </h4>
+            <canvas id="studentsDoughnut"></canvas>
+        </div>
+    </div>
  
 </div>
+
+  
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -408,6 +494,67 @@
             }
         });
     });
+
+
+    var sessions = <?php echo $sessions; ?>;
+        var studentsCount = <?php echo $studentsCount; ?>;
+
+        // Graphique à barres - Nombre d'étudiants par session
+        var ctx = document.getElementById('studentsChart').getContext('2d');
+        var studentsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: sessions,
+                datasets: [{
+                    label: 'Nombre d\'étudiants',
+                    data: studentsCount,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+
+        // Graphique en anneau - Répartition des étudiants par session
+        var ctxDoughnut = document.getElementById('studentsDoughnut').getContext('2d');
+        var studentsDoughnut = new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: sessions,
+                datasets: [{
+                    label: 'Répartition des étudiants par session',
+                    data: studentsCount,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)', // Couleur pour la première session
+                        'rgba(54, 162, 235, 0.2)', // Couleur pour la deuxième session
+                        'rgba(255, 206, 86, 0.2)', // Couleur pour la troisième session, etc.
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right'
+                    }
+                }
+            }
+        });
+   
     </script>
  </main>
 

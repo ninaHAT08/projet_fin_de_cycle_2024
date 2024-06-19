@@ -6,6 +6,7 @@ use App\Models\Sujet;
 use App\Models\Choix;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class ChoixController extends Controller
@@ -58,7 +59,15 @@ class ChoixController extends Controller
         if (!Auth::check() || Auth::user()->usertype !== 'etudiant') {
             return redirect()->route('choix.ajouter')->with('error', 'Seuls les étudiants peuvent ajouter des sujets.');
         }
-    
+        $session = Session::where('intitule_session', 'Déroulement des pfc')->first();
+
+        // Vérifie si la session est définie et si la date actuelle est valide par rapport aux dates de début et fin
+        if (!$session || !now()->between($session->date_debut, $session->date_fin)) {
+            // if ($session && now()->gte($session->date_debut) && now()->lte($session->date_fin)) {
+                
+            // Si la session n'est pas valide, redirige avec un message d'erreur
+            return redirect('enseignant')->with('error', 'Vous ne pouvez pas Affecter un sujet en dehors de la période de la session.');
+        }
         // Vérifier si l'utilisateur a déjà envoyé ses choix
         $idUtilisateur = Auth::id();
         $choixEnvoyes = Choix::where('idUser3', $idUtilisateur)->where('envoyer', true)->exists();
@@ -194,24 +203,33 @@ class ChoixController extends Controller
     }
 
     public function affectation()
-    {
-        // Vérifiez que l'utilisateur est connecté et est un enseignant
-        if (!Auth::check() || Auth::user()->usertype !== 'enseignant') {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté en tant qu\'enseignant pour accéder à cette page.');
-        }
-
-        $idEnseignant = Auth::id();
-
-        // Récupérer les sujets proposés par cet enseignant
-        $sujets = Sujet::where('iduser1', $idEnseignant)
-            ->where('Sujet_affecter', false)
-            ->pluck('idSujet');
-
-        // Récupérer les choix pour les sujets proposés par cet enseignant où "envoyer" est à true
-        $choixs = Choix::whereIn('idSujet1', $sujets)->where('envoyer', true)->get();
-
-        return view('sujets.affectation', compact('choixs'));
+{
+    // Vérifiez que l'utilisateur est connecté et est un enseignant
+    if (!Auth::check() || Auth::user()->usertype !== 'enseignant') {
+        return redirect()->route('login')->with('error', 'Vous devez être connecté en tant qu\'enseignant pour accéder à cette page.');
     }
+    $session = Session::where('intitule_session', 'affectation des pfc')->first();
+
+    // Vérifie si la session est définie et si la date actuelle est valide par rapport aux dates de début et fin
+    if (!$session || !now()->between($session->date_debut, $session->date_fin)) {
+        // if ($session && now()->gte($session->date_debut) && now()->lte($session->date_fin)) {
+            
+        // Si la session n'est pas valide, redirige avec un message d'erreur
+        return redirect('enseignant')->with('error', 'Vous ne pouvez pas Affecter un sujet en dehors de la période de la session.');
+    }
+    $idEnseignant = Auth::id();
+
+    // Récupérer les sujets proposés par cet enseignant
+    $sujets = Sujet::where('iduser1', $idEnseignant)
+    //ajouter 
+    ->where('Sujet_affecter', false)
+    ->pluck('idSujet');
+
+    // Récupérer les choix pour les sujets proposés par cet enseignant où "envoyer" est à true
+    $choixs = Choix::whereIn('idSujet1', $sujets)->where('envoyer', true)->get();
+
+    return view('sujets.affectation', compact('choixs'));
+}
 
     public function affecter(Request $request, $choixId)
     {

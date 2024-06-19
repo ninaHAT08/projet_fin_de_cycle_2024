@@ -51,7 +51,7 @@ Route::resource('/etudiantt', 'App\Http\Controllers\usersController');
 /// la route pour la gestion des enseignant
 Route::resource('/enseignantt', 'App\Http\Controllers\enseignantController');
 /// la route pour la gestion des doctorant
-Route::resource('/doctorant', 'App\Http\Controllers\doctorant');
+Route::resource('/doctorantt', 'App\Http\Controllers\doctorant');
 
 // pour les sujet ineterne admin
 Route::get('/gestionadmin/sujet', function () {return view('gestionadmin.sujet');})->name('gestionadmin.sujet');
@@ -86,7 +86,7 @@ Route::get('/statistique', function () { return view('statistique');})->name('st
 
 Route::get('/diagramme', function () { return view('diagramme');})->name('diagramme');
 
-
+Route::get('/soutenancesA', [SoutenanceController::class, 'indexx'])->name('soutenance.indexx');
 
 });
 
@@ -187,13 +187,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ajouter-choix', [SujetexterneController::class, 'ajouterChoix'])->name('ajouter.choix');
     Route::get('/voir-choix', [SujetexterneController::class, 'voirChoix'])->name('voir.choix');
     
-    Route::post('/affecter-sujets/{id}', [SujetexterneController::class, 'affecterSujets'])->name('affecter.sujets');
+    Route::post('/affecter-sujets', [SujetexterneController::class, 'affecterSujets'])->name('affecter.sujets');
    
    ///les sujets externes choisi par enseignat afficher dans les etudiants
 
 });
-
-
+//////////////////session 
+Route::get('/sessionenseignant', function () { return view('sessions.sessionenseignant');})->name('sessionenseignant');
+Route::get('/etudiantsession', function () { return view('sessions.etudiantsession');})->name('etudiantsession');
+Route::get('/doctorantsession', function () { return view('sessions.doctorantsession');})->name('doctorantsession');
 
 
 ////////:route pour doctorant

@@ -65,7 +65,17 @@
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion bg-beige" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
-                    <div class="nav">
+                @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                <div class="nav">
                         <a class="nav-link" href="{{ url('dashboard') }}">
                             <div class="sb-nav-link-icon text-white"><i class="fas fa-tachometer-alt"></i></div>
                             <div class="text-white">Accueil</div>
@@ -75,14 +85,46 @@
                             <div class="text-white">Modifier Profil</div>
                         </a>
                         <nav class="menu-nested">
-                            <a class="nav-link text-white" href="{{ url('espaceetudiant') }}">
+                        <a class="nav-link text-white" href="{{ route('etudiantsession') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar"></i></div>
+                                Sessions
+                            </a>  
+                        <a class="nav-link text-white" href="{{ url('espaceetudiant') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-list"></i></div>
                                 consulter liste sujet
                             </a>
-                            <a class="nav-link text-white" href="{{ route('choix.ajouter') }}">
-                                <div class="sb-nav-link-icon text-white"><i class="fas fa-file-alt"></i></div>
-                                ma fiche de voeux
-                            </a>
+                            <?php
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Auth;
+
+    $userId = Auth::id();
+
+    // Vérifiez si l'utilisateur connecté ou son binôme a déjà envoyé la fiche
+    $choix = DB::table('choix')
+                ->where(function($query) use ($userId) {
+                    $query->where('idUser3', $userId)
+                          ->orWhere('binome', $userId);
+                })
+                ->where('envoyer', 1)
+                ->first();
+
+    $ficheEnvoyee = $choix ? true : false;
+    ?>
+
+    <a class="nav-link text-white" href="{{ $ficheEnvoyee ? '#' : route('choix.ajouter') }}"
+       @if ($ficheEnvoyee)
+           onclick="event.preventDefault(); alert('Une fiche de vœux a déjà été remplie avec votre nom. Vous ne pouvez plus modifier vos choix ni remplir une autre fiche.');"
+       @else
+           onclick="event.preventDefault(); document.getElementById('form-choix').submit();"
+       @endif
+    >
+        <div class="sb-nav-link-icon text-white"><i class="fas fa-file-alt"></i></div>
+        ma fiche de vœux
+    </a>
+    <form id="form-choix" action="{{ route('choix.ajouter') }}" method="GET" style="display: none;">
+        @csrf
+    </form>
+    
                             <a class="nav-link text-white" href="{{ route('affichage.affectation') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-check-circle"></i></div>
                                 mes affectations
@@ -95,7 +137,8 @@
                         </a>
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link text-white" href="{{ route('sujetss.create') }}">
-                                <div class="sb-nav-link-icon text-white"><i class="fas fa-plus"></i></div>
+                           
+                            <div class="sb-nav-link-icon text-white"><i class="fas fa-plus"></i></div>
                                 proposer un sujet
                             </a>
                             <a class="nav-link text-white" href="{{ route('mmaliste') }}">

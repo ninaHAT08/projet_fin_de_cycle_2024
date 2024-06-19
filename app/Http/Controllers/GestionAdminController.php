@@ -24,24 +24,24 @@ class GestionAdminController extends Controller
 
     public function sujetsParEnseignant()
     {
-   
-    $nombreDeSujetsParEnseignant = DB::table('users')
-    ->leftJoin('sujet', 'users.id', '=', 'sujet.iduser1')
-    ->select('users.nom', 'users.prenom')
-    ->selectRaw('COUNT(sujet.idSujet) as nombre_de_sujets')
-    ->where('users.usertype', 'enseignant')
-    ->groupBy('users.id', 'users.nom', 'users.prenom')
-    ->get();
-    $nombreTotalDeSujets = DB::table('sujet')->count();
+$nombreDeSujetsParEnseignant = DB::table('users')
+->leftJoin('sujet', 'users.id', '=', 'sujet.iduser1')
+->select('users.nom', 'users.prenom','users.usertype' )
+->selectRaw('COUNT(sujet.idSujet) as nombre_de_sujets')
 
-   
-   // return view('sujets.nbrsujet', compact('nombreDeSujetsParEnseignant', 'nombreTotalDeSujets'));
-//return view('sujets.nbrsujet', compact('nombreDeSujetsParEnseignant'));
+->groupBy('users.id', 'users.nom', 'users.prenom','users.usertype')
+->havingRaw('COUNT(sujet.idSujet) > 0')
+->get();
+$nombreTotalDeSujets = DB::table('sujet')->count();
+
 $nombreDeSujetsPublies = DB::table('sujet')->where('publier', true)->count();
+
 
 // Retourner la vue avec les résultats
 return view('sujets.nbrsujet', compact('nombreDeSujetsParEnseignant', 'nombreTotalDeSujets', 'nombreDeSujetsPublies'));
 }
+
+
 public function etudiantsAvecSujets()
 {
     // Récupérer la liste des étudiants avec leurs sujets

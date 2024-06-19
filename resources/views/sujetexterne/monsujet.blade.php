@@ -76,7 +76,12 @@
                             <div class="text-white">Modifier Profil</div>
                         </a>
                         <nav class="menu-nested">
-                            <a class="nav-link text-white" href="{{ url('espaceetudiant') }}">
+                        <a class="nav-link text-white" href="{{ route('etudiantsession') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar"></i></div>
+                                Sessions
+                            </a>  
+                        
+                        <a class="nav-link text-white" href="{{ url('espaceetudiant') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-list"></i></div>
                                 consulter liste sujet
                             </a>

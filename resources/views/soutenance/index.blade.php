@@ -80,7 +80,11 @@
                             <div class="text-white">Modifier Profil</div>
                         </a>
                         <nav class="menu-nested">
-                            <a class="nav-link text-white" href="{{ route('sujets.create') }}">
+                        <a class="nav-link text-white" href="{{ route('sessionenseignant') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar"></i></div>
+                                Sessions
+                            </a>
+                        <a class="nav-link text-white" href="{{ route('sujets.create') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-plus"></i></div>
                                 proposer un sujet
                             </a>
@@ -103,7 +107,11 @@
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link text-white" href="{{url('enseaignantsujetexterne')}}">
+                        <a class="nav-link text-white" href="{{ route('soutenance.index') }}">
+        <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar-check"></i></div>
+        PV Soutenances
+    </a>
+                        <a class="nav-link text-white" href="{{url('enseaignantsujetexterne')}}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-external-link-alt"></i></div>
                                 voir la liste des sujets externes
                             </a>
@@ -149,7 +157,7 @@
                                             <th>Président du jury</th>
                                             <th>Encadrant</th>
                                             <th>Examinateur 1</th>
-                                           
+                                            <th>Examinateur 2</th>
                                             <th>Mémoire</th>
                                             <th>Note</th>
                                             <th>Actions</th>
@@ -164,7 +172,7 @@
                                             <th>Président du jury</th>
                                             <th>Encadrant</th>
                                             <th>Examinateur 1</th>
-                                          
+                                            <th>Examinateur 2</th>
                                             <th>Mémoire</th>
                                             <th>Note</th>
                                             <th>Actions</th>
@@ -184,7 +192,11 @@
                                                 <td>{{ $soutenance->presidentJury->prenom }} {{ $soutenance->presidentJury->nom }}</td>
                                                 <td>{{ $soutenance->enseignant1->prenom }} {{ $soutenance->enseignant1->nom }}</td>
                                                 <td>{{ $soutenance->enseignant2->prenom }} {{ $soutenance->enseignant2->nom }}</td>
-                                               
+                                                @if ($soutenance->enseignant3)
+                                                    <td>{{ $soutenance->enseignant3->prenom }} {{ $soutenance->enseignant3->nom }}</td>
+                                                @else
+                                                    <td>-</td>
+                                                @endif
                                                 <td>
                                                     @if ($soutenance->memoire)
                                                     <a href="{{ asset('storage/' . $soutenance->memoire) }}" target="_blank">Voir le mémoire</a>

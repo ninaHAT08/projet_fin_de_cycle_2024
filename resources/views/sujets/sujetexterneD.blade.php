@@ -77,7 +77,10 @@
     <div class="text-white">Modifier Profil</div>
 </a>
                         <nav class="menu-nested">
-                       
+                        <a class="nav-link text-white" href="{{ route('doctorantsession') }}">
+                                <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar"></i></div>
+                                Sessions
+                            </a>
                             <a class="nav-link text-white" href="{{ route('doctorantpublierD') }}">
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-check-circle"></i></div>
                                 La liste des sujet publier

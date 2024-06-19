@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Log;
+
+use App\Models\ChoixSujet;
+use App\Models\Session;
 use App\Models\User;
 use App\Models\sujetexterne;
 use Illuminate\Http\Request;
 use App\Models\Sujet;
-use App\Models\ChoixSujet;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Models\Session;
 class SujetexterneController extends Controller
 {
     /**
@@ -30,7 +29,6 @@ class SujetexterneController extends Controller
        return view('gestionadmin.sujetexterne', compact('sujets'));
     
    }
-   
    public function filterSujets2(Request $request)
    {
        $specialite = $request->input('specialite');
@@ -45,9 +43,38 @@ class SujetexterneController extends Controller
 
        return view('gestionadmin.sujetexterne', compact('sujets'));
    }
- 
+
    
-//affichage des sujet externe pour le doctorant
+   
+   //affichage des sujet externe pour l'enseignant
+   public function indexenseignant()
+   { 
+      // $sujets = sujets::where('typeSujet', 'externe')->get();
+      $sujets = Sujet::where('typeSujet', 'externe')
+      ->where('publier', true)
+      ->get();
+       return view('sujets.sujetexterne', compact('sujets'));
+     
+   }
+   public function filterSujets5(Request $request)
+   {
+       $specialite = $request->input('specialite');
+       $sujetsQuery = Sujet::where('typeSujet', 'externe') // Ajout de la condition pour les sujets externes
+       ->where('publier', true);
+       if ($specialite) {
+           // Filtrer par spécialité si spécifié
+           $sujetsQuery->where('specialite', $specialite);
+       }
+
+       $sujets = $sujetsQuery->get(); // Exécuter la requête
+
+       return view('sujets.sujetexterne', compact('sujets'));
+   }
+
+
+
+
+   //affichage des sujet externe pour le doctorant
 public function   indexdoctorant()
 { 
   
@@ -57,7 +84,6 @@ public function   indexdoctorant()
     return view('sujets.sujetexterneD', compact('sujets'));
   
 }
-
 public function filterSujetsDD(Request $request)
    {
        $specialite = $request->input('specialite');
@@ -73,65 +99,76 @@ public function filterSujetsDD(Request $request)
        return view('sujets.sujetexterneD', compact('sujets'));
    }
 
+//    public function create()
+//    {
+//     //    
+//     if (Auth::check()) {
+//         // Vérifie si l'utilisateur est un étudiant
+//         if (Auth::user()->usertype != 'etudiant') {
+//             // Redirige ou retourne un message d'erreur
+//             return redirect()->route('dashboard')->with('error', 'Vous n\'êtes pas autorisé à créer un sujet.');
+//         }
 
-   //affichage des sujet externe pour l'enseignant
-   public function indexenseignant()
-   { 
-      // $sujets = sujets::where('typeSujet', 'externe')->get();
-      $sujets = Sujet::where('typeSujet', 'externe')
-      ->where('publier', true)
-      ->get();
-       return view('sujets.sujetexterne', compact('sujets'));
-     
-   }
+//         // Vérifie si l'étudiant a déjà proposé un sujet
+//         $existingSujet = Sujet::where('iduser1', Auth::id())->first();
 
-   //filtrage sujet externe poue enseignat 
-   public function filterSujets5(Request $request)
-   {
-       $specialite = $request->input('specialite');
-       $sujetsQuery = Sujet::where('typeSujet', 'externe') // Ajout de la condition pour les sujets externes
-       ->where('publier', true);
-       if ($specialite) {
-           // Filtrer par spécialité si spécifié
-           $sujetsQuery->where('specialite', $specialite);
-       }
+//         // Si un sujet existe déjà pour cet utilisateur, afficher une erreur
+//         if ($existingSujet) {
+//             // Si l'étudiant a déjà proposé un sujet, redirige vers le tableau de bord avec un message d'erreur
+//             return redirect()->route('dashboard')->with('error', 'Vous avez déjà proposé un sujet.');
+//         }
+//         // Si l'étudiant n'a pas encore proposé de sujet, affiche le formulaire de création de sujet externe
+//         $etudiants = User::where('usertype', 'etudiant')->get();
+//         return view('sujetexterne.create', compact('etudiants'));
 
-       $sujets = $sujetsQuery->get(); // Exécuter la requête
+//         // Récupère la liste des étudiants (pour les cas où vous pourriez en avoir besoin)
+//         $etudiants = User::where('usertype', 'etudiant')->get();
 
-       return view('sujets.sujetexterne', compact('sujets'));
-   }
-   
-   
-   
-   
-   public function create()
-   {
-       if (Auth::check()) {
-           // Vérifie si l'utilisateur est un étudiant
-           if (Auth::user()->usertype != 'etudiant') {
-               // Redirige ou retourne un message d'erreur
-               return redirect()->route('dashboard')->with('error', 'Vous n\'êtes pas autorisé à créer un sujet.');
-           }
-   
-           // Vérifie si l'étudiant a déjà proposé un sujet
-           $existingSujet = Sujet::where('iduser1', Auth::id())->first();
-   
-           // Si un sujet existe déjà pour cet utilisateur, afficher une erreur
-           if ($existingSujet) {
-               // Si l'étudiant a déjà proposé un sujet, redirige vers le tableau de bord avec un message d'erreur
-               return redirect()->route('dashboard')->with('error', 'Vous avez déjà proposé un sujet.');
-           }
-   
-     
-       return redirect()->route('sujets.index')->with('error', 'Vous ne pouvez pas proposer un sujet en dehors de la période de la session.');
-           // Si l'étudiant n'a pas encore proposé de sujet, affiche le formulaire de création de sujet externe
-           $etudiants = User::where('usertype', 'etudiant')->get();
-           return view('sujetexterne.create', compact('etudiants'));
-       } else {
-           return redirect()->route('login')->with('error', 'Veuillez vous connecter.');
-       }
-   }
-   
+//         return view('sujetexterne.create', compact('etudiants'));
+//     } else {
+//         return redirect()->route('login')->with('error', 'Veuillez vous connecter.');
+//     }
+//    }
+public function create()
+{
+    // Vérifie si l'utilisateur est connecté
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Veuillez vous connecter.');
+    }
+
+    // Vérifie si l'utilisateur est un étudiant
+    if (Auth::user()->usertype != 'etudiant') {
+        return redirect()->route('dashboard')->with('error', 'Vous n\'êtes pas autorisé à créer un sujet.');
+    }
+
+    // Vérifie la période de la session active "proposition" depuis la base de données
+    $session = Session::where('intitule_session', 'Lancement des PFC')->first();
+
+    // Vérifie si la session est définie et si la date actuelle est valide par rapport aux dates de début et fin
+    if (!$session || !now()->between($session->date_debut, $session->date_fin)) {
+        // if ($session && now()->gte($session->date_debut) && now()->lte($session->date_fin)) {
+            
+        // Si la session n'est pas valide, redirige avec un message d'erreur
+        return redirect()->route('dashboard')->with('error', 'Vous ne pouvez pas proposer un sujet en dehors de la période de la session.');
+    }
+
+    // Vérifie si l'étudiant a déjà proposé un sujet
+    $existingSujet = Sujet::where('iduser1', Auth::id())->first();
+
+    // Si un sujet existe déjà pour cet utilisateur, afficher une erreur
+    if ($existingSujet) {
+        // Si l'étudiant a déjà proposé un sujet, redirige vers le tableau de bord avec un message d'erreur
+        return redirect()->route('dashboard')->with('error', 'Vous avez déjà proposé un sujet.');
+    }
+
+    // Récupérer la liste des étudiants (pour les cas où vous pourriez en avoir besoin)
+    $etudiants = User::where('usertype', 'etudiant')->get();
+
+    // Retourner la vue avec les étudiants pour le formulaire de création de sujet externe
+    return view('sujetexterne.create', compact('etudiants'));
+}
+
+
    public function store(Request $request)
    {
       
@@ -156,7 +193,7 @@ public function filterSujetsDD(Request $request)
        $sujet->maitre_du_stage = $request->maitre_du_stage;
        $sujet->iduser1 = Auth::id(); // Récupère l'ID de l'utilisateur connecté
        $sujet->save();
-       return redirect()->route('sujetss.create')->with('success', 'Sujet créé avec succès.');
+         return redirect()->route('sujetss.create')->with('success', 'Sujet créé avec succès!');
        
 }
    /**
@@ -197,28 +234,21 @@ public function filterSujetsDD(Request $request)
    return view ('sujetexterne.monsujet')-> with('sujets', $sujets);
 }
 
-//valider et publier le sujet externe par l'admin
+
    public function valider($idSujet)
       {
     $sujets = Sujet::findOrFail($idSujet);
-    if ($sujets->publier) {
-        // Si le sujet est déjà publié
-        return redirect()->route('adminsujetexterne')->with('error', 'Ce sujet est déjà validé et publié.');
-    }
-   
-   // Sinon, valider et publier le sujet
-    $sujets->publier = true;
+   $sujets->publier = true;
    $sujets->save();
-  return redirect()->route('adminsujetexterne')->with('success', 'Sujet publié avec succès dans l\'espace utlisateurs.');
+  return redirect()->route('adminsujetexterne')->with('success', 'Sujet publié avec succès dans l\'espace étudiant.');
     }
 
 
 
 
-   // Méthode pour ajouter un choix
-   
 
-   public function ajouterChoix(Request $request)
+
+    public function ajouterChoix(Request $request)
    {
        $request->validate([
            'idSujet' => 'required|exists:Sujet,idSujet',
@@ -241,12 +271,11 @@ public function filterSujetsDD(Request $request)
    
        return redirect()->back()->with('success', 'Sujet ajouté à votre liste de choix.');
    }
+   // Méthode pour voir les choix
    public function voirChoix()
    {
-       // Récupère les choix de sujets pour l'enseignant authentifié avec les sujets correspondants
        $choixSujets = ChoixSujet::where('id_enseignant', Auth::id())->with('sujet')->get();
-   
-       // Retourne la vue 'enseignantcrud.choix' en passant les choix de sujets récupérés
+
        return view('enseignantcrud.choix', compact('choixSujets'));
    }
 
@@ -271,61 +300,59 @@ public function filterSujetsDD(Request $request)
                        $query->with('enseignant'); // Charge la relation choixSujets avec enseignant
                    }])
                    ->get();
+                   
    
        // Retourne la vue avec les sujets et les choix chargés
        return view('etudiant.enseignants_choisis', compact('sujets'));
    }
    
-   
-   
-  // Méthode pour affecter les sujets externes
-  public function affecterSujets(Request $request, $id)
-  {
-      // Vérifie si l'utilisateur est authentifié
-      if (!Auth::check()) {
-          return redirect()->route('voir.choix')->with('error', 'Utilisateur non authentifié.');
-      }
+  // Méthode pour affecter les sujets
+
+public function affecterSujets(Request $request)
+{
+    $user = Auth::user();
+
+    $choixSujets = ChoixSujet::where('id_enseignant', $user->id)->get();
+
+    foreach ($choixSujets as $choix) {
+        $sujet = Sujet::find($choix->id_sujetE);
+
+        // Vérifie si le sujet existe et n'est pas déjà affecté
+        if ($sujet && !$sujet->Sujet_affecter) {
+            // Vérifie l'état de l'étudiant associé à iduser1
+            $etudiant = User::find($sujet->iduser1);
+
+            // Si l'étudiant existe et a déjà une affectation de sujet
+            // if ( $etudiant->etat === true) {
+            //     return back()->with('error', 'Cet étudiant a déjà une affectation de sujet.');
+            // }
+            if ($etudiant && $etudiant->idSujet !== null) {
+                return back()->with('error', 'Cet étudiant a déjà une affectation de sujet.');
+            }
+            // Met à jour le sujet pour indiquer qu'il est affecté
+            $sujet->Sujet_affecter = true;
+            $sujet->save();
+
+            // Met à jour l'état de l'étudiant si ce n'est pas déjà fait
+            if ($etudiant && $etudiant->etat !== true) {
+                $etudiant->etat = true;
+                $etudiant->idSujet = $choix->id_sujetE;
+                $etudiant->save();
+            }
+        } else {
+            // Si le sujet est déjà affecté, retourne un message d'erreur
+            return back()->with('error', 'Le sujet est déjà affecté.');
+        }
+    }
+    return redirect()->route('voir.choix')->with('success', 'Vous avez confirmé votre choix pour ce sujet.');
+}
+
+
   
-      try {
-          // Début de la transaction
-          DB::beginTransaction();
-  
-          // Vérifie si le sujet existe
-          $sujet = Sujet::findOrFail($id);
-  
-          // Vérifie si le sujet est déjà affecté
-          if ($sujet->sujet_affecter === true) {
-              return redirect()->route('voir.choix')->with('error', 'Le sujet est déjà affecté à un étudiant.');
-          }
-  
-          // Vérifie si l'utilisateur a déjà une affectation
-          $user = Auth::user();
-          if ($user->etat === true) {
-              return redirect()->route('voir.choix')->with('error', 'L\'étudiant a déjà une affectation de sujet.');
-          }
-          Log::info('Avant mise à jour', ['user' => $user, 'sujet' => $sujet]);
-          // Met à jour le sujet pour le marquer comme affecté
-          $sujet->update([
-              'iduser2' => Auth::id(),
-              'sujet_affecter' => true
-          ]);
-  
-          // Met à jour l'utilisateur pour marquer l'état comme affecté et associer le sujet
-          $user->update([
-             'iduser2' => Auth::id(),
-            'etat' => true,
-              'idSujet' => $sujet->idSujet
-          ]);
-  
-          // Fin de la transaction
-          DB::commit();
-  
-          return redirect()->route('voir.choix')->with('success', 'Le sujet a été affecté avec succès.');
-      } catch (\Exception $e) {
-          // En cas d'erreur, annule la transaction
-          DB::rollBack();
-          return redirect()->route('voir.choix')->with('error', 'Une erreur s\'est produite lors de l\'affectation du sujet.');
-      }
-  }
+
+
 
 }
+
+
+

@@ -156,7 +156,7 @@
 
                 <div class="text-center mt-2">
                     <button type="submit" class="btn btn-primary">Ajouter</button>
-                    <a href="{{ url('doctorant') }}" class="btn btn-secondary">Annuler</a>
+                    <a href="{{ url('doctorantt') }}" class="btn btn-secondary">Annuler</a>
                 </div>
             </form>
         </div>

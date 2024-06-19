@@ -140,7 +140,7 @@
                             <div class="sb-nav-link-icon text-white"><i class="fas fa-user-tie"></i></div>
                             <div class="text-white">Enseignants</div>
                         </a>
-                        <a class="nav-link" href="{{ url('doctorant') }}">
+                        <a class="nav-link" href="{{ url('doctorantt') }}">
                             <div class="sb-nav-link-icon text-white"><i class="fas fa-user-graduate"></i></div>
                             <div class="text-white">Doctorants</div>
                         </a>
@@ -162,7 +162,10 @@
                                 <div class="sb-nav-link-icon text-white"><i class="fas fa-chart-pie"></i></div>
                                 Statistiques
                             </a>
-                         
+                            <a class="nav-link text-white" href="{{ route('soutenance.indexx') }}">
+        <div class="sb-nav-link-icon text-white"><i class="fas fa-calendar-check"></i></div>
+        PV Soutenances
+    </a>
                         </nav>
                     </div>
                 </div>
