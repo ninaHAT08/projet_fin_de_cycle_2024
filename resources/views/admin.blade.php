@@ -157,10 +157,11 @@
         </div>
             <div id="layoutSidenav_content">
                 <main>
-                <?php
+               
+    <?php
+        
         // Connexion à la base de données
-
-   $pdo = new PDO('mysql:host=127.0.0.1;port=3307;dbname=gestionpfc', 'root', '');
+       $pdo = new PDO('mysql:host=127.0.0.1;port=3307;dbname=gestionpfc', 'root', '');
 
         
         // Récupérer le nombre total de sujets///counte le nombre de sujet inetrene
