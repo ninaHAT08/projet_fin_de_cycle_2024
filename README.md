@@ -1,66 +1,200 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Application Web de Gestion Administrative des Projets de Fin de Cycle (PFC)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Présentation du projet
 
-## About Laravel
+Ce projet a été réalisé dans le cadre de mon **Projet de Fin de Cycle (PFC)** pour l'obtention de mon **Master 2 en Génie Logiciel** à l'Université Abderrahmane Mira de Béjaïa.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Il porte sur la **conception et le développement d'une application web de gestion administrative du département d'Informatique, avec pour cas d'étude la gestion des Projets de Fin de Cycle (PFC).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+L'application vise à faciliter l'organisation, le suivi et la gestion administrative des projets de fin de cycle, en centralisant les informations et en structurant les différentes opérations liées à leur gestion.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Objectifs
 
-## Learning Laravel
+- Informatiser la gestion administrative des PFC.
+- Centraliser les informations relatives aux étudiants, aux enseignants et aux sujets de projets.
+- Faciliter l'organisation et le suivi des projets.
+- Structurer les choix et l'affectation des sujets.
+- Améliorer l'accès aux informations et la gestion des données.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Fonctionnalités
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Les fonctionnalités de l'application comprennent notamment :
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Gestion des utilisateurs et des accès selon les rôles.
+- Gestion des étudiants et des enseignants.
+- Gestion des sujets de projets.
+- Gestion des sessions.
+- Consultation et gestion des choix de sujets.
+- Affectation des sujets.
+- Consultation des informations liées aux projets.
+- Organisation et suivi des activités administratives.
 
-## Laravel Sponsors
+## Technologies utilisées
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Backend :** PHP, Laravel 11
+- **Base de données :** MySQL
+- **Frontend :** Blade, HTML, CSS, JavaScript, Bootstrap
+- **Modélisation :** UML
+- **Méthodologie :** Scrum
+- **Environnement de développement :** XAMPP
+- **Gestion de versions :** Git et GitHub
 
-### Premium Partners
+## Conception
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+La conception du système s'appuie sur la modélisation UML, notamment :
 
-## Contributing
+Diagramme de classes
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+![Diagramme de classe ](docs/imagesAPP/DIAGRAME%20DE%20CLASSE.PNG)
 
-## Code of Conduct
+Diagramme de cas d'utilisation — Administrateur
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+![Diagramme de cas d'utilisation Administrateur ](docs/imagesAPP/DIAGRAME%20DE%20CAS%20ADMIN.PNG)
 
-## Security Vulnerabilities
+Diagramme de cas d'utilisation — Enseignant
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![Diagramme de cas d'utilisation Enseignant](docs/imagesAPP/DIAGRAMME%20DE%20CAS%20ENS.PNG)
 
-## License
+Diagramme de cas d'utilisation — Étudiant
+![Diagramme de cas d'utilisation etudiant ](docs/imagesAPP/DIAGRAMME%20DE%20CAS%20ETUDIANT.PNG)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+## Structure des données
+
+Parmi les principales tables de la base de données :
+
+- `users`
+- `sujets`
+- `choix`
+- `sessions`
+
+Cette liste présente quelques tables principales et ne constitue pas nécessairement la totalité du schéma de la base de données.
+
+## Installation et lancement
+
+### Prérequis
+
+- PHP compatible avec la version de Laravel utilisée
+- Composer
+- MySQL
+- Node.js et npm
+- Git
+- XAMPP ou un environnement équivalent
+
+### 1. Cloner le dépôt
+
+```bash
+git clone https://github.com/ninaHAT08/projet_fin_de_cycle_2024.git
+cd projet_fin_de_cycle_2024
+```
+
+### 2. Installer les dépendances PHP
+
+```bash
+composer install
+```
+
+### 3. Configurer les variables d'environnement
+
+Créer le fichier `.env` à partir de `.env.example` :
+
+```bash
+copy .env.example .env
+```
+
+Configurer ensuite les paramètres de connexion à la base de données dans `.env` :
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3307
+DB_DATABASE=gestionpfc
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Adapter les valeurs selon votre propre environnement MySQL.
+
+### 4. Générer la clé de l'application
+
+```bash
+php artisan key:generate
+```
+
+### 5. Préparer la base de données
+
+Créer la base de données `gestionpfc` dans MySQL.
+
+Avant d'exécuter les migrations, vérifier les migrations disponibles et la méthode de création de la base de données du projet.
+
+```bash
+php artisan migrate
+```
+
+Si le projet nécessite un jeu de données initial, importer les données ou exécuter les seeders prévus, selon la configuration du projet.
+
+### 6. Installer les dépendances frontend
+
+```bash
+npm install
+npm run build
+```
+
+### 7. Lancer l'application
+
+```bash
+php artisan serve
+```
+
+Accéder ensuite à l'application à l'adresse :
+
+http://127.0.0.1:8000
+
+**Remarque :** les étapes d'installation sont indicatives. La configuration de la base de données, les migrations, les éventuels seeders et les ressources frontend doivent être vérifiés selon le contenu réel du dépôt.
+
+## Méthodologie de travail
+
+Le projet a été réalisé en s'appuyant sur la méthodologie **Scrum**, avec une démarche de conception et de développement structurée.
+
+
+## Compétences mobilisées
+
+- Conception et modélisation UML
+- Conception de bases de données relationnelles
+- Développement web avec Laravel et PHP
+- Manipulation de bases de données MySQL
+- Gestion de projet
+- Travail collaboratif
+- Utilisation de Git et GitHub
+
+## Captures d'écran de l'application
+### Page d'accueil
+
+![Page d'accueil de l'application PFC](docs/imagesAPP/Design%20sans%20titre.png)
+
+Interface de l'application
+
+
+### Organigramme de description de notre application web
+
+![APPLICATION WEB ](docs/imagesAPP/app%20web%20pfc.png)
+
+Autres interfaces
+
+
+(docs/imagesAPP/09.PNG)
+
+
+(docs/imagesAPP/NINNI.PNG)
+
+
+(docs/imagesAPP/22.PNG)
+## Dépôt GitHub
+
+[Consulter le code source du projet](https://github.com/ninaHAT08/projet_fin_de_cycle_2024)
+
+---
+
+*Projet académique réalisé en 2024 dans le cadre du Master 2 Génie Logiciel.*
